@@ -1,0 +1,120 @@
+.feedbackPage {
+  padding: 24px;
+  .filterContainer {
+    padding: 12px;
+    box-shadow: 0 0 10px #dedede;
+    .filterRow {
+      display: flex;
+      justify-content: center;
+      margin: 8px 0 16px;
+    }
+    .searchBtn {
+      margin-right: 32px;
+      background: @primary-color;
+      color: #fff;
+      border-radius: 4px;
+      svg {
+        margin-right: 10px;
+      }
+    }
+    .resetBtn {
+      margin-right: 32px;
+      background: #f08a5d;
+      color: #fff;
+      border-radius: 4px;
+      svg {
+        margin-right: 10px;
+      }
+    }
+    .addBtn {
+      background: #dc6673;
+      color: #fff;
+      border-radius: 4px;
+      svg {
+        margin-right: 10px;
+      }
+    }
+    :global {
+      .ant-row {
+        display: flex;
+        justify-content: space-around;
+        margin: 24px 0;
+        font-size: 14px;
+      }
+    }
+  }
+  .issueList {
+    margin: 16px 0;
+    padding: 16px 24px;
+    box-shadow: 0 0 10px #dedede;
+    .issue {
+      display: flex;
+      align-items: center;
+      margin: 16px;
+      padding: 16px;
+      box-shadow: 1px 2px 6px #ddd;
+      .avatar {
+        img {
+          object-fit: cover;
+          width: 90px;
+          height: 90px;
+          border-radius: 50%;
+        }
+      }
+      .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 100px;
+        margin-left: 20px;
+        .infoHeader {
+          display: flex;
+          align-items: center;
+          .title {
+            font-size: 26px;
+            a {
+              color: @primary-color;
+            }
+            a:hover {
+              opacity: .8;
+            }
+          }
+          :global {
+            .ant-tag {
+              margin-left: 8px;
+            }
+          }
+        }
+        .infoBody {
+          margin: 8px 0;
+          font-size: 13px;
+          color: rgba(0, 0, 0, .45);
+        }
+        .infoFooter {
+          span {
+            margin-right: 16px;
+            svg {
+              margin-right: 6px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .nothingContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: ~'calc(100vh - 118px)';
+    img {
+      width: 120px;
+    }
+    .nothingTip {
+      margin-left: 12px;
+      color: #535353;
+      font-size: 16px;
+    }
+  }
+}

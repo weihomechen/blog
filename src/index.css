@@ -1,0 +1,12 @@
+.userContainer {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.userAvatar {
+  height: 32px !important;
+  width: 32px !important;
+  object-fit: cover !important;
+  margin-right: 10px !important;
+  border-radius: 50% !important;
+}

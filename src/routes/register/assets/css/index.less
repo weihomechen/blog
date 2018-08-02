@@ -1,0 +1,59 @@
+.mark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+}
+
+.form {
+  width: 360px;
+  padding: 36px;
+  box-shadow: 0 0 100px rgba(0, 0, 0, .08);
+  button {
+    width: 100%;
+  }
+  p {
+    color: rgb(204, 204, 204);
+    text-align: center;
+    margin-top: 16px;
+    span {
+      &:first-child {
+        margin-right: 16px;
+      }
+    }
+  }
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  height: 40px;
+  line-height: 40px;
+  cursor: pointer;
+  margin-bottom: 24px;
+  img {
+    width: 40px;
+    margin-right: 8px;
+  }
+  span {
+    vertical-align: text-bottom;
+    font-size: 16px;
+    text-transform: uppercase;
+    display: inline-block;
+  }
+}
+
+.ant-spin-container,
+.ant-spin-nested-loading {
+  height: 100%;
+}
+
+.login-tip {
+  margin-top: 8px;
+}
