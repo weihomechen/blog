@@ -6,7 +6,7 @@
 
 [服务端地址](https://github.com/weihomechen/blog-node)
 
-[在线预览](http://118.25.16.129/blog)
+[在线预览](http://rulifun.cn/blog)
 
 主要技术栈：
 

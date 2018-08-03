@@ -11,29 +11,28 @@ const fetch = (options) => {
     url,
     ..._options
   } = options;
-  const apiUrl = `${process.env.NODE_ENV === 'development' ? '' : 'http://118.25.16.129'}${url}`
   switch (method.toLowerCase()) {
     case 'get':
-      return axios.get(apiUrl, { params: data });
+      return axios.get(url, { params: data });
     case 'delete':
-      return axios.delete(apiUrl, { data });
+      return axios.delete(url, { data });
     case 'head':
-      return axios.head(apiUrl, data);
+      return axios.head(url, data);
     case 'post': {
       const params = new URLSearchParams();
       Object.keys(data).map((key) => {
         params.append(key, data[key]);
       });
-      return axios.post(apiUrl, data, _options);
+      return axios.post(url, data, _options);
     }
     case 'put':
-      return axios.put(apiUrl, data, _options);
+      return axios.put(url, data, _options);
     case 'patch':
-      return axios.patch(apiUrl, data);
+      return axios.patch(url, data);
     case 'upload': {
       const form = new FormData();
       form.append('file', data.file);
-      return axios.post(apiUrl, form, {
+      return axios.post(url, form, {
         method: 'post',
         headers: { 'Content-Type': 'multipart/form-data' },
       });
