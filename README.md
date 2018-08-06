@@ -106,7 +106,9 @@ npm start
 
 ## 生产部署
 
-需要先clone[deploy-tool](https://github.com/weihomechen/deploy-tool)到本地，[deploy-tool说明](https://github.com/weihomechen/deploy-tool/blob/master/README.md)
+需要先clone[deploy-tool](https://github.com/weihomechen/deploy-tool)到本地
+
+[deploy-tool说明](https://github.com/weihomechen/deploy-tool/blob/master/README.md)
 
 ```sh
 # 使用示例
