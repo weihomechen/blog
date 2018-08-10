@@ -111,6 +111,9 @@ npm start
 [deploy-tool说明](https://github.com/weihomechen/deploy-tool/blob/master/README.md)
 
 ```sh
-# 使用示例
-node ./bin/deploy.js -n blog -t /Users/weihome/my-projects/blog  -w 118.18.18.118 -d /var/proj/ -p 123456
+# 部署前端项目
+node ./bin/deploy.js -n name -p pwd 
+
+# 示例
+node ./bin/deploy.js -n blog -p 123456
 ```

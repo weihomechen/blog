@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'dva';
 import { Table, Input, Popconfirm, message } from 'antd';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 import moment from 'moment';
 import style from './assets/css/index.less';
 

@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'dva';
 import { message, Tag, Popconfirm, Input } from 'antd';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 import moment from 'moment';
 import { IconFont } from 'components';
 import BraftEditor from 'braft-editor';

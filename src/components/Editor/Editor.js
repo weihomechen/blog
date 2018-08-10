@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal } from 'antd';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 import BraftEditor from 'braft-editor';
 import 'braft-editor/dist/braft.css';
 import styles from './Editor.less';

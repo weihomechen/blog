@@ -13,7 +13,7 @@ import {
   Tag,
   Table,
 } from 'antd';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 import moment from 'moment';
 import { IconFont, TeamForm } from 'components';
 import * as styles from './assets/css/index.less';

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
 import { Tabs, Pagination, message, Badge } from 'antd';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 import moment from 'moment';
 import { IconFont } from 'components';
 import { config } from 'utils';

@@ -10,7 +10,7 @@ import {
   Pagination,
 } from 'antd';
 import moment from 'moment';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 import { ArticleItem, IconFont } from 'components';
 import { getQuery } from 'utils';
 import * as style from './assets/style/index.less';

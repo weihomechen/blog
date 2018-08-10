@@ -8,7 +8,7 @@ import {
   Tabs,
   Pagination,
 } from 'antd';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
 import { IconFont } from 'components';
 import { showOffsetTime } from 'utils';
