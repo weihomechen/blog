@@ -18,6 +18,7 @@ function beforeUpload(file) {
   if (!isLt2M) {
     message.error('请选择小于2M的图片');
   }
+
   return isLt2M;
 }
 
@@ -38,14 +39,17 @@ class PersonCenter extends Component {
     const errorFn = () => {
       message.error('上传失败');
     };
+
     fd.append('uid', uid);
     fd.append('type', type);
     fd.append('file', param.file);
+
     xhr.onreadystatechange = () => {
       if (xhr.readyState === 4 && xhr.status === 200) {
         this.props.dispatch({ type: 'user/queryUser' });
       }
     };
+
     xhr.addEventListener('error', errorFn, false);
     xhr.addEventListener('abort', errorFn, false);
     xhr.open('POST', param.action);

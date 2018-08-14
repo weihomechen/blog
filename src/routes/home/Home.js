@@ -1,6 +1,7 @@
 /* eslint-disable no-plusplus */
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+
 import {
   connect,
 } from 'dva';
@@ -87,7 +88,6 @@ class Home extends React.Component {
     }
     this.setState({ modalVisible: true });
   }
-
 
   hideModal = () => {
     this.setState({ modalVisible: false });

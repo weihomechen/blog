@@ -184,6 +184,7 @@ class Team extends Component {
         }
       });
     };
+
     return (
       <div className={style.teamPage}>
         <Spin size="large" spinning={loading} />
