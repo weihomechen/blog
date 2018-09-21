@@ -37,11 +37,15 @@ export default {
     // 获取用户集合
     * getUsers({ payload }, { call, put }) {
       const res = yield call(getUsers);
-      const { success, data: users } = res;
+      const { success, data: users, code } = res;
       if (success) {
         yield put({ type: 'getUsersSuccess', payload: { users } });
       } else {
         console.log('获取用户列表失败');
+        if (code === 'user need login') {
+          message.error('请您先登录', 1);
+          yield put(routerRedux.push('/user/login'));
+        }
       }
     },
     // 获取活跃用户集合
