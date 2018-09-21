@@ -50,14 +50,16 @@ export default {
       const { success, msg } = yield call(update, payload);
       return { success, msg };
     },
-    * getUnReadTotal({ payload }, { call, put }) {
+    * getUnReadTotal({ payload }, { call, put, select }) {
       const { success, data, msg } = yield call(getUnReadTotal, payload);
+      const { user } = yield select(state => state.user);
+
       if (success) {
         yield put({
           type: 'stateChange',
           payload: data,
         });
-      } else {
+      } else if (user) {
         yield new Promise((resolve) => {
           message.error(msg, 1, resolve);
         });

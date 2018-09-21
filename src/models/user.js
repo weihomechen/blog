@@ -43,7 +43,6 @@ export default {
       } else {
         console.log('获取用户列表失败');
         if (code === 'user need login') {
-          message.error('请您先登录', 1);
           yield put(routerRedux.push('/user/login'));
         }
       }
