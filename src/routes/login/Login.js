@@ -57,9 +57,10 @@ const Login = ({
             >登录
             </Button>
           </Row>
-          <Row style={{ marginTop: 8 }}>
+          <Row style={{ margin: '8px 0' }}>
             <a className="register-tip" onClick={goToRegister}>还没有账号？点这里注册</a>
           </Row>
+          <div>试用账号：guest  密码：guest</div>
         </form>
       </div>
     </div>
