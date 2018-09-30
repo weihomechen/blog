@@ -1,14 +1,13 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-return-assign */
+/* eslint-disable no-unused-expressions, no-return-assign */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal } from 'antd';
 import Button from '@material-ui/core/Button';
-import BraftEditor from 'braft-editor';
-import 'braft-editor/dist/braft.css';
+import BraftEditor, { EditorState } from 'braft-editor';
+import 'braft-editor/dist/index.css'
 import styles from './Editor.less';
 
-const emptyRaw = { blocks: [{ key: '98r8g', text: '', type: 'unstyled', depth: 0, inlineStyleRanges: [], entityRanges: [], data: {} }], entityMap: {} };
+const emptyRaw = `{ blocks: [{ key: '98r8g', text: '', type: 'unstyled', depth: 0, inlineStyleRanges: [], entityRanges: [], data: {} }], entityMap: {} }`;
 const { confirm } = Modal;
 class DraftEditor extends React.Component {
   static propTypes = {
@@ -18,14 +17,14 @@ class DraftEditor extends React.Component {
   }
 
   static defaultProps = {
-    content: JSON.stringify(emptyRaw),
+    content: EditorState.createFrom(emptyRaw),
     getContent: () => { },
     type: 'article',
   }
 
   save = (type = 1) => {
-    const content = JSON.stringify(this.editorInstance.getRawContent());
-    this.props.getContent(content, type);
+    const editorState = this.editorInstance.getValue();
+    this.props.getContent(editorState.toRAW(), type);
   }
 
   cancel = () => {
@@ -39,10 +38,9 @@ class DraftEditor extends React.Component {
 
   render() {
     const { content } = this.props;
-    const initialContent = JSON.parse(content);
     const editorProps = {
       height: 500,
-      initialContent,
+      defaultValue: EditorState.createFrom(content),
       lineHeights: [
         '1', '1.2', '1.5', '1.75',
         '2', '3', '4',
@@ -113,7 +111,8 @@ class DraftEditor extends React.Component {
         //   },
         // },
       ],
-      onChange: this.handleChange,
+      onChange: this.editorChange,
+      onSave: this.save,
     };
 
     return (

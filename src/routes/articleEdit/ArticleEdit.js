@@ -241,14 +241,14 @@ class ArticleEdit extends Component {
             <Col span={3}>
               开启打赏：
               <Switch
-                checked={isAcceptReward}
+                checked={!!isAcceptReward}
                 onChange={this.acceptRewardChange}
               />
             </Col>
           </Row>
         </div>
         <div className={style.articleEditer}>
-          <Editor getContent={this.getContent} content={content} />
+          {content ? <Editor getContent={this.getContent} content={content} /> : null}
         </div>
         <Prompt
           when={isEditing}

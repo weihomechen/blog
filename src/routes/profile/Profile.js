@@ -32,6 +32,9 @@ class PersonCenter extends Component {
     router: PropTypes.object,
   }
 
+  /**
+   * @param type number: 0 - avatar, 1-cover, 2-moneyCode
+   */
   uploader = (type, param) => {
     const { uid } = this.props.user;
     const xhr = new XMLHttpRequest();

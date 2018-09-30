@@ -2,7 +2,7 @@
 import { connect } from 'dva';
 import { IconFont } from 'components';
 import { Spin, Input, Button } from 'antd';
-import BraftEditor from 'braft-editor';
+import BraftEditor, { EditorState } from 'braft-editor';
 import CommentItem from 'components/CommentItem';
 import moment from 'moment';
 import PropTypes from 'prop-types';
@@ -27,8 +27,6 @@ class ArticleDetail extends Component {
     } = this.props;
 
     const { id } = match.params;
-
-    this.editorInstance && this.editorInstance.setEditorProp('readOnly', true);
     this.getArticle(id);
   }
 
@@ -76,18 +74,15 @@ class ArticleDetail extends Component {
     const { comment, moneyCodeVisiable } = this.state;
     const showTime = moment(updateTime).format('YYYY-MM-DD HH:mm:ss');
 
-    const editorProps = {
-      height: 'auto',
-      initialContent: JSON.parse(content),
-      controls: [],
-    };
-
     const avatarRender = () => {
       const avatar = this.getUserInfo(author, 'name', 'avatar');
       return avatar ?
         <img className={styles.avatar} src={avatar} alt="" />
         : <IconFont className={styles.avatar} type="avatar" fontSize="60px" color="#00ADB5" />;
     };
+
+    const editorState = EditorState.createFrom(content);
+    const contentHtml = editorState.toHTML();
 
     return (
       <div className={styles.articleDetail}>
@@ -102,12 +97,11 @@ class ArticleDetail extends Component {
             <div className={styles.infoItems}>{showTime}</div>
           </div>
         </div>
-        <div className={styles.contentContainer}>
-          <BraftEditor
-            ref={instance => this.editorInstance = instance}
-            {...editorProps}
-          />
-        </div>
+        {
+          content ?
+            <div className={styles.contentContainer} dangerouslySetInnerHTML={{ __html: contentHtml }} />
+            : null
+        }
         {
           isAcceptReward && moneyCode ?
             <div className={styles.rewardContainer}>
