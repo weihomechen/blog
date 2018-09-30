@@ -185,7 +185,8 @@ class ArticleEdit extends Component {
   }
 
   render() {
-    const { loading, isEditing, cateList, article } = this.props;
+    const { loading, isEditing, cateList, article, match } = this.props;
+    const { id } = match.params;
     const { title, abstract, content, cate, tags = '', isAcceptReward } = article;
     const tagsArr = tags ? tags.split(',') : [];
     const { inputValue, inputVisible } = this.state;
@@ -248,7 +249,7 @@ class ArticleEdit extends Component {
           </Row>
         </div>
         <div className={style.articleEditer}>
-          {content ? <Editor getContent={this.getContent} content={content} /> : null}
+          {!id || content ? <Editor getContent={this.getContent} content={content} /> : null}
         </div>
         <Prompt
           when={isEditing}
