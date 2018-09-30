@@ -4,6 +4,14 @@ import styles from './assets/style/index.less';
 
 const changeLogList = [
   {
+    version: '1.2.1',
+    date: '2018-09-30',
+    log: [
+      '迁移braft-editor到2.x',
+      '集成node性能监控平台alinode',
+    ],
+  },
+  {
     version: '1.2.0',
     date: '2018-06-26',
     log: [
