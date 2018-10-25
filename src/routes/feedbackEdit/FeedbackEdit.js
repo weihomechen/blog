@@ -77,7 +77,10 @@ class FeedbackEdit extends React.PureComponent {
     }
 
     dispatch({ type: 'feedback/saveIssue', payload: { content } }).then(({ success }) => {
-      if (success) message.success('提交成功', 2, this.toIssueList);
+      if (success) {
+        message.success('提交成功', 2);
+        this.toIssueList();
+      }
     });
   }
 
@@ -126,11 +129,7 @@ class FeedbackEdit extends React.PureComponent {
         </Col>
       </Row>
       <div className={styles.editor}>
-        <Editor
-          getContent={this.getContent}
-          content={content}
-          type="issue"
-        />
+        {!id || content ? <Editor getContent={this.getContent} content={content} type="issue" /> : null}
       </div>
     </div>);
   }

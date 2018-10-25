@@ -6,7 +6,7 @@ import { message, Tag, Popconfirm, Input } from 'antd';
 import Button from '@material-ui/core/Button';
 import moment from 'moment';
 import { IconFont } from 'components';
-import BraftEditor from 'braft-editor';
+import BraftEditor, { EditorState } from 'braft-editor';
 import style from './assets/style/index.less';
 
 const { TextArea } = Input;
@@ -78,8 +78,8 @@ class FeedbackDetail extends React.PureComponent {
   }
 
   getDetail = () => {
-    const { dispatch, issue } = this.props;
-    const { id } = issue;
+    const { dispatch, match } = this.props;
+    const { id } = match.params;
 
     dispatch({ type: 'feedback/getDetail', payload: { id } });
   }
@@ -159,11 +159,8 @@ class FeedbackDetail extends React.PureComponent {
     const showTime = (time = updateTime) => moment(time).format('YYYY-MM-DD HH:mm:ss');
     const typeInfo = typeMap[String(type)] || {};
     const statusInfo = statusMap[String(status)] || {};
-    const editorProps = {
-      height: 'auto',
-      initialContent: JSON.parse(content),
-      controls: [],
-    };
+    const editorState = EditorState.createFrom(content);
+    const contentHtml = editorState.toHTML();
 
     return (
       <div className={style.feedbackDetailPage}>
@@ -181,12 +178,11 @@ class FeedbackDetail extends React.PureComponent {
             </div>
           </div>
         </div>
-        <div className={style.contentContainer}>
-          <BraftEditor
-            ref={instance => this.editorInstance = instance}
-            {...editorProps}
-          />
-        </div>
+        {
+          content ?
+            <div className={style.contentContainer} dangerouslySetInnerHTML={{ __html: contentHtml }} />
+            : null
+        }
         <div className={style.actionsContainer}>
           {user.uid === author || user.role === 1 ?
             issue.status === 1 ? <Popconfirm title="是否确定该反馈已经没有讨论的必要并将其关闭?" onConfirm={this.closeIssue} >
@@ -203,7 +199,7 @@ class FeedbackDetail extends React.PureComponent {
                 <div className={style.replyHeader}>
                   <span><IconFont type="time" />{showTime(createTime)}</span>
                   <span>
-                    {user.uid === replyAuthor ? <a onClick={this.delReply.bind(this, id)}>删除</a> : null}
+                    {user.uid === replyAuthor && status === 1 ? <a onClick={this.delReply.bind(this, id)}>删除</a> : null}
                   </span>
                 </div>
                 <div className={style.replyBody}>
