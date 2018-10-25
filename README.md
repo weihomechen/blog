@@ -120,8 +120,8 @@ npm i @ifun/deploy -g
 
 ```sh
 # 部署前端项目
-deploy -n <name> -p <pwd> 
+deploy -n <name>
 
 # 示例
-deploy -n blog -p 123456
+deploy -n blog
 ```
