@@ -4,8 +4,14 @@ import PropTypes from 'prop-types';
 import { Modal } from 'antd';
 import Button from '@material-ui/core/Button';
 import BraftEditor, { EditorState } from 'braft-editor';
-import 'braft-editor/dist/index.css'
+import CodeHighlighter from 'braft-extensions/dist/code-highlighter';
+import 'braft-editor/dist/index.css';
+import 'braft-extensions/dist/code-highlighter.css';
 import styles from './Editor.less';
+
+BraftEditor.use(CodeHighlighter({
+  includeEditors: ['editor-with-code-highlighter'],
+}));
 
 const emptyRaw = `{ blocks: [{ key: '98r8g', text: '', type: 'unstyled', depth: 0, inlineStyleRanges: [], entityRanges: [], data: {} }], entityMap: {} }`;
 const { confirm } = Modal;
@@ -118,6 +124,7 @@ class DraftEditor extends React.Component {
     return (
       <div className={styles.wrapper}>
         <BraftEditor
+          id="editor-with-code-highlighter"
           ref={instance => this.editorInstance = instance}
           {...editorProps}
         />

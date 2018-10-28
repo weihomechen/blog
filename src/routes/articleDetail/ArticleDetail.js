@@ -2,12 +2,12 @@
 import { connect } from 'dva';
 import { IconFont } from 'components';
 import { Spin, Input, Button } from 'antd';
-import BraftEditor, { EditorState } from 'braft-editor';
+import { EditorState } from 'braft-editor';
 import CommentItem from 'components/CommentItem';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-
+// import { Helmet } from 'react-helmet';
 import styles from './assets/css/index.less';
 
 const { TextArea } = Input;
@@ -86,6 +86,10 @@ class ArticleDetail extends Component {
 
     return (
       <div className={styles.articleDetail}>
+        {/* <Helmet>
+          <link href="https://rulifun.oss-cn-hangzhou.aliyuncs.com/blog/prism.css" rel="stylesheet" />
+          <script src="https://rulifun.oss-cn-hangzhou.aliyuncs.com/blog/prism.js"></script>
+        </Helmet> */}
         <Spin size="large" spinning={loading} />
         <div className={styles.titleContainer}>
           <div className={styles.title}>{title}</div>

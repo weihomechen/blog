@@ -50,17 +50,11 @@
     line-height: 1.8;
     color: #444;
     :global {
-      .braft-embed-image-toolbar {
-        display: none;
-      }
-      .braft-media-video-holder .braft-embed-video-toolbar a:last-child {
-        display: none;
-      }
-      .braft-media-audio-holder .braft-embed-audio-toolbar a:last-child {
-        display: none;
-      }
-      .braft-horizontal-line-toolbar {
-        display: none;
+      pre :has(code) {
+        background: #333;
+        code {
+          color: #fff;
+        }
       }
     }
   }
