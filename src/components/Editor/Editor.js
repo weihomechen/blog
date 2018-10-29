@@ -30,7 +30,7 @@ class DraftEditor extends React.Component {
 
   save = (type = 1) => {
     const editorState = this.editorInstance.getValue();
-    this.props.getContent(editorState.toRAW(), type);
+    this.props.getContent(editorState.toHtml(), type);
   }
 
   cancel = () => {
@@ -40,6 +40,19 @@ class DraftEditor extends React.Component {
         history.back();
       },
     });
+  }
+
+  preview = () => {
+
+    if (window.previewWindow) {
+      window.previewWindow.close();
+    }
+
+    window.previewWindow = window.open();
+    const editorState = this.editorInstance.getValue();
+    window.previewWindow.document.write(editorState.toHTML());
+    window.previewWindow.document.close();
+
   }
 
   render() {
@@ -83,42 +96,12 @@ class DraftEditor extends React.Component {
           type: 'split',
         },
         {
+          key: 'custom-button',
           type: 'button',
           text: '预览',
-          className: 'preview-button',
-          onClick: () => {
-            const preview = this.editorInstance.getHTMLContent();
-            window.open().document.write(preview);
-          },
+          onClick: this.preview
         },
-        // {
-        //   type: 'dropdown',
-        //   text: <span>下拉菜单</span>,
-        //   component: <h1 style={{ width: 200, color: '#ffffff', padding: 10, margin: 0 }}>Hello World!</h1>
-        // },
-        // {
-        //   type: 'modal',
-        //   text: <span style={{ paddingRight: 10, paddingLeft: 10 }}>弹出菜单</span>,
-        //   className: 'modal-button',
-        //   modal: {
-        //     title: '这是一个弹出框',
-        //     showClose: true,
-        //     showCancel: true,
-        //     showConfirm: true,
-        //     confirmable: true,
-        //     onConfirm: () => console.log(1),
-        //     onCancel: () => console.log(2),
-        //     onClose: () => console.log(3),
-        //     children: (
-        //       <div style={{ width: 480, height: 320, padding: 30 }}>
-        //         <span>Hello World！</span>
-        //       </div>
-        //     ),
-        //   },
-        // },
       ],
-      onChange: this.editorChange,
-      onSave: this.save,
     };
 
     return (

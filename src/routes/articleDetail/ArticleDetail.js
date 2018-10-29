@@ -7,7 +7,7 @@ import CommentItem from 'components/CommentItem';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-// import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import styles from './assets/css/index.less';
 
 const { TextArea } = Input;
@@ -81,15 +81,18 @@ class ArticleDetail extends Component {
         : <IconFont className={styles.avatar} type="avatar" fontSize="60px" color="#00ADB5" />;
     };
 
-    const editorState = EditorState.createFrom(content);
-    const contentHtml = editorState.toHTML();
+    let contentHtml = content;
+    if (contentHtml && contentHtml.startsWith('{"blocks"')) {
+      const editorState = EditorState.createFrom(content);
+      contentHtml = editorState.toHTML();
+    }
 
     return (
       <div className={styles.articleDetail}>
-        {/* <Helmet>
+        <Helmet>
           <link href="https://rulifun.oss-cn-hangzhou.aliyuncs.com/blog/prism.css" rel="stylesheet" />
           <script src="https://rulifun.oss-cn-hangzhou.aliyuncs.com/blog/prism.js"></script>
-        </Helmet> */}
+        </Helmet>
         <Spin size="large" spinning={loading} />
         <div className={styles.titleContainer}>
           <div className={styles.title}>{title}</div>
