@@ -5,6 +5,8 @@ import { Modal } from 'antd';
 import Button from '@material-ui/core/Button';
 import BraftEditor, { EditorState } from 'braft-editor';
 import CodeHighlighter from 'braft-extensions/dist/code-highlighter';
+import 'prismjs/components/prism-json'
+import 'prismjs/components/prism-bash'
 import 'braft-editor/dist/index.css';
 import 'braft-extensions/dist/code-highlighter.css';
 import styles from './Editor.less';
