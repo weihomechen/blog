@@ -38,7 +38,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.16.0",
     "babel-runtime": "^6.20.0",
-    "braft-editor": "^2.1.22",
+    "braft-editor": "^2.1.23",
     "braft-extensions": "^0.0.8",
     "copy-webpack-plugin": "^4.4.2",
     "css-loader": "^1.0.0",

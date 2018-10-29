@@ -10,7 +10,27 @@ import 'braft-extensions/dist/code-highlighter.css';
 import styles from './Editor.less';
 
 BraftEditor.use(CodeHighlighter({
-  includeEditors: ['editor-with-code-highlighter'],
+  syntaxs: [
+    {
+      name: 'JavaScript',
+      syntax: 'javascript'
+    }, {
+      name: 'HTML',
+      syntax: 'html'
+    }, {
+      name: 'CSS',
+      syntax: 'css'
+    }, {
+      name: 'C-like',
+      syntax: 'clike',
+    }, {
+      name: 'Bash',
+      syntax: 'bash'
+    }, {
+      name: 'JSON',
+      syntax: 'json'
+    }
+  ],
 }));
 
 const emptyRaw = `{ blocks: [{ key: '98r8g', text: '', type: 'unstyled', depth: 0, inlineStyleRanges: [], entityRanges: [], data: {} }], entityMap: {} }`;
@@ -57,9 +77,10 @@ class DraftEditor extends React.Component {
 
   render() {
     const { content } = this.props;
+    const defaultValue = EditorState.createFrom(content);
     const editorProps = {
       height: 500,
-      defaultValue: EditorState.createFrom(content),
+      defaultValue,
       lineHeights: [
         '1', '1.2', '1.5', '1.75',
         '2', '3', '4',

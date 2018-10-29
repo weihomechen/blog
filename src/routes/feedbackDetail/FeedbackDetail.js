@@ -6,7 +6,9 @@ import { message, Tag, Popconfirm, Input } from 'antd';
 import Button from '@material-ui/core/Button';
 import moment from 'moment';
 import { IconFont } from 'components';
-import BraftEditor, { EditorState } from 'braft-editor';
+import { EditorState } from 'braft-editor';
+import { Helmet } from 'react-helmet';
+
 import style from './assets/style/index.less';
 
 const { TextArea } = Input;
@@ -164,6 +166,10 @@ class FeedbackDetail extends React.PureComponent {
 
     return (
       <div className={style.feedbackDetailPage}>
+        <Helmet>
+          <link href="https://rulifun.oss-cn-hangzhou.aliyuncs.com/blog/prism.css" rel="stylesheet" />
+          <script src="https://rulifun.oss-cn-hangzhou.aliyuncs.com/blog/prism.js"></script>
+        </Helmet>
         <div className={style.detailHeader}>
           <div className={style.titleContainer}>
             <div className={style.title}>{title}</div>

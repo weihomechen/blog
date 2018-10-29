@@ -81,11 +81,8 @@ class ArticleDetail extends Component {
         : <IconFont className={styles.avatar} type="avatar" fontSize="60px" color="#00ADB5" />;
     };
 
-    let contentHtml = content;
-    if (contentHtml && contentHtml.startsWith('{"blocks"')) {
-      const editorState = EditorState.createFrom(content);
-      contentHtml = editorState.toHTML();
-    }
+    const editorState = EditorState.createFrom(content);
+    const contentHtml = editorState.toHTML();
 
     return (
       <div className={styles.articleDetail}>
@@ -104,11 +101,7 @@ class ArticleDetail extends Component {
             <div className={styles.infoItems}>{showTime}</div>
           </div>
         </div>
-        {
-          content ?
-            <div className={styles.contentContainer} dangerouslySetInnerHTML={{ __html: contentHtml }} />
-            : null
-        }
+        <div className={styles.contentContainer} dangerouslySetInnerHTML={{ __html: contentHtml }} />
         {
           isAcceptReward && moneyCode ?
             <div className={styles.rewardContainer}>
