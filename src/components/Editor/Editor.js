@@ -30,7 +30,7 @@ class DraftEditor extends React.Component {
 
   save = (type = 1) => {
     const editorState = this.editorInstance.getValue();
-    this.props.getContent(editorState.toHtml(), type);
+    this.props.getContent(editorState.toHTML(), type);
   }
 
   cancel = () => {
