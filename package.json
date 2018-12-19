@@ -17,7 +17,6 @@
     "@microants/get-webport": "^1.0.2",
     "compression-webpack-plugin": "^1.1.11",
     "eslint": "^4.19.1",
-    "webpack-cli": "^3.0.8",
     "webpack-dev-server": "^3.1.4"
   },
   "dependencies": {
@@ -71,6 +70,7 @@
     "url-loader": "^1.0.1",
     "url-search-params": "^0.10.0",
     "webpack": "^4.16.0",
+    "webpack-cli": "^3.1.2",
     "webpack-merge": "^4.1.0"
   }
 }
