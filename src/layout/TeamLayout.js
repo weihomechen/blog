@@ -23,7 +23,7 @@ class TeamLayout extends React.PureComponent {
     return (
       <div>
         <Helmet>
-          <title>Microants Blog</title>
+          <title>Rulifun Blog</title>
           <link rel="icon" href={config.logoSrc} type="image/x-icon" />
         </Helmet>
         <div className={styles.layout}>

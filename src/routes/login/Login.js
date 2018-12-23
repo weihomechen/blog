@@ -31,7 +31,7 @@ const Login = ({
       <div className={styles.form}>
         <div className={styles.logo}>
           <img alt="logo" src="https://rulifun.oss-cn-hangzhou.aliyuncs.com/blog/logo.png" />
-          <span>Microants Blog</span>
+          <span>Rulifun Blog</span>
         </div>
         <form>
           <FormItem hasFeedback>
