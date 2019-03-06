@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Footer.less';
-import { config } from '../../utils';
+import config from 'config/page.config'
 
 const Footer = () => (
   <div className={styles.footer}>

@@ -1,11 +1,7 @@
 /* eslint-disable no-extend-native */
 import { message } from 'antd';
 import moment from 'moment';
-import config from './config';
-import menu from './menu';
-import request from './request';
-import { color } from './theme';
-
+export { request } from './request'
 
 // 连字符转驼峰
 String.prototype.hyphenToHump = function () {
@@ -40,9 +36,9 @@ Date.prototype.format = function (format) {
   return format;
 };
 
-const getQuery = (key) => {
+export const getQuery = (key) => {
   const query = {};
-  location.search.slice(1).split('&').forEach((item) => {
+  location.search.slice(1).split('&').forEach((item) => { // eslint-disable-line
     const queryPair = item.split('=');
     query[queryPair[0]] = queryPair[1];
   });
@@ -61,7 +57,7 @@ const getQuery = (key) => {
 // 连续事件结束后的 1000ms 后触发
 // sample 1: _.debounce(function(){}, 1000, true)
 // 连续事件触发后立即触发（此时会忽略第二个参数）
-const customDebounce = (func, wait, immediate) => {
+export const customDebounce = (func, wait, immediate) => {
   let timeout;
   let args;
   let context;
@@ -136,7 +132,7 @@ const customDebounce = (func, wait, immediate) => {
   };
 };
 
-const showOffsetTime = (time) => {
+export const showOffsetTime = (time) => {
   const momentTime = moment(time);
   const offset = Date.now() - momentTime.valueOf();
   if (offset < 0) {
@@ -157,7 +153,7 @@ const showOffsetTime = (time) => {
   return `${showValue}天前`;
 };
 
-function checkFileSize(fileSize, maxSize = 2) {
+export function checkFileSize(fileSize, maxSize = 2) {
   if (!fileSize) {
     console.error('请选择文件');
     return;
@@ -168,14 +164,3 @@ function checkFileSize(fileSize, maxSize = 2) {
   }
   return isOk;
 }
-
-module.exports = {
-  config,
-  menu,
-  request,
-  color,
-  getQuery,
-  customDebounce,
-  showOffsetTime,
-  checkFileSize,
-};
