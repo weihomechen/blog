@@ -24,6 +24,7 @@
 
 - react
 - dva
+- umi
 - webpack
 - es6+
 - axios
@@ -128,8 +129,8 @@ npm i @ifun/deploy -g
 
 ```sh
 # 部署前端项目
-deploy -n <name>
+deploy app <name>
 
 # 示例
-deploy -n blog
+deploy app blog
 ```
