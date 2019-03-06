@@ -9,8 +9,8 @@ import style from './CommentItem.less';
 const { TextArea } = Input;
 
 class CommentItem extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       replysVisible: false,
       replyBoxVisible: false,
@@ -112,7 +112,8 @@ class CommentItem extends React.Component {
             className={style.delCommentBtn}
             style={{ display: (isAuthor && isShowDelBtn) || 'none' }}
             onClick={this.delComment}
-          >删除</a>
+          >删除
+          </a>
         </div>
         <div className={style.commentFooter}>
           <Icon type="message" />

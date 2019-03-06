@@ -145,9 +145,9 @@ class Header extends React.PureComponent {
             </Menu.Item>
             {uid ?
               <SubMenu
-                title={<span className="userContainer">
+                title={<span className={styles.userContainer}>
                   {avatar ?
-                    <img alt="" src={avatar} className="userAvatar" /> :
+                    <img alt="" src={avatar} className={styles.userAvatar} /> :
                     <Icon type="user" />
                   }
                   {name}

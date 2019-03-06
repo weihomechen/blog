@@ -3,8 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Menu, Badge } from 'antd';
 import { Link } from 'dva/router';
+import menu from 'config/menu.config';
 import IconFont from '../Iconfont';
-import { menu } from '../../utils';
 
 const getMenus = function (menuArray, isSiderFold, parentPath = '/', unHandledCount = 0) {
   const menuArr = [];
