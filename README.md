@@ -1,6 +1,6 @@
 # blog-front
 
-![Build Status](https://www.travis-ci.org/weihomechen/blog.svg?branch=master)
+[![Build Status](https://www.travis-ci.org/weihomechen/blog.svg?branch=master)](https://www.travis-ci.org/weihomechen/blog)
 
 ## 概述
 
