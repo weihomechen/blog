@@ -1,5 +1,7 @@
 # blog-front
 
+![Build Status](https://www.travis-ci.org/weihomechen/blog.svg?branch=master)
+
 ## 概述
 
 本项目是全栈博客应用的前端部分
