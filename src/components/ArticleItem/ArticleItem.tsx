@@ -2,12 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon, Tag } from 'antd';
 import moment from 'moment';
-import { IconFont } from '..';
+import { IconFont } from '../index';
+import { Article, Cate } from '../../utils/type'
 import style from './ArticleItem.less';
 
-const ArticleItem = ({
-  article, cate, onClick, uid,
-}) => {
+export interface ArticleItemProps {
+  article: Article
+  cate: Cate
+  onClick: (id: number) => any
+  uid: number | string
+}
+
+const ArticleItem = (props: ArticleItemProps) => {
+  const {
+    article, cate, onClick, uid,
+  } = props
   const {
     title, id, author, updateTime, abstract, comments, tags,
   } = article;
