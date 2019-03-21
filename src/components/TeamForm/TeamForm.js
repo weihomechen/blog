@@ -134,10 +134,8 @@ class TeamForm extends React.Component {
 
   render() {
     const {
-      teamList,
       form,
       modalVisible,
-      hide,
       teamDTO,
     } = this.props;
     const { tid, name, abstract } = teamDTO;
