@@ -5,12 +5,17 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "jsx": "react",
-    "lib": ["esnext", "dom"],
+    "lib": [
+      "esnext",
+      "dom"
+    ],
     "esModuleInterop": true,
     "sourceMap": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": [
+        "src/*",
+      ],
     },
     "allowSyntheticDefaultImports": true
   }

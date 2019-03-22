@@ -7,7 +7,7 @@ import { Tabs, Pagination, message, Badge } from 'antd';
 import Button from '@material-ui/core/Button';
 import moment from 'moment';
 import { IconFont } from 'components';
-import config from 'config/page.config';
+import config from 'config/project.config';
 import style from './assets/css/index.less';
 
 const { TabPane } = Tabs;

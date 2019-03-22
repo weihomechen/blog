@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Layout.less';
-import config from 'config/page.config';
+import config from 'config/project.config';
 import Menus from './Menu';
 
 class Sider extends React.PureComponent {
