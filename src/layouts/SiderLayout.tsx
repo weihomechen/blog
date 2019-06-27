@@ -6,18 +6,45 @@ import { connect } from 'dva';
 import { withRouter } from 'dva/router';
 import { Layout } from '../components';
 import '../components/skin.less';
+import {
+  DispatchParam,
+} from '../utils/type'
 
 const {
   Header, Footer, Sider, styles,
 } = Layout;
 
-class SiderLayout extends React.PureComponent {
-  constructor() {
-    super();
-    this.state = {
-      isSiderFold: false,
-    };
-  }
+export interface SiderLayoutProps {
+  app: any
+  loading: boolean
+  location: any
+  state: any
+  dispatch: (val: DispatchParam) => any
+  unHandledCount: number
+}
+
+class SiderLayout extends React.PureComponent<SiderLayoutProps, {}> {
+  state = {
+    isSiderFold: false,
+  };
+
+  static propTypes = {
+    app: PropTypes.object,
+    loading: PropTypes.bool,
+    location: PropTypes.object,
+    state: PropTypes.object,
+    dispatch: PropTypes.func,
+    unHandledCount: PropTypes.number,
+  };
+
+  static defaultProps = {
+    app: {},
+    loading: false,
+    location: {},
+    state: {},
+    dispatch: () => { },
+    unHandledCount: 0,
+  };
 
   render() {
     const {
@@ -46,6 +73,7 @@ class SiderLayout extends React.PureComponent {
       isSiderFold,
       unHandledCount,
     };
+
     return (
       <div className={`${styles.layout} ${isSiderFold ? styles.fold : ''}`}>
         <aside className={styles.sider}>
@@ -63,29 +91,11 @@ class SiderLayout extends React.PureComponent {
   }
 }
 
-SiderLayout.propTypes = {
-  app: PropTypes.object,
-  loading: PropTypes.bool,
-  location: PropTypes.object,
-  state: PropTypes.object,
-  dispatch: PropTypes.func,
-  unHandledCount: PropTypes.number,
-};
-
-SiderLayout.defaultProps = {
-  app: {},
-  loading: false,
-  location: {},
-  state: {},
-  dispatch: () => { },
-  unHandledCount: 0,
-};
-
 function mapStateToProps({ global, approval = {}, loading }) {
   return {
     state: global,
     loading: loading.models.app,
-    unHandledCount: approval.unHandledCount,
+    unHandledCount: (approval as any).unHandledCount,
   };
 }
 

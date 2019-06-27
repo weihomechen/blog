@@ -123,11 +123,13 @@ export const showOffsetTime = (time) => {
 export function checkFileSize(fileSize, maxSize = 2) {
   if (!fileSize) {
     console.error('请选择文件');
-    return;
+    return false;
   }
+
   const isOk = fileSize / 1024 / 1024 < maxSize;
+
   if (!isOk) {
     message.error(`请选择小于${maxSize}M的图片`);
+    return isOk;
   }
-  return isOk;
 }

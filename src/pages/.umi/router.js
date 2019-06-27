@@ -1,13 +1,14 @@
 import React from 'react';
 import { Router as DefaultRouter, Route, Switch } from 'react-router-dom';
 import dynamic from 'umi/dynamic';
-import renderRoutes from 'umi/_renderRoutes';
+import renderRoutes from 'umi/lib/renderRoutes';
+import history from '@tmp/history';
 import RendererWrapper0 from '/Users/ifun/my-projects/blog/src/pages/.umi/LocaleWrapper.jsx'
 import _dvaDynamic from 'dva/dynamic'
 
-let Router = require('dva/router').routerRedux.ConnectedRouter;
+const Router = require('dva/router').routerRedux.ConnectedRouter;
 
-let routes = [
+const routes = [
   {
     "path": "/user",
     "redirect": "/user/login",
@@ -31,30 +32,36 @@ let routes = [
   },
   {
     "path": "/user",
-    "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "layouts__UserLayout" */'../../layouts/UserLayout'),
-  
-}),
+    "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "layouts__UserLayout" */'../../layouts/UserLayout'),
+      
+    })
+    : require('../../layouts/UserLayout').default,
     "routes": [
       {
         "path": "/user/login",
-        "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "p__login__index" */'../login/index'),
-  
-}),
+        "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "p__login__index" */'../login/index'),
+      
+    })
+    : require('../login/index').default,
         "exact": true,
         "_title": "blog",
         "_title_default": "blog"
       },
       {
         "path": "/user/register",
-        "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "p__register__index" */'../register/index'),
-  
-}),
+        "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "p__register__index" */'../register/index'),
+      
+    })
+    : require('../register/index').default,
         "exact": true,
         "_title": "blog",
         "_title_default": "blog"
@@ -70,74 +77,88 @@ let routes = [
   },
   {
     "path": "/personal",
-    "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "layouts__SiderLayout" */'../../layouts/SiderLayout'),
-  
-}),
+    "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "layouts__SiderLayout" */'../../layouts/SiderLayout'),
+      
+    })
+    : require('../../layouts/SiderLayout').default,
     "routes": [
       {
         "path": "/personal/account",
-        "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "p__account__index" */'../account/index'),
-  
-}),
+        "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "p__account__index" */'../account/index'),
+      
+    })
+    : require('../account/index').default,
         "exact": true,
         "_title": "blog",
         "_title_default": "blog"
       },
       {
         "path": "/personal/article",
-        "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "p__personalArticle__index" */'../personalArticle/index'),
-  
-}),
+        "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "p__personalArticle__index" */'../personalArticle/index'),
+      
+    })
+    : require('../personalArticle/index').default,
         "exact": true,
         "_title": "blog",
         "_title_default": "blog"
       },
       {
         "path": "/personal/approval",
-        "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "p__approval__index" */'../approval/index'),
-  
-}),
+        "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "p__approval__index" */'../approval/index'),
+      
+    })
+    : require('../approval/index').default,
         "exact": true,
         "_title": "blog",
         "_title_default": "blog"
       },
       {
         "path": "/personal/feedback",
-        "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "p__personalFeedback__index" */'../personalFeedback/index'),
-  
-}),
+        "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "p__personalFeedback__index" */'../personalFeedback/index'),
+      
+    })
+    : require('../personalFeedback/index').default,
         "exact": true,
         "_title": "blog",
         "_title_default": "blog"
       },
       {
         "path": "/personal/changeLog",
-        "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "p__changeLog__index" */'../changeLog/index'),
-  
-}),
+        "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "p__changeLog__index" */'../changeLog/index'),
+      
+    })
+    : require('../changeLog/index').default,
         "exact": true,
         "_title": "blog",
         "_title_default": "blog"
       },
       {
         "path": "/personal/profile",
-        "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "p__profile__index" */'../profile/index'),
-  
-}),
+        "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "p__profile__index" */'../profile/index'),
+      
+    })
+    : require('../profile/index').default,
         "exact": true,
         "_title": "blog",
         "_title_default": "blog"
@@ -153,30 +174,36 @@ let routes = [
   },
   {
     "path": "/adminCenter",
-    "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "layouts__SiderLayout" */'../../layouts/SiderLayout'),
-  
-}),
+    "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "layouts__SiderLayout" */'../../layouts/SiderLayout'),
+      
+    })
+    : require('../../layouts/SiderLayout').default,
     "routes": [
       {
         "path": "/adminCenter/cateManage",
-        "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "p__cateManage__index" */'../cateManage/index'),
-  
-}),
+        "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "p__cateManage__index" */'../cateManage/index'),
+      
+    })
+    : require('../cateManage/index').default,
         "exact": true,
         "_title": "blog",
         "_title_default": "blog"
       },
       {
         "path": "/adminCenter/messageSender",
-        "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "p__messageSender__index" */'../messageSender/index'),
-  
-}),
+        "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "p__messageSender__index" */'../messageSender/index'),
+      
+    })
+    : require('../messageSender/index').default,
         "exact": true,
         "_title": "blog",
         "_title_default": "blog"
@@ -192,19 +219,23 @@ let routes = [
   },
   {
     "path": "/team",
-    "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "layouts__TeamLayout" */'../../layouts/TeamLayout'),
-  
-}),
+    "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "layouts__TeamLayout" */'../../layouts/TeamLayout'),
+      
+    })
+    : require('../../layouts/TeamLayout').default,
     "routes": [
       {
         "path": "/team/:tid",
-        "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "p__team__index" */'../team/index'),
-  
-}),
+        "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "p__team__index" */'../team/index'),
+      
+    })
+    : require('../team/index').default,
         "exact": true,
         "_title": "blog",
         "_title_default": "blog"
@@ -220,19 +251,23 @@ let routes = [
   },
   {
     "path": "/personalPage",
-    "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "layouts__BasicLayout" */'../../layouts/BasicLayout'),
-  
-}),
+    "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "layouts__BasicLayout" */'../../layouts/BasicLayout'),
+      
+    })
+    : require('../../layouts/BasicLayout').default,
     "routes": [
       {
         "path": "/personalPage/:uid",
-        "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "p__personalPage__index" */'../personalPage/index'),
-  
-}),
+        "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "p__personalPage__index" */'../personalPage/index'),
+      
+    })
+    : require('../personalPage/index').default,
         "exact": true,
         "_title": "blog",
         "_title_default": "blog"
@@ -248,19 +283,23 @@ let routes = [
   },
   {
     "path": "/mc",
-    "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "layouts__BasicLayout" */'../../layouts/BasicLayout'),
-  
-}),
+    "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "layouts__BasicLayout" */'../../layouts/BasicLayout'),
+      
+    })
+    : require('../../layouts/BasicLayout').default,
     "routes": [
       {
         "path": "/mc",
-        "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "p__mc__index" */'../mc/index'),
-  
-}),
+        "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "p__mc__index" */'../mc/index'),
+      
+    })
+    : require('../mc/index').default,
         "exact": true,
         "_title": "blog",
         "_title_default": "blog"
@@ -276,30 +315,36 @@ let routes = [
   },
   {
     "path": "/article",
-    "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "layouts__BasicLayout" */'../../layouts/BasicLayout'),
-  
-}),
+    "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "layouts__BasicLayout" */'../../layouts/BasicLayout'),
+      
+    })
+    : require('../../layouts/BasicLayout').default,
     "routes": [
       {
         "path": "/article/detail/:id",
-        "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "p__articleDetail__index" */'../articleDetail/index'),
-  
-}),
+        "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "p__articleDetail__index" */'../articleDetail/index'),
+      
+    })
+    : require('../articleDetail/index').default,
         "exact": true,
         "_title": "blog",
         "_title_default": "blog"
       },
       {
         "path": "/article/edit/:id?",
-        "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "p__articleEdit__index" */'../articleEdit/index'),
-  
-}),
+        "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "p__articleEdit__index" */'../articleEdit/index'),
+      
+    })
+    : require('../articleEdit/index').default,
         "exact": true,
         "_title": "blog",
         "_title_default": "blog"
@@ -315,19 +360,23 @@ let routes = [
   },
   {
     "path": "/search",
-    "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "layouts__BasicLayout" */'../../layouts/BasicLayout'),
-  
-}),
+    "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "layouts__BasicLayout" */'../../layouts/BasicLayout'),
+      
+    })
+    : require('../../layouts/BasicLayout').default,
     "routes": [
       {
         "path": "/search",
-        "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "p__search__index" */'../search/index'),
-  
-}),
+        "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "p__search__index" */'../search/index'),
+      
+    })
+    : require('../search/index').default,
         "exact": true,
         "_title": "blog",
         "_title_default": "blog"
@@ -343,41 +392,49 @@ let routes = [
   },
   {
     "path": "/feedback",
-    "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "layouts__BasicLayout" */'../../layouts/BasicLayout'),
-  
-}),
+    "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "layouts__BasicLayout" */'../../layouts/BasicLayout'),
+      
+    })
+    : require('../../layouts/BasicLayout').default,
     "routes": [
       {
         "path": "/feedback",
-        "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "p__feedback__index" */'../feedback/index'),
-  
-}),
+        "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "p__feedback__index" */'../feedback/index'),
+      
+    })
+    : require('../feedback/index').default,
         "exact": true,
         "_title": "blog",
         "_title_default": "blog"
       },
       {
         "path": "/feedback/detail/:id",
-        "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "p__feedbackDetail__index" */'../feedbackDetail/index'),
-  
-}),
+        "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "p__feedbackDetail__index" */'../feedbackDetail/index'),
+      
+    })
+    : require('../feedbackDetail/index').default,
         "exact": true,
         "_title": "blog",
         "_title_default": "blog"
       },
       {
         "path": "/feedback/edit/:id?",
-        "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "p__feedbackEdit__index" */'../feedbackEdit/index'),
-  
-}),
+        "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "p__feedbackEdit__index" */'../feedbackEdit/index'),
+      
+    })
+    : require('../feedbackEdit/index').default,
         "exact": true,
         "_title": "blog",
         "_title_default": "blog"
@@ -393,19 +450,23 @@ let routes = [
   },
   {
     "path": "/error",
-    "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "layouts__BasicLayout" */'../../layouts/BasicLayout'),
-  
-}),
+    "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "layouts__BasicLayout" */'../../layouts/BasicLayout'),
+      
+    })
+    : require('../../layouts/BasicLayout').default,
     "routes": [
       {
         "path": "/error",
-        "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "p__error__index" */'../error/index'),
-  
-}),
+        "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "p__error__index" */'../error/index'),
+      
+    })
+    : require('../error/index').default,
         "exact": true,
         "_title": "blog",
         "_title_default": "blog"
@@ -422,19 +483,23 @@ let routes = [
   {
     "path": "/",
     "exact": false,
-    "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "layouts__BasicLayout" */'../../layouts/BasicLayout'),
-  
-}),
+    "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "layouts__BasicLayout" */'../../layouts/BasicLayout'),
+      
+    })
+    : require('../../layouts/BasicLayout').default,
     "routes": [
       {
         "path": "/",
-        "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "p__home__index" */'../home/index'),
-  
-}),
+        "component": __IS_BROWSER
+    ? _dvaDynamic({
+      
+      component: () => import(/* webpackChunkName: "p__home__index" */'../home/index'),
+      
+    })
+    : require('../home/index').default,
         "exact": true,
         "_title": "blog",
         "_title_default": "blog"
@@ -455,11 +520,12 @@ let routes = [
   }
 ];
 window.g_routes = routes;
-window.g_plugins.applyForEach('patchRoutes', { initialValue: routes });
+const plugins = require('umi/_runtimePlugin');
+plugins.applyForEach('patchRoutes', { initialValue: routes });
 
 // route change handler
 function routeChangeHandler(location, action) {
-  window.g_plugins.applyForEach('onRouteChange', {
+  plugins.applyForEach('onRouteChange', {
     initialValue: {
       routes,
       location,
@@ -467,14 +533,16 @@ function routeChangeHandler(location, action) {
     },
   });
 }
-window.g_history.listen(routeChangeHandler);
-routeChangeHandler(window.g_history.location);
+history.listen(routeChangeHandler);
+routeChangeHandler(history.location);
 
-export default function RouterWrapper() {
+export { routes };
+
+export default function RouterWrapper(props = {}) {
   return (
 <RendererWrapper0>
-          <Router history={window.g_history}>
-      { renderRoutes(routes, {}) }
+          <Router history={history}>
+      { renderRoutes(routes, props) }
     </Router>
         </RendererWrapper0>
   );

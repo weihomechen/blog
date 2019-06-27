@@ -2,13 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './iconfont.less';
 
-const Iconfont = ({
-  type, color, fontSize, className,
-}) => (
-  <svg className={`icon ${className}`} style={{ fontSize }} aria-hidden="true">
+export interface IconfontProps {
+  type: string
+  color: string
+  fontSize: string
+  className: string
+}
+
+const Iconfont = (props: IconfontProps) => {
+  const {
+    type, color, fontSize, className,
+  } = props
+
+  return (<svg className={`icon ${className}`} style={{ fontSize }} aria-hidden="true">
     <use style={{ color }} xlinkHref={`#icon-${type}`} />
-  </svg>
-);
+  </svg>);
+};
 
 Iconfont.defaultProps = {
   type: '',

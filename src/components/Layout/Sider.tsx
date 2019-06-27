@@ -3,22 +3,53 @@ import PropTypes from 'prop-types';
 import styles from './Layout.less';
 import config from 'config/project.config';
 import Menus from './Menu';
+import {
+  DispatchParam,
+} from '../../utils/type'
 
-class Sider extends React.PureComponent {
+export interface SiderProps {
+  isSiderFold: boolean
+  location: object
+  dispatch: (val: DispatchParam) => void
+  unHandledCount: number
+}
+
+export interface SiderState {
+
+}
+
+class Sider extends React.PureComponent<SiderProps, SiderState> {
+  static propTypes = {
+    isSiderFold: PropTypes.bool,
+    location: PropTypes.object,
+    dispatch: PropTypes.func,
+    unHandledCount: PropTypes.number,
+  }
+
+  static defaultProps = {
+    isSiderFold: false,
+    location: {},
+    dispatch: () => { },
+    unHandledCount: 0,
+  }
+
   componentDidMount() {
     this.props.dispatch({ type: 'approval/getList' });
   }
+
   render() {
     const {
       isSiderFold,
       location,
       unHandledCount,
     } = this.props;
+
     // const menuClick = (e) => {
     //   e.domEvent.preventDefault();
     //   const targetNode = document.getElementById(e.key.replace(/\//g, ''));
     //   targetNode.scrollIntoView(true);
     // }
+
     const menusProps = {
       isSiderFold,
       location,
@@ -36,19 +67,5 @@ class Sider extends React.PureComponent {
     );
   }
 }
-
-Sider.propTypes = {
-  isSiderFold: PropTypes.bool,
-  location: PropTypes.object,
-  dispatch: PropTypes.func,
-  unHandledCount: PropTypes.number,
-};
-
-Sider.defaultProps = {
-  isSiderFold: false,
-  location: {},
-  dispatch: () => { },
-  unHandledCount: 0,
-};
 
 export default Sider;

@@ -8,6 +8,10 @@ import {
   message,
 } from 'antd';
 import style from './assets/css/index.less';
+import {
+  User,
+  DispatchParam,
+} from '../../utils/type'
 
 const initialState = JSON.stringify({
   uid: '',
@@ -15,15 +19,27 @@ const initialState = JSON.stringify({
   oldPassword: '',
 });
 
-class PersonCenter extends Component {
-  constructor() {
-    super();
-    this.state = JSON.parse(initialState);
-  }
+export interface PersonCenterProps {
+  user: User
+  dispatch: (val: DispatchParam) => any
+}
+
+class PersonCenter extends Component<PersonCenterProps, {}> {
+  static propTypes = {
+    user: PropTypes.object,
+    dispatch: PropTypes.func,
+  };
+
+  static defaultProps = {
+    user: {},
+    dispatch: () => { },
+  };
 
   static contextTypes = {
     router: PropTypes.object,
   }
+
+  state = JSON.parse(initialState);
 
   passwordChange = (e) => {
     this.setState({ password: e.target.value });
@@ -71,16 +87,6 @@ class PersonCenter extends Component {
     );
   }
 }
-
-PersonCenter.propTypes = {
-  user: PropTypes.object,
-  dispatch: PropTypes.func,
-};
-
-PersonCenter.defaultProps = {
-  user: {},
-  dispatch: () => { },
-};
 
 function mapStateToProps({ user }) {
   return {

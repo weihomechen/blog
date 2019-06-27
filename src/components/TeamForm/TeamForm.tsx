@@ -13,6 +13,9 @@ import {
 } from 'antd';
 import { checkFileSize } from '../../utils';
 import * as styles from './index.less';
+import {
+  Team,
+} from '../../utils/type'
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -21,18 +24,24 @@ const formItemLayout = {
   wrapperCol: { span: 12 },
 };
 
+export interface TeamFormProps {
+  dispatch: (val: any) => any
+  form: any
+  teamList: Team[]
+  modalVisible: boolean
+  hide: any
+  teamDTO: Team
+}
+
 @connect(({ team }) => {
   return {
     teamList: team.list || [],
   };
 })
-class TeamForm extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      avatar: '',
-    };
-  }
+class TeamForm extends React.Component<TeamFormProps, {}> {
+  state = {
+    avatar: '',
+  };
 
   static propTypes = {
     dispatch: PropTypes.func,
@@ -58,7 +67,7 @@ class TeamForm extends React.Component {
   }
 
   beforeUpload = (file) => {
-    checkFileSize(file.size);
+    return checkFileSize(file.size);
   }
 
   submitTeam = (e) => {
@@ -120,7 +129,7 @@ class TeamForm extends React.Component {
       message.error('上传失败');
     };
     fd.append('file', param.file);
-    xhr.onreadystatechange = (e) => {
+    xhr.onreadystatechange = (e: any) => {
       if (xhr.readyState === 4 && xhr.status === 200) {
         const avatar = (JSON.parse(e.currentTarget.response) || {}).data;
         this.setState({ avatar });

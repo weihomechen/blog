@@ -8,16 +8,46 @@ import {
 import { Menu, Icon, Badge, notification, Button, Input } from 'antd';
 import styles from './Header.less';
 import io from '../../common/io';
+import { User, DispatchParam } from '../../utils/type'
 
 const { SubMenu } = Menu;
 
-class Header extends React.PureComponent {
-  constructor() {
-    super();
-    this.state = {
-      keyword: '',
-    };
-  }
+export interface HeaderProps {
+  user: User
+  location: any
+  dispatch: (val: DispatchParam) => any
+  showLogo: boolean
+  isSiderFold: boolean
+  siderFoldChange: any
+  unReadTotal: number
+}
+
+class Header extends React.PureComponent<HeaderProps, {}> {
+  state = {
+    keyword: '',
+  };
+
+  socket: any
+
+  static defaultProps = {
+    user: {},
+    location: {},
+    dispatch: () => { },
+    showLogo: true,
+    isSiderFold: false,
+    siderFoldChange: () => { },
+    unReadTotal: 0,
+  };
+
+  static propTypes = {
+    user: PropTypes.object,
+    location: PropTypes.object,
+    dispatch: PropTypes.func,
+    showLogo: PropTypes.bool,
+    isSiderFold: PropTypes.bool,
+    siderFoldChange: PropTypes.func,
+    unReadTotal: PropTypes.number,
+  };
 
   componentDidMount() {
     const { dispatch } = this.props;
@@ -174,26 +204,6 @@ class Header extends React.PureComponent {
     );
   }
 }
-
-Header.defaultProps = {
-  user: {},
-  location: {},
-  dispatch: () => { },
-  showLogo: true,
-  isSiderFold: false,
-  siderFoldChange: () => { },
-  unReadTotal: 0,
-};
-
-Header.propTypes = {
-  user: PropTypes.object,
-  location: PropTypes.object,
-  dispatch: PropTypes.func,
-  showLogo: PropTypes.bool,
-  isSiderFold: PropTypes.bool,
-  siderFoldChange: PropTypes.func,
-  unReadTotal: PropTypes.number,
-};
 
 export default connect(({ user = {}, mc = {} }) => ({
   user: user.user,

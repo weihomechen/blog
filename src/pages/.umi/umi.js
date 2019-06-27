@@ -1,45 +1,100 @@
 import './polyfills';
+import history from './history';
 
-import '@tmp/initHistory';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import findRoute from '/Users/ifun/my-projects/blog/node_modules/umi-build-dev/lib/findRoute.js';
 
 
 // runtime plugins
-window.g_plugins = require('umi/_runtimePlugin');
-window.g_plugins.init({
-  validKeys: ['patchRoutes','render','rootContainer','modifyRouteProps','onRouteChange','dva',],
+const plugins = require('umi/_runtimePlugin');
+window.g_plugins = plugins;
+plugins.init({
+  validKeys: ['patchRoutes','render','rootContainer','modifyRouteProps','onRouteChange','initialProps','dva','locale',],
 });
-window.g_plugins.use(require('../../../node_modules/umi-plugin-dva/lib/runtime'));
-window.g_plugins.use(require('@/app'));
+plugins.use(require('../../../node_modules/umi-plugin-dva/lib/runtime'));
+plugins.use(require('@/app'));
 
-require('@tmp/initDva');
+const app = require('@tmp/dva')._onCreate();
+window.g_app = app;
 
 // render
-let oldRender = () => {
-  const rootContainer = window.g_plugins.apply('rootContainer', {
-    initialValue: React.createElement(require('./router').default),
+let clientRender = async () => {
+  window.g_isBrowser = true;
+  let props = {};
+  // Both support SSR and CSR
+  if (window.g_useSSR) {
+    // 如果开启服务端渲染则客户端组件初始化 props 使用服务端注入的数据
+    props = window.g_initialData;
+  } else {
+    const pathname = location.pathname;
+    const activeRoute = findRoute(require('@tmp/router').routes, pathname);
+    if (activeRoute && activeRoute.component) {
+      props = activeRoute.component.getInitialProps ? await activeRoute.component.getInitialProps() : {};
+    }
+  }
+  const rootContainer = plugins.apply('rootContainer', {
+    initialValue: React.createElement(require('./router').default, props),
   });
-  ReactDOM.render(
+  ReactDOM[window.g_useSSR ? 'hydrate' : 'render'](
     rootContainer,
     document.getElementById('root'),
   );
 };
-const render = window.g_plugins.compose('render', { initialValue: oldRender });
+const render = plugins.compose('render', { initialValue: clientRender });
 
 const moduleBeforeRendererPromises = [];
+// client render
+if (__IS_BROWSER) {
 
-Promise.all(moduleBeforeRendererPromises).then(() => {
-  render();
-}).catch((err) => {
-  window.console && window.console.error(err);
-});
+  Promise.all(moduleBeforeRendererPromises).then(() => {
+    render();
+  }).catch((err) => {
+    window.console && window.console.error(err);
+  });
+}
+
+// export server render
+let serverRender, ReactDOMServer;
+if (!__IS_BROWSER) {
+  serverRender = async (ctx) => {
+    const pathname = ctx.req.url;
+    require('@tmp/history').default.push(pathname);
+    let props = {};
+    const activeRoute = findRoute(require('./router').routes, pathname) || false;
+    if (activeRoute && activeRoute.component.getInitialProps) {
+      props = await activeRoute.component.getInitialProps(ctx);
+      props = plugins.apply('initialProps', {
+         initialValue: props,
+      });
+    } else {
+      // message activeRoute not found
+      console.log(`${pathname} activeRoute not found`);
+    }
+    const rootContainer = plugins.apply('rootContainer', {
+      initialValue: React.createElement(require('./router').default, props),
+    });
+    const htmlTemplateMap = {
+      
+    };
+    return {
+      htmlElement: htmlTemplateMap[pathname],
+      rootContainer,
+    };
+  }
+  // using project react-dom version
+  // https://github.com/facebook/react/issues/13991
+  ReactDOMServer = require('react-dom/server');
+}
+
+export { ReactDOMServer };
+export default __IS_BROWSER ? null : serverRender;
 
 require('../../global.css');
 
 // hot module replacement
-if (module.hot) {
+if (__IS_BROWSER && module.hot) {
   module.hot.accept('./router', () => {
-    oldRender();
+    clientRender();
   });
 }

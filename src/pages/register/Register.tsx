@@ -7,6 +7,12 @@ import styles from './assets/css/index.less';
 
 const FormItem = Form.Item;
 
+export interface RegisterProps {
+  loading: boolean
+  form: any
+  dispatch: (val: any) => any
+}
+
 const Register = ({
   loading,
   dispatch,
@@ -14,7 +20,7 @@ const Register = ({
     getFieldDecorator,
     validateFieldsAndScroll,
   },
-}) => {
+}: RegisterProps) => {
   function handleOk() {
     validateFieldsAndScroll((errors, values) => {
       if (!errors) {
