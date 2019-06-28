@@ -17,7 +17,13 @@ import style from './assets/css/index.less';
 const { confirm } = Modal;
 const presetColors = ['#F47373', '#FFD3B6', '#A8E6CF', '#2CCCE4', '#928A97', '#dce775', '#F38181', '#66C6BA', '#f44336', '#F08A5D', '#00ADB5'];
 
+export interface CateManageProps {
+
+}
+
 class CateManage extends Component {
+  dispatch: any
+
   constructor(props) {
     super(props);
     this.dispatch = this.props.dispatch;

@@ -18,8 +18,28 @@ import Fab from '@material-ui/core/Fab';
 import moment from 'moment';
 import { IconFont, TeamForm } from 'components';
 import * as styles from './assets/css/index.less';
+import {
+  User,
+  Team,
+  Cate,
+  Article,
+} from '../../utils/type'
 
 const { Meta } = Card;
+
+export interface HomeProps {
+  dispatch: (val: any) => any
+  user: User
+  users: User[]
+  activeUsers: User[]
+  teamList: Team[]
+  cateList: Cate[]
+  articleList: Article[]
+}
+
+export interface HomeState {
+  modalVisible: boolean
+}
 
 @connect(({ user, team, article, category = {} }) => {
   return {
@@ -29,9 +49,9 @@ const { Meta } = Card;
     ...user,
   };
 })
-class Home extends React.Component {
-  constructor() {
-    super();
+class Home extends React.Component<HomeProps, HomeState> {
+  constructor(props) {
+    super(props);
     this.state = {
       modalVisible: false,
     };
@@ -224,9 +244,9 @@ class Home extends React.Component {
                 <Card
                   key={v.tid}
                   cover={<img alt="" src={v.avatar} onClick={this.browseTeam(v.tid)} />}
-                  actions={[<Tooltip placement="bottom" title="浏览">
+                  actions={[(<Tooltip placement="bottom" title="浏览">
                     <span onClick={this.browseTeam(v.tid)}><IconFont type="browse" fontSize="18px" /></span>
-                  </Tooltip>,
+                  </Tooltip>),
                   user.tid === v.tid ?
                     <Tooltip placement="bottom" title="我的团队">
                       <span onClick={this.browseTeam(v.tid)}><IconFont type="group1" fontSize="22px" /></span>

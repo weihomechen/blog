@@ -18,6 +18,11 @@ import { connect } from 'dva';
 import { withRouter, Prompt } from 'dva/router';
 import Editor from '../../components/Editor';
 import style from './assets/css/index.less';
+import {
+  User,
+  Article,
+  Cate,
+} from '../../utils/type'
 
 const labelSpan = 2;
 const contentSpan = 16;
@@ -25,14 +30,51 @@ const { TextArea } = Input;
 const { Option } = Select;
 const { confirm } = Modal;
 
-class ArticleEdit extends Component {
-  constructor() {
-    super();
-    this.state = {
-      inputVisible: false,
-      inputValue: '',
-    };
-  }
+export interface ArticleEditProps {
+  match: any
+  location: any
+  user: User
+  loading: boolean
+  isEditing: boolean
+  article: Article
+  cateList: Cate[]
+  dispatch: (val: any) => any
+}
+
+export interface ArticleEditState {
+  inputVisible: boolean
+  inputValue: string
+}
+
+class ArticleEdit extends Component<ArticleEditProps> {
+  static propTypes = {
+    match: PropTypes.object,
+    location: PropTypes.object,
+    user: PropTypes.object,
+    loading: PropTypes.bool,
+    isEditing: PropTypes.bool,
+    article: PropTypes.object,
+    cateList: PropTypes.array,
+    dispatch: PropTypes.func,
+  };
+
+  static defaultProps = {
+    match: {},
+    location: {},
+    user: {},
+    loading: false,
+    isEditing: false,
+    article: {},
+    cateList: [],
+    dispatch: () => { },
+  };
+
+  state = {
+    inputVisible: false,
+    inputValue: '',
+  };
+
+  tagInput: any
 
   static contextTypes = {
     router: PropTypes.object,
@@ -45,8 +87,8 @@ class ArticleEdit extends Component {
     id && this.getArticle(id);
     dispatch({ type: 'category/getCateList' }).then(({ success, cateList }) => {
       if (success && !id) {
-        const { id: cate } = cateList.find(v => v.name === '其它') || {};
-        this.props.dispatch({ type: 'article/articleChange', payload: { cate } });
+        const { id } = cateList.find(v => v.name === '其它') || {} as Cate;
+        this.props.dispatch({ type: 'article/articleChange', payload: { cate: id } });
       }
     });
   }
@@ -79,7 +121,6 @@ class ArticleEdit extends Component {
   }
 
   getContent = (content, status) => {
-    debugger
     const { user, dispatch } = this.props;
     if (!user.uid) {
       this.handleUnLogin(dispatch);
@@ -115,7 +156,7 @@ class ArticleEdit extends Component {
   }
 
   handleClose = (removedTag) => {
-    const { article = {}, dispatch } = this.props;
+    const { article = {} as Article, dispatch } = this.props;
     const tagsArr = article.tags.split(',').filter(tag => tag !== removedTag);
     const tags = tagsArr.join(',');
 
@@ -146,7 +187,7 @@ class ArticleEdit extends Component {
       return;
     }
 
-    const { article = {}, dispatch } = this.props;
+    const { article = {} as Article, dispatch } = this.props;
     const { tags } = article;
     let tagsArr = tags ? tags.split(',') : [];
 
@@ -261,29 +302,7 @@ class ArticleEdit extends Component {
   }
 }
 
-ArticleEdit.propTypes = {
-  match: PropTypes.object,
-  location: PropTypes.object,
-  user: PropTypes.object,
-  loading: PropTypes.bool,
-  isEditing: PropTypes.bool,
-  article: PropTypes.object,
-  cateList: PropTypes.array,
-  dispatch: PropTypes.func,
-};
-
-ArticleEdit.defaultProps = {
-  match: {},
-  location: {},
-  user: {},
-  loading: false,
-  isEditing: false,
-  article: {},
-  cateList: [],
-  dispatch: () => { },
-};
-
-function mapStateToProps({ loading, article, user, category = {} }) {
+function mapStateToProps({ loading, article, user, category = {} as any }) {
   return {
     loading: loading.models.article,
     user: user.user,

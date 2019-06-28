@@ -14,10 +14,34 @@ import Button from '@material-ui/core/Button';
 import { ArticleItem, IconFont } from 'components';
 import { getQuery } from 'utils';
 import * as style from './assets/style/index.less';
+import {
+  Article,
+  User,
+  Cate,
+  Dispatch,
+} from '../../utils/type'
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 const dateFormater = 'YYYY-MM-DD';
+
+export interface SearchProps {
+  list: Article[]
+  users: User[]
+  cateList: Cate[]
+  total: number
+  dispatch: Dispatch
+}
+
+export interface SearchState {
+  title: string
+  uid: number | string
+  from: string
+  to: string
+  cate: number | string
+  tag: string
+  pageNo: number
+}
 
 @connect((({ article, user, category }) => {
   return {
@@ -27,9 +51,9 @@ const dateFormater = 'YYYY-MM-DD';
     total: article.total,
   };
 }))
-class Search extends React.PureComponent {
-  constructor() {
-    super();
+class Search extends React.PureComponent<SearchProps, SearchState> {
+  constructor(props) {
+    super(props);
     this.state = {
       title: '',
       uid: '',
@@ -140,7 +164,8 @@ class Search extends React.PureComponent {
       tag,
     } = this.state;
 
-    return (<div className={style.search}>
+    return (
+      <div className={style.search}>
       <div className={style.filterContainer}>
         <Row gutter={16}>
           <Col span={6}>标题：<Input style={{ width: 200 }} value={title} onChange={this.titleChange} placeholder="输入关键词模糊查询" /></Col>
@@ -172,7 +197,8 @@ class Search extends React.PureComponent {
           <Pagination total={total} showTotal={t => `共${t}篇`} onChange={pageNo => this.pageChange(pageNo)} />
         </div>
       </div>
-    </div>);
+    </div>
+    );
   }
 }
 

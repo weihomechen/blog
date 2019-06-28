@@ -3,7 +3,7 @@ import { message } from 'antd';
 import moment from 'moment';
 export { request } from './request';
 
-export const getQuery = (key) => {
+export const getQuery = (key: string): string => {
   const query = {};
   location.search.slice(1).split('&').forEach((item) => { // eslint-disable-line
     const queryPair = item.split('=');
@@ -24,7 +24,7 @@ export const getQuery = (key) => {
 // 连续事件结束后的 1000ms 后触发
 // sample 1: _.debounce(function(){}, 1000, true)
 // 连续事件触发后立即触发（此时会忽略第二个参数）
-export const customDebounce = (func, wait, immediate) => {
+export const customDebounce = (func: any, wait: number, immediate: boolean) => {
   let timeout;
   let args;
   let context;
@@ -34,7 +34,7 @@ export const customDebounce = (func, wait, immediate) => {
   const later = function () {
     // 定时器设置的回调 later 方法的触发时间，和连续事件触发的最后一次时间戳的间隔
     // 如果间隔为 wait（或者刚好大于 wait），则触发事件
-    const last = Date.now - timestamp;
+    const last = +Date.now - timestamp;
 
     // 时间间隔 last 在 [0, wait) 中
     // 还没到触发的点，则继续设置定时器
@@ -99,28 +99,32 @@ export const customDebounce = (func, wait, immediate) => {
   };
 };
 
-export const showOffsetTime = (time) => {
+export const showOffsetTime = (time: string) => {
   const momentTime = moment(time);
   const offset = Date.now() - momentTime.valueOf();
   if (offset < 0) {
     // 数据错误
     return '';
   }
+
   if (offset < 1000 * 60 * 60) {
     // 一小时内
     const showValue = Math.floor(offset / (1000 * 60)) || 1;
     return `${showValue}分钟前`;
   }
+
   if (offset < 1000 * 60 * 60 * 24) {
     // 一天内
     const showValue = Math.floor(offset / (1000 * 60 * 60));
     return `${showValue}小时前`;
   }
+
   const showValue = Math.floor(offset / (1000 * 60 * 60 * 24));
+
   return `${showValue}天前`;
 };
 
-export function checkFileSize(fileSize, maxSize = 2) {
+export function checkFileSize(fileSize: number, maxSize: number = 2): boolean {
   if (!fileSize) {
     console.error('请选择文件');
     return false;
@@ -129,7 +133,7 @@ export function checkFileSize(fileSize, maxSize = 2) {
   const isOk = fileSize / 1024 / 1024 < maxSize;
 
   if (!isOk) {
-    message.error(`请选择小于${maxSize}M的图片`);
-    return isOk;
   }
+
+  return isOk;
 }

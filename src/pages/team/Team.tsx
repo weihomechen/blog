@@ -9,14 +9,40 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import moment from 'moment';
 import style from './assets/css/index.less';
+import {
+  Dispatch,
+  Team,
+  User,
+  Cate,
+  Article,
+} from '../../utils/type'
 
 const defaultTeamAbstract = '震惊！这个团队竟然没有简介...';
 const { TabPane } = Tabs;
 const { confirm } = Modal;
 
-class Team extends Component {
-  constructor() {
-    super();
+export interface TeamProps {
+  dispatch: Dispatch
+  loading: boolean
+  list: Article[]
+  total: number
+  team: Team
+  user: User
+  users: User[]
+  cateList: Cate[]
+  match: any
+}
+
+export interface TeamState {
+  modalVisible: boolean
+  inviteModalVisible: boolean
+  currentMember: string | number
+  alreadyInvited: number[],
+}
+
+class TeamPage extends Component<TeamProps, TeamState> {
+  constructor(props) {
+    super(props);
     this.state = {
       modalVisible: false,
       inviteModalVisible: false,
@@ -24,6 +50,28 @@ class Team extends Component {
       alreadyInvited: [],
     };
   }
+
+  static propTypes = {
+    dispatch: PropTypes.func,
+    loading: PropTypes.bool,
+    list: PropTypes.arrayOf(PropTypes.object),
+    total: PropTypes.number,
+    team: PropTypes.object,
+    user: PropTypes.object,
+    users: PropTypes.arrayOf(PropTypes.object),
+    cateList: PropTypes.array,
+  };
+
+  static defaultProps = {
+    dispatch: () => { },
+    loading: false,
+    list: [],
+    total: 0,
+    team: {},
+    user: {},
+    users: [],
+    cateList: [],
+  };
 
   componentDidMount() {
     this.getArticleList();
@@ -310,28 +358,6 @@ class Team extends Component {
   }
 }
 
-Team.propTypes = {
-  dispatch: PropTypes.func,
-  loading: PropTypes.bool,
-  list: PropTypes.arrayOf(PropTypes.object),
-  total: PropTypes.number,
-  team: PropTypes.object,
-  user: PropTypes.object,
-  users: PropTypes.arrayOf(PropTypes.object),
-  cateList: PropTypes.array,
-};
-
-Team.defaultProps = {
-  dispatch: () => { },
-  loading: false,
-  list: [],
-  total: 0,
-  team: {},
-  user: {},
-  users: [],
-  cateList: [],
-};
-
 function mapStateToProps({ loading, team, user, article, category }) {
   return {
     loading: loading.models.team,
@@ -342,4 +368,4 @@ function mapStateToProps({ loading, team, user, article, category }) {
   };
 }
 
-export default withRouter(connect(mapStateToProps)(Team));
+export default withRouter(connect(mapStateToProps)(TeamPage));

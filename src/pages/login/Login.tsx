@@ -7,6 +7,12 @@ import styles from './index.less';
 
 const FormItem = Form.Item;
 
+export interface LoginProps {
+  loading: boolean
+  dispatch: (val: any) => any
+  form: any
+}
+
 const Login = ({
   loading,
   dispatch,
@@ -14,7 +20,7 @@ const Login = ({
     getFieldDecorator,
     validateFieldsAndScroll,
   },
-}) => {
+}: LoginProps) => {
   function handleOk() {
     validateFieldsAndScroll((errors, values) => {
       if (errors) {

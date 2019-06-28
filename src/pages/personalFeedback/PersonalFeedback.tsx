@@ -14,6 +14,33 @@ import {
 } from 'antd';
 import moment from 'moment';
 import style from './assets/css/index.less';
+import {
+  User,
+  Issue,
+  Dispatch,
+} from '../../utils/type'
+
+export interface PersonalFeedbackProps {
+  loading: boolean
+  total: number
+  issueList: Issue[]
+  user: User
+  dispatch: Dispatch
+}
+
+export interface PersonalFeedbackFilter {
+  keyword: string
+  type: string
+  from: string
+  to: string
+  status: number
+  pageNo: number
+  pageSize: number
+}
+
+export interface PersonalFeedbackState {
+  filter: PersonalFeedbackFilter
+}
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
@@ -28,13 +55,29 @@ const initialFilter = JSON.stringify({
   pageSize: 10,
 });
 
-class PersonalFeedback extends Component {
-  constructor() {
-    super();
+class PersonalFeedback extends Component<PersonalFeedbackProps, PersonalFeedbackState> {
+  constructor(props) {
+    super(props);
     this.state = {
       filter: JSON.parse(initialFilter),
     };
   }
+
+  static propTypes = {
+    loading: PropTypes.bool,
+    issueList: PropTypes.array,
+    total: PropTypes.number,
+    user: PropTypes.object,
+    dispatch: PropTypes.func,
+  };
+
+  static defaultProps = {
+    loading: false,
+    issueList: [],
+    total: 0,
+    user: {},
+    dispatch: () => { },
+  };
 
   static contextTypes = {
     router: PropTypes.object,
@@ -133,10 +176,12 @@ class PersonalFeedback extends Component {
       {
         title: '操作',
         width: 150,
-        render: (text, record) => (<div>
-          <Button className={`${style.editBtn} custom-btn-edit`} onClick={this.editFeedback.bind(this, record.id)}>编辑</Button>
-          <Button className={`${style.editBtn} custom-btn-del`} onClick={this.closeIssue.bind(this, record.id)}>关闭</Button>
-        </div>),
+        render: (text, record) => (
+          <div>
+            <Button className={`${style.editBtn} custom-btn-edit`} onClick={this.editFeedback.bind(this, record.id)}>编辑</Button>
+            <Button className={`${style.editBtn} custom-btn-del`} onClick={this.closeIssue.bind(this, record.id)}>关闭</Button>
+          </div>
+        ),
       },
     ];
 
@@ -187,22 +232,6 @@ class PersonalFeedback extends Component {
     );
   }
 }
-
-PersonalFeedback.propTypes = {
-  loading: PropTypes.bool,
-  issueList: PropTypes.array,
-  total: PropTypes.number,
-  user: PropTypes.object,
-  dispatch: PropTypes.func,
-};
-
-PersonalFeedback.defaultProps = {
-  loading: false,
-  issueList: [],
-  total: 0,
-  user: {},
-  dispatch: () => { },
-};
 
 function mapStateToProps({ loading, user, feedback }) {
   return {

@@ -9,13 +9,31 @@ import moment from 'moment';
 import { IconFont } from 'components';
 import config from 'config/project.config';
 import style from './assets/css/index.less';
+import {
+  Dispatch,
+  Message,
+} from '../../utils/type'
 
 const { TabPane } = Tabs;
 let timer;
 
-class MessageCenter extends PureComponent {
-  constructor() {
-    super();
+export interface MessageCenterProps {
+  dispatch: Dispatch
+  discussMsgList: Message[]
+  systemMsgList: Message[]
+  discussMsgTotal: number
+  systemMsgTotal: number
+  unReadSysMsgTotal: number
+  unReadDisMsgTotal: number
+}
+
+export interface MessageCenterState {
+  alreadyReadList: number[]
+}
+
+class MessageCenter extends PureComponent<MessageCenterProps, MessageCenterState> {
+  constructor(props) {
+    super(props);
     this.state = {
       alreadyReadList: [],
     };
@@ -148,7 +166,7 @@ class MessageCenter extends PureComponent {
                   article_id: articleId = '',
                   articleTitle = '',
                 } = item;
-                return (<div key={mid} id={mid} className={`message-item ${style.messageItem}`}>
+                return (<div key={mid} id={mid + ''} className={`message-item ${style.messageItem}`}>
                   <div className={style.itemHeader}>
                     <div className={style.avatarContainer}>
                       {
@@ -196,7 +214,7 @@ class MessageCenter extends PureComponent {
                       content = '',
                       createTime = '',
                     } = item;
-                    return (<div key={mid} id={mid} className={`message-item ${style.messageItem}`}>
+                    return (<div key={mid} id={mid + ''} className={`message-item ${style.messageItem}`}>
                       <div className={style.itemHeader}>
                         <div className={style.avatarContainer}>
                           {
@@ -231,6 +249,6 @@ class MessageCenter extends PureComponent {
   }
 }
 
-export default connect(({ mc }) => ({
+export default connect(({ mc }: any) => ({
   ...mc,
 }))(MessageCenter);

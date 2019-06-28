@@ -5,19 +5,31 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Editor from '../../components/Editor';
-
 import styles from './assets/style/index.less';
+import {
+  Issue,
+} from '../../utils/type'
 
 const { Option } = Select;
+
+export interface FeedbackEditProps {
+  dispatch: (val: any) => any
+  match: any
+  issue: Issue
+}
+
+export interface FeedbackEditState {
+  id: string
+}
 
 @connect(({ feedback }) => {
   return {
     issue: feedback.issue,
   };
 })
-class FeedbackEdit extends React.PureComponent {
-  constructor() {
-    super();
+class FeedbackEdit extends React.PureComponent<FeedbackEditProps, FeedbackEditState> {
+  constructor(props) {
+    super(props);
     this.state = {
       id: '',
     };
@@ -108,30 +120,32 @@ class FeedbackEdit extends React.PureComponent {
       </ul>
     );
 
-    return (<div className={styles.feedbackEditPage}>
-      <div className={styles.header}>
-        <div className={styles.title}>
-          {id ? 'Edit' : 'New'} issue
+    return (
+      <div className={styles.feedbackEditPage}>
+        <div className={styles.header}>
+          <div className={styles.title}>
+            {id ? 'Edit' : 'New'} issue
           <Tooltip title={tipRender} placement="right">
-            <Icon
-              type="question-circle"
-            />
-          </Tooltip>
+              <Icon
+                type="question-circle"
+              />
+            </Tooltip>
+          </div>
+        </div>
+        <Row gutter={16}>
+          <Col span={19}>标题：<Input style={{ width: 900 }} value={title} onChange={this.titleChange} maxLength={60} /></Col>
+          <Col span={4}>
+            提交类型：<Select value={type} onChange={this.typeChange}>
+              <Option value={0}>Advice</Option>
+              <Option value={1}>Bug</Option>
+            </Select>
+          </Col>
+        </Row>
+        <div className={styles.editor}>
+          {!id || content ? <Editor getContent={this.getContent} content={content} type="issue" /> : null}
         </div>
       </div>
-      <Row gutter={16}>
-        <Col span={19}>标题：<Input style={{ width: 900 }} value={title} onChange={this.titleChange} maxLength={60} /></Col>
-        <Col span={4}>
-          提交类型：<Select value={type} onChange={this.typeChange}>
-            <Option value={0}>Advice</Option>
-            <Option value={1}>Bug</Option>
-          </Select>
-        </Col>
-      </Row>
-      <div className={styles.editor}>
-        {!id || content ? <Editor getContent={this.getContent} content={content} type="issue" /> : null}
-      </div>
-    </div>);
+    );
   }
 }
 

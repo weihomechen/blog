@@ -6,19 +6,33 @@ import { Table, Input, Popconfirm, message } from 'antd';
 import Button from '@material-ui/core/Button';
 import moment from 'moment';
 import style from './assets/css/index.less';
+import {
+  User,
+  ApprovalItem,
+} from '../../utils/type'
 
 const statusMap = ['待审批', '已同意', '已驳回'];
 const DATE_FORMATER = 'YYYY-MM-DD HH:mm';
 const { TextArea } = Input;
 
-class Approval extends PureComponent {
-  constructor() {
-    super();
-    this.state = {
-      pageNo: 1,
-      reason: '',
-    };
-  }
+export interface ApprovalProps {
+  dispatch: (val?: any) => any
+  list: ApprovalItem[]
+  total: number
+  loading: boolean
+  users: User[]
+}
+
+export interface ApprovalState {
+  pageNo: number
+  reason: string
+}
+
+class Approval extends PureComponent<ApprovalProps, ApprovalState> {
+  state = {
+    pageNo: 1,
+    reason: '',
+  };
 
   static propTypes = {
     dispatch: PropTypes.func,
@@ -83,10 +97,12 @@ class Approval extends PureComponent {
     this.setState({ pageNo }, () => this.getList());
   }
 
-  rejectRender = () => (<div>
-    <div>确认驳回该申请？</div>
-    <TextArea placeholder="请填写驳回理由" onChange={this.reasonChange} style={{ width: 180, marginTop: 12 }} autosize={{ minRows: 2, maxRows: 3 }} />
-  </div>);
+  rejectRender = () => (
+    <div>
+      <div>确认驳回该申请？</div>
+      <TextArea placeholder="请填写驳回理由" onChange={this.reasonChange} style={{ width: 180, marginTop: 12 }} autosize={{ minRows: 2, maxRows: 3 }} />
+    </div>
+  );
 
   render() {
     const {
@@ -102,7 +118,7 @@ class Approval extends PureComponent {
       {
         title: '申请/发起人',
         dataIndex: 'applicant',
-        render: uid => (users.find(v => v.uid === uid) || {}).name,
+        render: uid => (users.find(v => v.uid === uid) || {} as User).name,
       },
       {
         title: '标题',
@@ -120,16 +136,18 @@ class Approval extends PureComponent {
       {
         title: '状态',
         dataIndex: 'status',
-        render: (status, item) => (<div>
-          {+status === 0 ? (<div>
-            <Popconfirm title="确认同意？" onConfirm={this.confirm.bind(this, item.aid, 1)}>
-              <Button className={style.approveBtn}>同意</Button>
-            </Popconfirm>
-            <Popconfirm title={this.rejectRender()} onConfirm={this.confirm.bind(this, item.aid, 2)}>
-              <Button className={style.rejectBtn}>驳回</Button>
-            </Popconfirm>
-          </div>) : statusMap[status]}
-        </div>),
+        render: (status, item) => (
+          <div>
+            {+status === 0 ? (<div>
+              <Popconfirm title="确认同意？" onConfirm={this.confirm.bind(this, item.aid, 1)}>
+                <Button className={style.approveBtn}>同意</Button>
+              </Popconfirm>
+              <Popconfirm title={this.rejectRender()} onConfirm={this.confirm.bind(this, item.aid, 2)}>
+                <Button className={style.rejectBtn}>驳回</Button>
+              </Popconfirm>
+            </div>) : statusMap[status]}
+          </div>
+        ),
       },
     ];
 
@@ -155,8 +173,10 @@ class Approval extends PureComponent {
   }
 }
 
-export default connect(({ approval, user, loading }) => ({
-  loading: loading.models.approval,
-  ...user,
-  ...approval,
-}))(Approval);
+export default connect(({ approval, user, loading }: any) => {
+  return ({
+    loading: loading.models.approval,
+    ...user,
+    ...approval,
+  })
+})(Approval);

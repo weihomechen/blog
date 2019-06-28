@@ -3,19 +3,35 @@ import PropTypes from 'prop-types';
 import { connect } from 'dva';
 import { Row, Col, Input, Button, message } from 'antd';
 import * as styles from './assets/style/index.less';
+import {
+  User,
+  Dispatch,
+} from '../../utils/type'
 
 const { TextArea } = Input;
 
-@connect((user, team, messageSender) => {
+export interface MessageSenderProps {
+  user: User
+  users: User[]
+  dispatch: Dispatch
+}
+
+export interface MessageSenderState {
+  title: string
+  content: string
+  receiver: number[]
+}
+
+@connect(({ user, team, messageSender }) => {
   return {
     ...user,
     ...team,
     ...messageSender,
   };
 })
-class MessageSender extends Component {
-  constructor() {
-    super();
+class MessageSender extends Component<MessageSenderProps, MessageSenderState> {
+  constructor(props) {
+    super(props);
     this.state = {
       title: '',
       content: '',

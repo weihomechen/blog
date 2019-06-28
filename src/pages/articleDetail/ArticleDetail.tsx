@@ -9,17 +9,54 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import styles from './assets/css/index.less';
+import {
+  Article,
+  Comment,
+  User,
+} from '../../utils/type'
 
 const { TextArea } = Input;
 
-class ArticleDetail extends Component {
-  constructor() {
-    super();
-    this.state = {
-      comment: '',
-      moneyCodeVisiable: false,
-    };
-  }
+export interface ArticleDetailProps {
+  loading: boolean
+  comments: Comment[]
+  article: Article
+  dispatch: (val: any) => any
+  user: User
+  users: User[]
+  match: any
+}
+
+export interface ArticleDetailState {
+  comment: string
+  moneyCodeVisiable: boolean
+}
+
+class ArticleDetail extends Component<ArticleDetailProps, ArticleDetailState> {
+  static propTypes = {
+    loading: PropTypes.bool,
+    comments: PropTypes.array,
+    article: PropTypes.objectOf(PropTypes.any),
+    dispatch: PropTypes.func,
+    user: PropTypes.object,
+    users: PropTypes.array,
+    match: PropTypes.object,
+  };
+
+  static defaultProps = {
+    loading: false,
+    comments: [],
+    article: {},
+    dispatch: () => { },
+    user: {},
+    users: [],
+    match: {},
+  };
+
+  state = {
+    comment: '',
+    moneyCodeVisiable: false,
+  };
 
   componentDidMount() {
     const {
@@ -68,7 +105,7 @@ class ArticleDetail extends Component {
   }
 
   render() {
-    const { loading, article, comments, user = {}, users } = this.props;
+    const { loading, article, comments, user = {} as User, users } = this.props;
     const { title = '', author, updateTime, content, isAcceptReward } = article;
     const { moneyCode } = user;
     const { comment, moneyCodeVisiable } = this.state;
@@ -88,7 +125,7 @@ class ArticleDetail extends Component {
       <div className={styles.articleDetail}>
         <Helmet>
           <link href="https://rulifun.oss-cn-hangzhou.aliyuncs.com/blog/prism.css" rel="stylesheet" />
-          <script src="https://rulifun.oss-cn-hangzhou.aliyuncs.com/blog/prism.js"></script>
+          <script src="https://rulifun.oss-cn-hangzhou.aliyuncs.com/blog/prism.js" />
         </Helmet>
         <Spin size="large" spinning={loading} />
         <div className={styles.titleContainer}>
@@ -148,26 +185,6 @@ class ArticleDetail extends Component {
     );
   }
 }
-
-ArticleDetail.propTypes = {
-  loading: PropTypes.bool,
-  comments: PropTypes.array,
-  article: PropTypes.objectOf(PropTypes.any),
-  dispatch: PropTypes.func,
-  user: PropTypes.object,
-  users: PropTypes.array,
-  match: PropTypes.object,
-};
-
-ArticleDetail.defaultProps = {
-  loading: false,
-  comments: [],
-  article: {},
-  dispatch: () => { },
-  user: {},
-  users: [],
-  match: {},
-};
 
 function mapStateToProps({ loading, user, article }) {
   return {

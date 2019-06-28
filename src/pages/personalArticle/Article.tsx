@@ -15,6 +15,11 @@ import {
 } from 'antd';
 import moment from 'moment';
 import style from './assets/css/index.less';
+import {
+  Article,
+  User,
+  Dispatch,
+} from '../../utils/type'
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
@@ -29,11 +34,45 @@ const initialState = JSON.stringify({
   selectedRowKeys: [],
 });
 
-class PersonCenter extends Component {
-  constructor() {
-    super();
+export interface PersonCenterProps {
+  loading: boolean
+  list: Article[]
+  total: number
+  user: User
+  dispatch: Dispatch
+}
+
+export interface PersonCenterState {
+  title: string
+  from: string
+  to: string
+  status: number
+  pageNo: number
+  pageSize: number
+  selectedRowKeys: number[]
+}
+
+class PersonCenter extends Component<PersonCenterProps, PersonCenterState> {
+  constructor(props) {
+    super(props);
     this.state = JSON.parse(initialState);
   }
+
+  static propTypes = {
+    loading: PropTypes.bool,
+    list: PropTypes.array,
+    total: PropTypes.number,
+    user: PropTypes.object,
+    dispatch: PropTypes.func,
+  };
+
+  static defaultProps = {
+    loading: false,
+    list: [],
+    total: 0,
+    user: {},
+    dispatch: () => { },
+  };
 
   static contextTypes = {
     router: PropTypes.object,
@@ -72,7 +111,7 @@ class PersonCenter extends Component {
 
   pageChange = async (pageNo) => {
     this.setState({ pageNo }, () => {
-      this.getList(pageNo);
+      this.getList();
     });
   }
 
@@ -215,22 +254,6 @@ class PersonCenter extends Component {
     );
   }
 }
-
-PersonCenter.propTypes = {
-  loading: PropTypes.bool,
-  list: PropTypes.array,
-  total: PropTypes.number,
-  user: PropTypes.object,
-  dispatch: PropTypes.func,
-};
-
-PersonCenter.defaultProps = {
-  loading: false,
-  list: [],
-  total: 0,
-  user: {},
-  dispatch: () => { },
-};
 
 function mapStateToProps({ loading, user, article }) {
   return {

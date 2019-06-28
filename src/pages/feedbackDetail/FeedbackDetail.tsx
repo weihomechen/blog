@@ -10,6 +10,10 @@ import { EditorState } from 'braft-editor';
 import { Helmet } from 'react-helmet';
 
 import style from './assets/style/index.less';
+import {
+  User,
+  Issue,
+} from '../../utils/type'
 
 const { TextArea } = Input;
 const typeMap = {
@@ -33,6 +37,18 @@ const statusMap = {
   },
 };
 
+export interface FeedbackDetailProps {
+  dispatch: (val: any) => any
+  match: any
+  user: User
+  users: User[]
+  issue: Issue
+}
+
+export interface FeedbackDetailState {
+  replyContent: string
+}
+
 @connect(({ user, feedback }) => {
   return {
     user: user.user,
@@ -40,9 +56,9 @@ const statusMap = {
     issue: feedback.issue,
   };
 })
-class FeedbackDetail extends React.PureComponent {
-  constructor() {
-    super();
+class FeedbackDetail extends React.PureComponent<FeedbackDetailProps, FeedbackDetailState> {
+  constructor(props) {
+    super(props);
     this.state = {
       replyContent: '',
     };
@@ -64,6 +80,8 @@ class FeedbackDetail extends React.PureComponent {
     issue: {},
   };
 
+  editorInstance: any
+
   componentWillMount() {
     const {
       match,
@@ -72,7 +90,7 @@ class FeedbackDetail extends React.PureComponent {
     const { id } = match.params;
 
     if (id) {
-      this.getDetail(id);
+      this.getDetail();
     } else {
       dispatch({ type: 'global/routeChange', payload: { path: '/error' } });
     }
@@ -168,7 +186,7 @@ class FeedbackDetail extends React.PureComponent {
       <div className={style.feedbackDetailPage}>
         <Helmet>
           <link href="https://rulifun.oss-cn-hangzhou.aliyuncs.com/blog/prism.css" rel="stylesheet" />
-          <script src="https://rulifun.oss-cn-hangzhou.aliyuncs.com/blog/prism.js"></script>
+          <script src="https://rulifun.oss-cn-hangzhou.aliyuncs.com/blog/prism.js" />
         </Helmet>
         <div className={style.detailHeader}>
           <div className={style.titleContainer}>

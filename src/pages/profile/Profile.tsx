@@ -10,6 +10,10 @@ import {
   Button,
 } from 'antd';
 import style from './assets/css/index.less';
+import {
+  User,
+  Dispatch,
+} from '../../utils/type'
 
 const { TextArea } = Input;
 
@@ -22,15 +26,36 @@ function beforeUpload(file) {
   return isLt2M;
 }
 
-class PersonCenter extends Component {
-  constructor() {
-    super();
+export interface PersonCenterProps {
+  user: User
+  dispatch: Dispatch
+}
+
+export interface PersonCenterState {
+
+}
+
+class PersonCenter extends Component<PersonCenterProps, PersonCenterState> {
+  constructor(props) {
+    super(props);
     this.state = {};
   }
+
+  static propTypes = {
+    user: PropTypes.object,
+    dispatch: PropTypes.func,
+  };
+
+  static defaultProps = {
+    user: {},
+    dispatch: () => { },
+  };
 
   static contextTypes = {
     router: PropTypes.object,
   }
+
+  mottoInput: any
 
   /**
    * @param type number: 0 - avatar, 1-cover, 2-moneyCode
@@ -43,7 +68,7 @@ class PersonCenter extends Component {
       message.error('上传失败');
     };
 
-    fd.append('uid', uid);
+    fd.append('uid', String(uid));
     fd.append('type', type);
     fd.append('file', param.file);
 
@@ -118,7 +143,7 @@ class PersonCenter extends Component {
               defaultValue={motto}
               placeholder="请输入100个字符内的座右铭"
               autosize={{ minRows: 2, maxRows: 4 }}
-              maxLength="100"
+              maxLength={100}
             />
             <Button type="primary" onClick={this.saveMotto} className={style.saveMottoBtn}>保存</Button>
           </div>
@@ -141,16 +166,6 @@ class PersonCenter extends Component {
     );
   }
 }
-
-PersonCenter.propTypes = {
-  user: PropTypes.object,
-  dispatch: PropTypes.func,
-};
-
-PersonCenter.defaultProps = {
-  user: {},
-  dispatch: () => { },
-};
 
 function mapStateToProps({ user }) {
   return {
