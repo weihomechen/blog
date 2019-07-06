@@ -59,65 +59,45 @@ npm start
 ## 目录结构
 
 ```
+.
 ├── README.md
-├── app           // 后台部分
-├── config        // egg配置文件
-├── dispatch.js
-├── logs          // 运行日志
-├── node_modules
+├── config                      // 配置文件
+│   ├── config.js                  - 构建配置
+│   ├── menu.config.js             - 菜单配置
+│   ├── plugin.config.js           - 插件配置
+│   ├── project.config.js          - 项目相关信息配置
+│   └── router.config.js           - 路由配置
+├── lib                         // 引用的相对独立的库
+│   └── iconFont.js                - 自定义的图标字体库（基于阿里的iconfont）
+├── package-lock.json
 ├── package.json
-├── run
-├── scripts      
-├── static        // 前端部分 
-├── test
-└── db.sql    // 数据库表设计
+├── src
+│   ├── app.ts                  // 前端入口
+│   ├── common                  // 通用代码
+│   ├── components              // 原则上无状态的组件
+│   ├── global.css              // 全局样式
+│   ├── layouts                 // 布局模式
+│   ├── models                  // 状态管理
+│   ├── pages                   // 页面路由组件
+│   ├── services                // 负责与API的交互
+│   └── utils                   // 通用工具
+├── tsconfig.json               // ts配置文件
+├── tslint.yml                  // tslint配置文件
+└── typings.d.ts                // ts声明文件
 ```
 
-## 前端流程
+## 前后端流程
 
-```
-├── build               // webpack配置  
-└── src
-    ├── _index.js
-    ├── components      // 通用或无状态组件
-    ├── img
-    ├── index.html
-    ├── index.js
-    ├── models          // 管理路由组件的状态
-    │   ├── app.js
-    │   └── article.js
-    ├── router.js       // 前端路由配置
-    ├── routes          // 路由组件
-    │   ├── app.js
-    │   ├── article
-    │   ├── error
-    │   └── logins
-    ├── services        // 前端和后台交互的逻辑（发起请求）
-    │   ├── app.js
-    │   └── article.js 
-    ├── tests
-    ├── theme.js
-    └── utils
-```
-前端路由(router) --> 渲染路由组件(routes) --> 状态管理、与后台交互，发起请求(models) --> 后台对应路由配置进行处理(app) --> 返回结果 --> 前端接收后处理(models)
-
-## 后台流程
-
-```
-├── controller      // 处理对应的后台路由
-│   ├── article.js
-│   └── client.js
-├── extend
-│   └── helper.js
-├── middleware
-├── public
-├── router.js       // 后台路由映射
-├── service         // 后台和数据库交互逻辑
-│   └── article.js
-└── view
-```
-
-收到请求（router） --> 根据路由映射调用处理函数（controller） --> 与数据库交互（service） --> 返回结果（controller）
+1、浏览器访问页面URL
+2、前端渲染路由组件
+3、状态管理(models) 、与后台交互，发起请求等（services）
+4、nginx过滤、转发等
+5、后台监听收到请求（router）
+6、根据路由映射调用处理函数（controller）
+7、与数据库交互（service）、业务处理
+8、返回结果（controller）
+9、前端接收后处理(models)
+10、前端UI更新
 
 ## 生产部署
 
