@@ -88,16 +88,16 @@ npm start
 
 ## 前后端流程
 
-1、浏览器访问页面URL
-2、前端渲染路由组件
-3、状态管理(models) 、与后台交互，发起请求等（services）
-4、nginx过滤、转发等
-5、后台监听收到请求（router）
-6、根据路由映射调用处理函数（controller）
-7、与数据库交互（service）、业务处理
-8、返回结果（controller）
-9、前端接收后处理(models)
-10、前端UI更新
+- 1、浏览器访问页面URL
+- 2、前端渲染路由组件
+- 3、状态管理(models) 、与后台交互，发起请求等（services）
+- 4、nginx过滤、转发等
+- 5、后台监听收到请求（router）
+- 6、根据路由映射调用处理函数（controller）
+- 、与数据库交互（service）、业务处理
+- 8、返回结果（controller）
+- 9、前端接收后处理(models)
+- 10、前端UI更新
 
 ## 生产部署
 
