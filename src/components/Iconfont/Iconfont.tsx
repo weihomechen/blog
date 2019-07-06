@@ -14,9 +14,11 @@ const Iconfont = (props: IconfontProps) => {
     type, color, fontSize, className,
   } = props
 
-  return (<svg className={`icon ${className}`} style={{ fontSize }} aria-hidden="true">
-    <use style={{ color }} xlinkHref={`#icon-${type}`} />
-  </svg>);
+  return (
+    <svg className={`icon ${className}`} style={{ fontSize }} aria-hidden="true">
+      <use style={{ color }} xlinkHref={`#icon-${type}`} />
+    </svg>
+  );
 };
 
 Iconfont.defaultProps = {
