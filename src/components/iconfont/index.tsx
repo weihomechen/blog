@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './iconfont.less';
+import './index.less';
 
 export interface IconfontProps {
   type: string

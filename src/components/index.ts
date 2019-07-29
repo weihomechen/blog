@@ -1,8 +1,8 @@
-import Editor from './Editor';
-import ArticleItem from './ArticleItem/ArticleItem';
-import IconFont from './Iconfont/Iconfont';
-import * as Layout from './Layout';
-import TeamForm from './TeamForm';
+import Editor from './editor';
+import ArticleItem from './articleItem';
+import IconFont from './iconfont';
+import * as Layout from './layout';
+import TeamForm from './teamForm';
 
 export {
   Layout,

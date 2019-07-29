@@ -16,7 +16,7 @@ import {
 } from 'antd';
 import { connect } from 'dva';
 import { withRouter, Prompt } from 'dva/router';
-import Editor from '../../components/Editor';
+import Editor from '../../components/editor';
 import style from './assets/css/index.less';
 import {
   User,

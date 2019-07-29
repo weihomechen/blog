@@ -4,7 +4,7 @@ import { Icon, Tag } from 'antd';
 import moment from 'moment';
 import { IconFont } from '../index';
 import { Article, Cate } from '../../utils/type'
-import style from './ArticleItem.less';
+import style from './index.less';
 
 export interface ArticleItemProps {
   article: Article

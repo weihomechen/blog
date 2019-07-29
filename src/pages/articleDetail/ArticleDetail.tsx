@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { IconFont } from 'components';
 import { Spin, Input, Button } from 'antd';
 import { EditorState } from 'braft-editor';
-import CommentItem from 'components/CommentItem';
+import CommentItem from 'components/commentItem';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';

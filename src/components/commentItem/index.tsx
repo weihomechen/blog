@@ -4,21 +4,60 @@ import PropTypes from 'prop-types';
 import { Icon, Input, Button } from 'antd';
 import { IconFont } from 'components';
 import { customDebounce, showOffsetTime } from 'utils';
-import style from './CommentItem.less';
+import { User, Comment } from '../../utils/type';
+import style from './index.less';
 
 const { TextArea } = Input;
+export interface CommentItemProps {
+  comment: Comment,
+  user: User,
+  users: User[],
+  submitReply: (replyDTO: any) => any,
+  delComment: (comment: any) => any,
+  delReply: () => any,
+}
 
-class CommentItem extends React.Component {
+export interface CommentItemState {
+  replysVisible: boolean,
+  replyBoxVisible: boolean,
+  replyContent: string,
+  isShowDelBtn: boolean,
+  showDelReplyBtnId: string | number,
+  to: string,
+}
+
+class CommentItem extends React.Component<CommentItemProps, CommentItemState> {
   constructor(props) {
     super(props);
     this.state = {
       replysVisible: false,
       replyBoxVisible: false,
-      replyContent: '',
-      isShowDelBtn: '',
+      isShowDelBtn: false,
       showDelReplyBtnId: '',
+      replyContent: '',
+      to: '',
     };
   }
+
+  static propTypes = {
+    comment: PropTypes.object,
+    users: PropTypes.array,
+    user: PropTypes.object,
+    submitReply: PropTypes.func,
+    delComment: PropTypes.func,
+    delReply: PropTypes.func,
+  };
+
+  static defaultProps = {
+    comment: {},
+    users: [],
+    user: {},
+    submitReply: () => { },
+    delComment: () => { },
+    delReply: () => { },
+  };
+
+  replyInput: any
 
   replyChangeDebounce = (replyContent) => {
     customDebounce(this.setState({ replyContent }), 100);
@@ -88,12 +127,12 @@ class CommentItem extends React.Component {
       showDelReplyBtnId,
     } = this.state;
     const { author, createTime, content, replyList = [] } = comment;
-    const commentAuthor = users.find(item => item.name === author) || {};
+    const commentAuthor = users.find(item => item.name === author) || {} as User;
     const replysLen = replyList.length;
     const isAuthor = author === user.name;
     let replyAuthorAvatar;
     const getReplyAuthor = (replyAuthorName) => {
-      const replyAuthor = users.find(item => item.name === replyAuthorName) || {};
+      const replyAuthor = users.find(item => item.name === replyAuthorName) || {} as User;
       replyAuthorAvatar = replyAuthor.avatar || '';
       return replyAuthorAvatar;
     };
@@ -110,7 +149,7 @@ class CommentItem extends React.Component {
         >{content}
           <a
             className={style.delCommentBtn}
-            style={{ display: (isAuthor && isShowDelBtn) || 'none' }}
+            style={{ display: (isAuthor && isShowDelBtn) ? '' : 'none' }}
             onClick={this.delComment}
           >删除
           </a>
@@ -122,7 +161,7 @@ class CommentItem extends React.Component {
           </a>
           <span className={style.commentTime}>{showOffsetTime(createTime)}</span>
         </div>
-        <div className={style.replys} style={{ display: replysVisible || 'none' }}>
+        <div className={style.replys} style={{ display: replysVisible ? '' : 'none' }}>
           {replyList.map(item => (<div key={item.id} className={style.replyItem}>
             <div className={style.replyHeader}>
               {getReplyAuthor(item.author) ? <img alt="" src={replyAuthorAvatar} className={style.avatar} /> : <IconFont type="avatar" fontSize="22px" />}
@@ -137,18 +176,20 @@ class CommentItem extends React.Component {
               {item.content}
               <a
                 className={style.delReplyBtn}
-                style={{ display: (user.name === item.author && showDelReplyBtnId === item.id) || 'none' }}
+                style={{ display: (user.name === item.author && showDelReplyBtnId === item.id) ? '' : 'none' }}
                 onClick={this.props.delReply.bind(this, item)}
-              >删除</a>
+              >删除
+              </a>
               <a
                 className={style.showReplyBtn}
-                style={{ display: (user.name !== item.author && showDelReplyBtnId === item.id) || 'none' }}
+                style={{ display: (user.name !== item.author && showDelReplyBtnId === item.id) ? '' : 'none' }}
                 onClick={this.presetReply.bind(this, item)}
-              >回复</a>
+              >回复
+              </a>
             </div>
             <div className={style.replyFooter}>{showOffsetTime(item.createTime)}</div>
           </div>))}
-          <div className={style.replyBox} style={{ visibility: replyBoxVisible || 'none' }}>
+          <div className={style.replyBox} style={{ visibility: replyBoxVisible ? 'visible' : 'hidden' }}>
             <TextArea
               ref={ref => this.replyInput = ref}
               value={replyContent}
@@ -163,23 +204,5 @@ class CommentItem extends React.Component {
     );
   }
 }
-
-CommentItem.propTypes = {
-  comment: PropTypes.object,
-  users: PropTypes.array,
-  user: PropTypes.object,
-  submitReply: PropTypes.func,
-  delComment: PropTypes.func,
-  delReply: PropTypes.func,
-};
-
-CommentItem.defaultProps = {
-  comment: {},
-  users: [],
-  user: {},
-  submitReply: () => { },
-  delComment: () => { },
-  delReply: () => { },
-};
 
 export default CommentItem;

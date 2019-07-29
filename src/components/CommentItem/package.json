@@ -1,6 +1,0 @@
-{
-  "name": "CommentItem",
-  "version": "0.0.0",
-  "private": true,
-  "main": "./CommentItem.js"
-}

@@ -4,7 +4,7 @@ import { Row, Col, Input, Icon, Select, Tooltip, message } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Editor from '../../components/Editor';
+import Editor from '../../components/editor';
 import styles from './assets/style/index.less';
 import {
   Issue,

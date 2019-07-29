@@ -13,22 +13,22 @@ const routes = [
     "path": "/user",
     "redirect": "/user/login",
     "exact": true,
-    "_title": "blog",
-    "_title_default": "blog"
+    "_title": "Rulifun Blog",
+    "_title_default": "Rulifun Blog"
   },
   {
     "path": "/personal",
     "redirect": "/personal/profile",
     "exact": true,
-    "_title": "blog",
-    "_title_default": "blog"
+    "_title": "Rulifun Blog",
+    "_title_default": "Rulifun Blog"
   },
   {
     "path": "/adminCenter",
     "redirect": "/adminCenter/cateManage",
     "exact": true,
-    "_title": "blog",
-    "_title_default": "blog"
+    "_title": "Rulifun Blog",
+    "_title_default": "Rulifun Blog"
   },
   {
     "path": "/user",
@@ -50,8 +50,8 @@ const routes = [
     })
     : require('../login/index').default,
         "exact": true,
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       },
       {
         "path": "/user/register",
@@ -63,17 +63,17 @@ const routes = [
     })
     : require('../register/index').default,
         "exact": true,
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       },
       {
         "component": () => React.createElement(require('/Users/ifun/my-projects/blog/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true }),
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       }
     ],
-    "_title": "blog",
-    "_title_default": "blog"
+    "_title": "Rulifun Blog",
+    "_title_default": "Rulifun Blog"
   },
   {
     "path": "/personal",
@@ -95,8 +95,8 @@ const routes = [
     })
     : require('../account/index').default,
         "exact": true,
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       },
       {
         "path": "/personal/article",
@@ -108,8 +108,8 @@ const routes = [
     })
     : require('../personalArticle/index').default,
         "exact": true,
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       },
       {
         "path": "/personal/approval",
@@ -121,8 +121,8 @@ const routes = [
     })
     : require('../approval/index').default,
         "exact": true,
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       },
       {
         "path": "/personal/feedback",
@@ -134,8 +134,8 @@ const routes = [
     })
     : require('../personalFeedback/index').default,
         "exact": true,
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       },
       {
         "path": "/personal/changeLog",
@@ -147,8 +147,8 @@ const routes = [
     })
     : require('../changeLog/index').default,
         "exact": true,
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       },
       {
         "path": "/personal/profile",
@@ -160,17 +160,17 @@ const routes = [
     })
     : require('../profile/index').default,
         "exact": true,
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       },
       {
         "component": () => React.createElement(require('/Users/ifun/my-projects/blog/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true }),
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       }
     ],
-    "_title": "blog",
-    "_title_default": "blog"
+    "_title": "Rulifun Blog",
+    "_title_default": "Rulifun Blog"
   },
   {
     "path": "/adminCenter",
@@ -192,8 +192,8 @@ const routes = [
     })
     : require('../cateManage/index').default,
         "exact": true,
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       },
       {
         "path": "/adminCenter/messageSender",
@@ -205,17 +205,17 @@ const routes = [
     })
     : require('../messageSender/index').default,
         "exact": true,
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       },
       {
         "component": () => React.createElement(require('/Users/ifun/my-projects/blog/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true }),
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       }
     ],
-    "_title": "blog",
-    "_title_default": "blog"
+    "_title": "Rulifun Blog",
+    "_title_default": "Rulifun Blog"
   },
   {
     "path": "/team",
@@ -237,17 +237,17 @@ const routes = [
     })
     : require('../team/index').default,
         "exact": true,
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       },
       {
         "component": () => React.createElement(require('/Users/ifun/my-projects/blog/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true }),
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       }
     ],
-    "_title": "blog",
-    "_title_default": "blog"
+    "_title": "Rulifun Blog",
+    "_title_default": "Rulifun Blog"
   },
   {
     "path": "/personalPage",
@@ -269,17 +269,17 @@ const routes = [
     })
     : require('../personalPage/index').default,
         "exact": true,
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       },
       {
         "component": () => React.createElement(require('/Users/ifun/my-projects/blog/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true }),
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       }
     ],
-    "_title": "blog",
-    "_title_default": "blog"
+    "_title": "Rulifun Blog",
+    "_title_default": "Rulifun Blog"
   },
   {
     "path": "/mc",
@@ -301,17 +301,17 @@ const routes = [
     })
     : require('../mc/index').default,
         "exact": true,
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       },
       {
         "component": () => React.createElement(require('/Users/ifun/my-projects/blog/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true }),
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       }
     ],
-    "_title": "blog",
-    "_title_default": "blog"
+    "_title": "Rulifun Blog",
+    "_title_default": "Rulifun Blog"
   },
   {
     "path": "/article",
@@ -333,8 +333,8 @@ const routes = [
     })
     : require('../articleDetail/index').default,
         "exact": true,
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       },
       {
         "path": "/article/edit/:id?",
@@ -346,17 +346,17 @@ const routes = [
     })
     : require('../articleEdit/index').default,
         "exact": true,
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       },
       {
         "component": () => React.createElement(require('/Users/ifun/my-projects/blog/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true }),
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       }
     ],
-    "_title": "blog",
-    "_title_default": "blog"
+    "_title": "Rulifun Blog",
+    "_title_default": "Rulifun Blog"
   },
   {
     "path": "/search",
@@ -378,17 +378,17 @@ const routes = [
     })
     : require('../search/index').default,
         "exact": true,
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       },
       {
         "component": () => React.createElement(require('/Users/ifun/my-projects/blog/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true }),
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       }
     ],
-    "_title": "blog",
-    "_title_default": "blog"
+    "_title": "Rulifun Blog",
+    "_title_default": "Rulifun Blog"
   },
   {
     "path": "/feedback",
@@ -410,8 +410,8 @@ const routes = [
     })
     : require('../feedback/index').default,
         "exact": true,
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       },
       {
         "path": "/feedback/detail/:id",
@@ -423,8 +423,8 @@ const routes = [
     })
     : require('../feedbackDetail/index').default,
         "exact": true,
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       },
       {
         "path": "/feedback/edit/:id?",
@@ -436,17 +436,17 @@ const routes = [
     })
     : require('../feedbackEdit/index').default,
         "exact": true,
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       },
       {
         "component": () => React.createElement(require('/Users/ifun/my-projects/blog/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true }),
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       }
     ],
-    "_title": "blog",
-    "_title_default": "blog"
+    "_title": "Rulifun Blog",
+    "_title_default": "Rulifun Blog"
   },
   {
     "path": "/error",
@@ -468,17 +468,17 @@ const routes = [
     })
     : require('../error/index').default,
         "exact": true,
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       },
       {
         "component": () => React.createElement(require('/Users/ifun/my-projects/blog/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true }),
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       }
     ],
-    "_title": "blog",
-    "_title_default": "blog"
+    "_title": "Rulifun Blog",
+    "_title_default": "Rulifun Blog"
   },
   {
     "path": "/",
@@ -501,22 +501,22 @@ const routes = [
     })
     : require('../home/index').default,
         "exact": true,
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       },
       {
         "component": () => React.createElement(require('/Users/ifun/my-projects/blog/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true }),
-        "_title": "blog",
-        "_title_default": "blog"
+        "_title": "Rulifun Blog",
+        "_title_default": "Rulifun Blog"
       }
     ],
-    "_title": "blog",
-    "_title_default": "blog"
+    "_title": "Rulifun Blog",
+    "_title_default": "Rulifun Blog"
   },
   {
     "component": () => React.createElement(require('/Users/ifun/my-projects/blog/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true }),
-    "_title": "blog",
-    "_title_default": "blog"
+    "_title": "Rulifun Blog",
+    "_title_default": "Rulifun Blog"
   }
 ];
 window.g_routes = routes;
