@@ -14,6 +14,7 @@ export interface MenusProps {
 
 const getMenus = function (menuArray, isSiderFold, parentPath = '/', unHandledCount = 0) {
   const menuArr = [];
+
   menuArray.map((item) => {
     const linkTo = parentPath + item.key;
     const subMenus = getMenus(item.child || [], isSiderFold, `${linkTo}/`);
@@ -32,20 +33,21 @@ const getMenus = function (menuArray, isSiderFold, parentPath = '/', unHandledCo
           {subMenus}
         </Menu.SubMenu>
       );
+
       menuArr.push(subMenu);
     } else {
       menuArr.push(
         <Menu.Item key={linkTo}>
-          {item.isRoute ?
-            <Link to={linkTo}>
+          {item.isAnchor
+            ? <a href={`#${item.key}`}>
+              {item.icon ? <IconFont type={item.icon} /> : ''}
+              {!isSiderFold && item.name}
+            </a>
+            : <Link to={linkTo}>
               {item.icon ? <IconFont type={item.icon} /> : ''}
               {!isSiderFold && item.name}
               {item.key === 'approval' ? <Badge style={{ background: '#00ADB5', marginLeft: 8, boxShadow: 'none' }} count={unHandledCount} /> : null}
-            </Link> :
-            <a href={`#${item.key}`}>
-              {item.icon ? <IconFont type={item.icon} /> : ''}
-              {!isSiderFold && item.name}
-            </a>}
+            </Link> }
         </Menu.Item>
       );
     }

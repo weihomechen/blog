@@ -1,6 +1,13 @@
-import path from 'path'
+import path from 'path';
 import pageRoutes from './router.config';
 import webpackplugin from './plugin.config';
+import projectConfig from './project.config';
+
+const {
+  name,
+  description,
+  logoSrc,
+} = projectConfig
 
 export default {
   // 路由配置
@@ -16,7 +23,7 @@ export default {
       locale: {
         default: 'zh-CN',
       },
-      title: 'blog',
+      title: name,
       dll: false,
       routes: {
         exclude: [
@@ -64,14 +71,14 @@ export default {
     },
   },
   manifest: {
-    name: 'Rulifun Blog',
+    name,
     background_color: '#FFF',
-    description: '一个全栈博客应用的前端部分✨',
+    description,
     display: 'standalone',
     start_url: '/index.html',
     icons: [
       {
-        src: 'https://rulifun.oss-cn-hangzhou.aliyuncs.com/blog/logo.png',
+        src: logoSrc,
         sizes: '64x64',
         type: 'image/png',
       },
