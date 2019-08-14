@@ -1,0 +1,215 @@
+.homePage {
+  position: relative;
+  width: 96%;
+  margin: 0 auto;
+  font-family: "PingFangSC-light";
+  padding: 24px;
+  .teamList {
+    margin-bottom: 24px;
+    .teamListHeader {
+      margin-bottom: 6px;
+      padding-left: 12px;
+      font-size: 20px;
+      line-height: 1.2;
+      color: #00ADB5;
+      border-left: 3px solid #00ADB5;
+      border-radius: 1px;
+    }
+    .teamListBody {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      width: 100%;
+      .teamItem {
+        width: 30%;
+        margin: 30px auto;
+        max-width: 400px;
+        height: 300px;
+        transition: all .5s;
+      }
+      .teamItem:hover {
+        transform: scale(1.05);
+      }
+      .createTeam {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30%;
+        max-width: 500px;
+        height: 300px;
+        margin: 30px auto;
+        .addTeamBtn {
+          width: 60px;
+          height: 60px;
+          color: #fff;
+          background: #08D9D6;
+        }
+        .addTeamBtn:hover {
+          opacity: .8;
+          background: #08D9D6;
+        }
+      }
+      :global {
+        .ant-card-bordered {
+          border: none;
+          box-shadow: 4px 4px 6px #dedede;
+        }
+        .ant-card-cover {
+          overflow: hidden;
+          height: 200px;
+          img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .ant-card-body {
+          height: 60px;
+          padding: 10px;
+        }
+        .ant-card-meta {
+          display: flex;
+          align-items: center;
+          .ant-card-meta-detail {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            .ant-card-meta-title {
+              margin: 0;
+              font-size: 18px;
+              font-weight: 400;
+            }
+          }
+        }
+        .ant-card-actions {
+          height: 40px;
+          >li {
+            margin: 10px 0;
+          }
+        }
+      }
+    }
+  }
+  .flexContainer {
+    display: flex;
+    .articleList {
+      width: 70%;
+      .articleListHeader {
+        padding-left: 12px;
+        font-size: 20px;
+        line-height: 1.2;
+        color: #00ADB5;
+        border-left: 3px solid #00ADB5;
+        border-radius: 1px;
+      }
+      .articleListBody {
+        padding: 0 30px;
+        .articleItem {
+          display: flex;
+          align-items: center;
+          margin: 24px 0;
+          padding: 16px 24px;
+          box-shadow: 1px 2px 6px #ddd;
+          .authorAvatar {
+            width: 70px;
+            height: 70px;
+            margin-right: 16px;
+            object-fit: cover;
+            border-radius: 35px;
+          }
+          .authorName {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            margin-right: 16px;
+            border-radius: 35px;
+            font-size: 20px;
+            color: #1FAB89;
+            box-shadow: 0 0 6px #eee;
+            background: #DFF4F3;
+          }
+          .info {
+            flex: 1;
+            margin-left: 12px;
+            .title {
+              display: flex;
+              align-items: center;
+              font-size: 24px;
+              margin-bottom: 12px;
+              a {
+                margin-right: 12px;
+                color: #00ADB5;
+              }
+              a:hover {
+                opacity: .8;
+              }
+            }
+            .infoItem {
+              margin-right: 24px;
+              color: #868686;
+              svg {
+                margin-right: 6px;
+              }
+            }
+            .tags {
+              margin-top: 8px;
+              svg {
+                margin-right: 6px;
+              }
+              .tag {
+                margin-right: 8px;
+                color: #868686;
+                font-size: 14px;
+                cursor: pointer;
+              }
+              .tag:hover {
+                color: @primary-color;
+              }
+            }
+          }
+        }
+      }
+    }
+    .userList {
+      width: 30%;
+      .userListHeader {
+        padding-left: 12px;
+        font-size: 20px;
+        line-height: 1.2;
+        color: #00ADB5;
+        border-left: 3px solid #00ADB5;
+        border-radius: 1px;
+      }
+      .userListBody {
+        margin: 24px 0;
+        box-shadow: 0 0 12px #dedede;
+        .activeName:hover {
+          color: @primary-color;
+          cursor: pointer;
+        }
+        :global {
+          .ant-pagination {
+            display: flex;
+            justify-content: flex-end;
+          }
+        }
+      }
+    }
+  }
+  .feedbackIntro {
+    position: fixed;
+    bottom: 70px;
+    right: 24px;
+    cursor: pointer;
+    transition: all .5s;
+  }
+  .feedbackIntro:hover {
+    transform: scale(1.1);
+  }
+}
+
+.uploadedAvatar {
+  height: 156px;
+}

@@ -1,0 +1,106 @@
+@import "../vars.less";
+.header {
+  width: 100%;
+  background-color: #fff;
+  .headerContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 980px;
+    max-width: 1920px;
+    height: 50px;
+    margin: 0 auto;
+    padding: 0 30px;
+    .leftContent {
+      display: flex;
+      align-items: center;
+      .searchInput {
+        flex: 1;
+        margin-left: 16px;
+        width: 200px;
+        input {
+          border-radius: 20px;
+        }
+      }
+    }
+    .logoContainer {
+      display: flex;
+      align-items: center;
+      .logo {
+        height: 40px;
+        margin-right: 6px;
+      }
+      .logoText {
+        outline: none;
+        text-decoration: none;
+        position: relative;
+        font-size: 20px;
+        line-height: 1;
+        color: #00ADB5;
+        display: inline-block;
+        text-transform: uppercase;
+        font-weight: 400;
+        overflow: hidden;
+      }
+      .logoText:hover {
+        color: #00B8A9;
+      }
+      .logoText::after {
+        content: '';
+        position: absolute;
+        height: 4px;
+        width: 100%;
+        top: 50%;
+        margin-top: -2px;
+        right: 0;
+        background: #F9F9F9;
+        transform: translate3d(-100%, 0, 0);
+        transition: transform 0.4s;
+        transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+      }
+      .logoText:hover::after {
+        transform: translate3d(100%, 0, 0);
+      }
+      .logoText::before {
+        content: attr(data-letters);
+        position: absolute;
+        z-index: 2;
+        overflow: hidden;
+        color: #FCA180;
+        white-space: nowrap;
+        width: 0%;
+        transition: width 0.4s 0.3s;
+      }
+      .logoText:hover::before {
+        width: 100%;
+      }
+    }
+    .userContainer {
+      display: flex;
+      align-items: center;
+      img {
+        height: 32px;
+        width: 32px;
+        object-fit: cover;
+        margin-right: 10px;
+        border-radius: 50%;
+      }
+    }
+  }
+  :global {
+    .ant-menu-horizontal {
+      display: flex;
+      >.ant-menu-item-selected {
+        >a {
+          color: #1890ff;
+        }
+      }
+    }
+    .ant-badge-count {
+      min-width: 18px;
+      height: 18px;
+      line-height: 16px;
+      padding: 1px;
+    }
+  }
+}
