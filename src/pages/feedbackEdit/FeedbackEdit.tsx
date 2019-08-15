@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions,no-return-assign,no-restricted-globals,react/destructuring-assignment */
 import { connect } from 'dva';
 import { Row, Col, Input, Icon, Select, Tooltip, message } from 'antd';
 import PropTypes from 'prop-types';
@@ -8,18 +7,18 @@ import Editor from '../../components/editor';
 import styles from './assets/style/index.less';
 import {
   Issue,
-} from '../../utils/type'
+} from '../../utils/type';
 
 const { Option } = Select;
 
 export interface FeedbackEditProps {
-  dispatch: (val: any) => any
-  match: any
-  issue: Issue
+  dispatch: (val: any) => any;
+  match: any;
+  issue: Issue;
 }
 
 export interface FeedbackEditState {
-  id: string
+  id: string;
 }
 
 @connect(({ feedback }) => {
@@ -28,24 +27,24 @@ export interface FeedbackEditState {
   };
 })
 class FeedbackEdit extends React.PureComponent<FeedbackEditProps, FeedbackEditState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      id: '',
-    };
-  }
 
   static propTypes = {
     dispatch: PropTypes.func,
     match: PropTypes.object,
     issue: PropTypes.object,
-  }
+  };
 
   static defaultProps = {
     dispatch: () => { },
     match: {},
     issue: {},
   };
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: '',
+    };
+  }
 
   componentWillMount() {
     const { dispatch, match } = this.props;
@@ -133,7 +132,9 @@ class FeedbackEdit extends React.PureComponent<FeedbackEditProps, FeedbackEditSt
           </div>
         </div>
         <Row gutter={16}>
-          <Col span={19}>标题：<Input style={{ width: 900 }} value={title} onChange={this.titleChange} maxLength={60} /></Col>
+          <Col span={19}>标题：
+            <Input style={{ width: 900 }} value={title} onChange={this.titleChange} maxLength={60} />
+          </Col>
           <Col span={4}>
             提交类型：<Select value={type} onChange={this.typeChange}>
               <Option value={0}>Advice</Option>

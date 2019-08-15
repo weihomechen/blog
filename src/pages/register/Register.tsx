@@ -1,4 +1,3 @@
-/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Row, Form, Input, message } from 'antd';
@@ -8,9 +7,9 @@ import styles from './assets/css/index.less';
 const FormItem = Form.Item;
 
 export interface RegisterProps {
-  loading: boolean
-  form: any
-  dispatch: (val: any) => any
+  loading: boolean;
+  form: any;
+  dispatch: (val: any) => any;
 }
 
 const Register = ({

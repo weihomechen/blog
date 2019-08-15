@@ -1,4 +1,3 @@
-/* eslint-disable no-plusplus */
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -23,22 +22,22 @@ import {
   Team,
   Cate,
   Article,
-} from '../../utils/type'
+} from '../../utils/type';
 
 const { Meta } = Card;
 
 export interface HomeProps {
-  dispatch: (val: any) => any
-  user: User
-  users: User[]
-  activeUsers: User[]
-  teamList: Team[]
-  cateList: Cate[]
-  articleList: Article[]
+  dispatch: (val: any) => any;
+  user: User;
+  users: User[];
+  activeUsers: User[];
+  teamList: Team[];
+  cateList: Cate[];
+  articleList: Article[];
 }
 
 export interface HomeState {
-  modalVisible: boolean
+  modalVisible: boolean;
 }
 
 @connect(({ user, team, article, category = {} }) => {
@@ -50,12 +49,6 @@ export interface HomeState {
   };
 })
 class Home extends React.Component<HomeProps, HomeState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      modalVisible: false,
-    };
-  }
 
   static propTypes = {
     dispatch: PropTypes.func,
@@ -65,7 +58,7 @@ class Home extends React.Component<HomeProps, HomeState> {
     teamList: PropTypes.array,
     cateList: PropTypes.array,
     articleList: PropTypes.array,
-  }
+  };
 
   static defaultProps = {
     dispatch: () => { },
@@ -76,6 +69,12 @@ class Home extends React.Component<HomeProps, HomeState> {
     articleList: [],
     cateList: [],
   };
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalVisible: false,
+    };
+  }
 
   componentWillMount() {
     const {
@@ -177,7 +176,13 @@ class Home extends React.Component<HomeProps, HomeState> {
 
     const cateRender = (cateId) => {
       const cate = this.getCateInfo(cateId);
-      return cate ? <Tag color={cate.color} onClick={() => this.searchArticleByCate(cateId || '')}>{cate.name}</Tag> : null;
+      return cate
+        ? (
+          <Tag color={cate.color} onClick={() => this.searchArticleByCate(cateId || '')}>
+            {cate.name}
+          </Tag>
+        )
+        : null;
     };
 
     const avatarRender = (uid) => {
@@ -222,7 +227,14 @@ class Home extends React.Component<HomeProps, HomeState> {
         title: '昵称',
         dataIndex: 'uid',
         align: 'center',
-        render: uid => <div className={styles.activeName} onClick={this.toPersonalPage.bind(this, uid)}>{getUserInfo(uid, 'name')}</div>,
+        render: uid => (
+          <div
+            className={styles.activeName}
+            onClick={this.toPersonalPage.bind(this, uid)}
+          >
+            {getUserInfo(uid, 'name')}
+          </div>
+        ),
       },
       {
         title: '文章数',
@@ -290,13 +302,29 @@ class Home extends React.Component<HomeProps, HomeState> {
                         {cateRender(item.cate)}
                       </div>
                       <div>
-                        <span className={styles.infoItem}><IconFont type="time" color="#F38181" />{moment(item.updateTime).format('YYYY-MM-DD HH:mm')}</span>
-                        {+item.comments ? <span className={styles.infoItem}><IconFont type="comment" color="#F38181" />{item.comments}</span> : null}
+                        <span className={styles.infoItem}>
+                          <IconFont type="time" color="#F38181" />{moment(item.updateTime).format('YYYY-MM-DD HH:mm')}
+                        </span>
+                        {+item.comments
+                          ? <span className={styles.infoItem}>
+                            <IconFont type="comment" color="#F38181" />
+                            {item.comments}
+                          </span>
+                          : null}
                       </div>
                       {tags ?
                         <div className={styles.tags}>
                           <IconFont type="tag" color="#F38181" fontSize="20px" />
-                          {tags.split(',').map(tag => <span key={`${id}-${tag}`} className={styles.tag} onClick={() => this.searchArticleByTag(tag)}>{tag}</span>)}
+                          {
+                            tags.split(',').map(tag => (
+                              <span
+                                key={`${id}-${tag}`}
+                                className={styles.tag}
+                                onClick={() => this.searchArticleByTag(tag)}
+                              >{tag}
+                              </span>
+                            ))
+                          }
                         </div> : null}
                     </div>
                   </div>);

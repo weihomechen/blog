@@ -3,20 +3,20 @@ import PropTypes from 'prop-types';
 import { Icon, Tag } from 'antd';
 import moment from 'moment';
 import { IconFont } from '../index';
-import { Article, Cate } from '../../utils/type'
+import { Article, Cate } from '../../utils/type';
 import style from './index.less';
 
 export interface ArticleItemProps {
-  article: Article
-  cate: Cate
-  onClick: (id: number) => any
-  uid: number | string
+  article: Article;
+  cate: Cate;
+  onClick: (id: number) => any;
+  uid: number | string;
 }
 
 const ArticleItem = (props: ArticleItemProps) => {
   const {
     article, cate, onClick, uid,
-  } = props
+  } = props;
   const {
     title, id, author, updateTime, abstract, comments, tags,
   } = article;

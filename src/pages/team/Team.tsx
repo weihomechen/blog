@@ -15,41 +15,32 @@ import {
   User,
   Cate,
   Article,
-} from '../../utils/type'
+} from '../../utils/type';
 
 const defaultTeamAbstract = '震惊！这个团队竟然没有简介...';
 const { TabPane } = Tabs;
 const { confirm } = Modal;
 
 export interface TeamProps {
-  dispatch: Dispatch
-  loading: boolean
-  list: Article[]
-  total: number
-  team: Team
-  user: User
-  users: User[]
-  cateList: Cate[]
-  match: any
+  dispatch: Dispatch;
+  loading: boolean;
+  list: Article[];
+  total: number;
+  team: Team;
+  user: User;
+  users: User[];
+  cateList: Cate[];
+  match: any;
 }
 
 export interface TeamState {
-  modalVisible: boolean
-  inviteModalVisible: boolean
-  currentMember: string | number
-  alreadyInvited: number[],
+  modalVisible: boolean;
+  inviteModalVisible: boolean;
+  currentMember: string | number;
+  alreadyInvited: number[];
 }
 
 class TeamPage extends Component<TeamProps, TeamState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      modalVisible: false,
-      inviteModalVisible: false,
-      currentMember: '',
-      alreadyInvited: [],
-    };
-  }
 
   static propTypes = {
     dispatch: PropTypes.func,
@@ -72,6 +63,16 @@ class TeamPage extends Component<TeamProps, TeamState> {
     users: [],
     cateList: [],
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalVisible: false,
+      inviteModalVisible: false,
+      currentMember: '',
+      alreadyInvited: [],
+    };
+  }
 
   componentDidMount() {
     this.getArticleList();
@@ -145,7 +146,7 @@ class TeamPage extends Component<TeamProps, TeamState> {
       <img src="https://rulifun.oss-cn-hangzhou.aliyuncs.com/blog/no-thing.png" alt="" />
       <div className={style.nothingTip}>空空如也～快去发表文章吧</div>
     </div>
-  );
+  )
 
   confirmOut = () => {
     const { user, team } = this.props;
@@ -249,7 +250,10 @@ class TeamPage extends Component<TeamProps, TeamState> {
               </div>
               <div className={style.infoItem}>
                 <Tooltip title="团队管理员" placement="top">
-                  <span><IconFont type="manager" fontSize="14px" color="#00ADB5" />{this.getUserInfo(team.owner, 'uid', 'name')}</span>
+                  <span>
+                    <IconFont type="manager" fontSize="14px" color="#00ADB5" />
+                    {this.getUserInfo(team.owner, 'uid', 'name')}
+                  </span>
                 </Tooltip>
               </div>
               <div className={style.abstract}>{team.abstract || defaultTeamAbstract}</div>
@@ -257,12 +261,23 @@ class TeamPage extends Component<TeamProps, TeamState> {
           </div>
           <Tabs defaultActiveKey="1">
             <TabPane
-              tab={<div><Button className={style.tabBtn} fullWidth><IconFont type="list" fontSize="16px" />最新文章</Button></div>}
+              tab={<div>
+                <Button className={style.tabBtn} fullWidth><IconFont type="list" fontSize="16px" />最新文章</Button>
+              </div>}
               key="1"
             >
               {list.length ?
                 <div>
-                  {list.map(item => <ArticleItem uid={user.uid} article={item} key={item.id} cate={this.getCateInfo(item.cate)} onClick={this.goToArticle} />)}
+                  {
+                    list.map(item =>
+                      <ArticleItem
+                        uid={user.uid}
+                        article={item}
+                        key={item.id}
+                        cate={this.getCateInfo(item.cate)}
+                        onClick={this.goToArticle}
+                      />)
+                  }
                   <Pagination total={total} showTotal={t => `共${t}篇`} onChange={pageNo => this.pageChange(pageNo)} />
                 </div> : this.nothingNow()}
             </TabPane>
@@ -287,9 +302,18 @@ class TeamPage extends Component<TeamProps, TeamState> {
             </span>
           </div>
           <div className={style.infoList}>
-            <div className={style.infoItem}><IconFont type="time1" fontSize="18px" color="#00ADB5" /> 创建于<i>{moment(team.createTime).format('YYYY-MM-DD')}</i></div>
-            <div className={style.infoItem}><IconFont type="list1" fontSize="18px" color="#00ADB5" /> 目前收录了<i>{total}</i>篇文章</div>
-            <div className={style.infoItem}><IconFont type="group" fontSize="18px" color="#00ADB5" /> 现在有<i>{memberList.length}</i>位小伙伴在这里玩耍</div>
+            <div className={style.infoItem}>
+              <IconFont type="time1" fontSize="18px" color="#00ADB5" />
+              创建于<i>{moment(team.createTime).format('YYYY-MM-DD')}</i>
+            </div>
+            <div className={style.infoItem}>
+              <IconFont type="list1" fontSize="18px" color="#00ADB5" />
+              目前收录了<i>{total}</i>篇文章
+            </div>
+            <div className={style.infoItem}>
+              <IconFont type="group" fontSize="18px" color="#00ADB5" />
+              现在有<i>{memberList.length}</i>位小伙伴在这里玩耍
+            </div>
           </div>
           <div className={style.header}>
             <span>团队成员
@@ -315,8 +339,12 @@ class TeamPage extends Component<TeamProps, TeamState> {
                   {item.avatar ? <img alt="" src={item.avatar} /> : <IconFont type="avatar" fontSize="80px" />}
                   {user.uid === team.owner && item.uid === currentMember && item.uid !== team.owner ?
                     <div className={style.showHandler}>
-                      <div className={style.transfer} onClick={this.transferTeam}><IconFont type="transfer" fontSize="15px" /> 转让</div>
-                      <div className={style.kickOut} onClick={this.kickMember}><IconFont type="out1" fontSize="15px" /> 踢出</div>
+                      <div className={style.transfer} onClick={this.transferTeam}>
+                        <IconFont type="transfer" fontSize="15px" /> 转让
+                      </div>
+                      <div className={style.kickOut} onClick={this.kickMember}>
+                        <IconFont type="out1" fontSize="15px" /> 踢出
+                      </div>
                     </div> : null}
                 </div>
                 <Link to={`/personalPage/${item.uid}`} className={style.name}>{item.name}</Link>
@@ -329,7 +357,9 @@ class TeamPage extends Component<TeamProps, TeamState> {
           visible={inviteModalVisible}
           className={style.inviteModal}
           onCancel={this.hideInviteModal}
-          footer={<div className={style.modalFooter}><Button className={style.cancelBtn} onClick={this.hideInviteModal}>取消</Button></div>}
+          footer={<div className={style.modalFooter}>
+            <Button className={style.cancelBtn} onClick={this.hideInviteModal}>取消</Button>
+          </div>}
         >
           <div className={style.inviteMember}>
             {notTeamUsers.map(item => {
@@ -343,7 +373,12 @@ class TeamPage extends Component<TeamProps, TeamState> {
                   {avatar ? <img src={avatar} alt="" /> : <IconFont type="avatar" fontSize="60px" color="#00adb5" />}
                   {user.uid === team.owner && item.uid === currentMember ?
                     <div className={style.showHandler}>
-                      <div className={style.invite} onClick={() => submitInvite(uid)}><IconFont type="add-member" fontSize="15px" /> 邀请</div>
+                      <div
+                        className={style.invite}
+                        onClick={() => submitInvite(uid)}
+                      >
+                        <IconFont type="add-member" fontSize="15px" /> 邀请
+                      </div>
                     </div> : null}
                 </div>
                 <div className={style.actions}>

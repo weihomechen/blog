@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'dva';
@@ -18,28 +17,28 @@ import {
   User,
   Issue,
   Dispatch,
-} from '../../utils/type'
+} from '../../utils/type';
 
 export interface PersonalFeedbackProps {
-  loading: boolean
-  total: number
-  issueList: Issue[]
-  user: User
-  dispatch: Dispatch
+  loading: boolean;
+  total: number;
+  issueList: Issue[];
+  user: User;
+  dispatch: Dispatch;
 }
 
 export interface PersonalFeedbackFilter {
-  keyword: string
-  type: string
-  from: string
-  to: string
-  status: number
-  pageNo: number
-  pageSize: number
+  keyword: string;
+  type: string;
+  from: string;
+  to: string;
+  status: number;
+  pageNo: number;
+  pageSize: number;
 }
 
 export interface PersonalFeedbackState {
-  filter: PersonalFeedbackFilter
+  filter: PersonalFeedbackFilter;
 }
 
 const { RangePicker } = DatePicker;
@@ -56,12 +55,6 @@ const initialFilter = JSON.stringify({
 });
 
 class PersonalFeedback extends Component<PersonalFeedbackProps, PersonalFeedbackState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      filter: JSON.parse(initialFilter),
-    };
-  }
 
   static propTypes = {
     loading: PropTypes.bool,
@@ -81,6 +74,12 @@ class PersonalFeedback extends Component<PersonalFeedbackProps, PersonalFeedback
 
   static contextTypes = {
     router: PropTypes.object,
+  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      filter: JSON.parse(initialFilter),
+    };
   }
 
   componentDidMount() {
@@ -178,8 +177,16 @@ class PersonalFeedback extends Component<PersonalFeedbackProps, PersonalFeedback
         width: 150,
         render: (text, record) => (
           <div>
-            <Button className={`${style.editBtn} custom-btn-edit`} onClick={this.editFeedback.bind(this, record.id)}>编辑</Button>
-            <Button className={`${style.editBtn} custom-btn-del`} onClick={this.closeIssue.bind(this, record.id)}>关闭</Button>
+            <Button
+              className={`${style.editBtn} custom-btn-edit`}
+              onClick={this.editFeedback.bind(this, record.id)}
+            >编辑
+            </Button>
+            <Button
+              className={`${style.editBtn} custom-btn-del`}
+              onClick={this.closeIssue.bind(this, record.id)}
+            >关闭
+            </Button>
           </div>
         ),
       },

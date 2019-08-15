@@ -19,7 +19,7 @@ import {
   Article,
   User,
   Dispatch,
-} from '../../utils/type'
+} from '../../utils/type';
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
@@ -35,28 +35,24 @@ const initialState = JSON.stringify({
 });
 
 export interface PersonCenterProps {
-  loading: boolean
-  list: Article[]
-  total: number
-  user: User
-  dispatch: Dispatch
+  loading: boolean;
+  list: Article[];
+  total: number;
+  user: User;
+  dispatch: Dispatch;
 }
 
 export interface PersonCenterState {
-  title: string
-  from: string
-  to: string
-  status: number
-  pageNo: number
-  pageSize: number
-  selectedRowKeys: number[]
+  title: string;
+  from: string;
+  to: string;
+  status: number;
+  pageNo: number;
+  pageSize: number;
+  selectedRowKeys: number[];
 }
 
 class PersonCenter extends Component<PersonCenterProps, PersonCenterState> {
-  constructor(props) {
-    super(props);
-    this.state = JSON.parse(initialState);
-  }
 
   static propTypes = {
     loading: PropTypes.bool,
@@ -76,6 +72,10 @@ class PersonCenter extends Component<PersonCenterProps, PersonCenterState> {
 
   static contextTypes = {
     router: PropTypes.object,
+  };
+  constructor(props) {
+    super(props);
+    this.state = JSON.parse(initialState);
   }
 
   componentDidMount() {
@@ -188,7 +188,14 @@ class PersonCenter extends Component<PersonCenterProps, PersonCenterState> {
       {
         title: '操作',
         width: 150,
-        render: (text, record) => <Button className={`${style.editBtn} custom-btn-edit`} onClick={this.toWritePage.bind(this, record.id)}>编辑</Button>,
+        render: (text, record) =>
+          (
+            <Button
+              className={`${style.editBtn} custom-btn-edit`}
+              onClick={this.toWritePage.bind(this, record.id)}
+            >编辑
+            </Button>
+          ),
       },
     ];
 
@@ -224,7 +231,12 @@ class PersonCenter extends Component<PersonCenterProps, PersonCenterState> {
             title="是否确认批量删除"
             onConfirm={this.deleteArticle}
           >
-            <Button type="primary" className="custom-btn-del" style={{ marginBottom: 12, display: selectedRowKeys.length ? '' : 'none' }}>删除</Button>
+            <Button
+              type="primary"
+              className="custom-btn-del"
+              style={{ marginBottom: 12, display: selectedRowKeys.length ? '' : 'none' }}
+            >删除
+            </Button>
           </Popconfirm>
           <Table
             rowSelection={{ selectedRowKeys, onChange: this.selectedChange }}

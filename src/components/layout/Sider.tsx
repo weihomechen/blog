@@ -5,33 +5,29 @@ import config from 'config/project.config';
 import Menus from './Menu';
 import {
   DispatchParam,
-} from '../../utils/type'
+} from '../../utils/type';
 
 export interface SiderProps {
-  isSiderFold: boolean
-  location: object
-  dispatch: (val: DispatchParam) => void
-  unHandledCount: number
+  isSiderFold: boolean;
+  location: object;
+  dispatch: (val: DispatchParam) => void;
+  unHandledCount: number;
 }
 
-export interface SiderState {
-
-}
-
-class Sider extends React.PureComponent<SiderProps, SiderState> {
+class Sider extends React.PureComponent<SiderProps, {}> {
   static propTypes = {
     isSiderFold: PropTypes.bool,
     location: PropTypes.object,
     dispatch: PropTypes.func,
     unHandledCount: PropTypes.number,
-  }
+  };
 
   static defaultProps = {
     isSiderFold: false,
     location: {},
     dispatch: () => { },
     unHandledCount: 0,
-  }
+  };
 
   componentDidMount() {
     this.props.dispatch({ type: 'approval/getList' });

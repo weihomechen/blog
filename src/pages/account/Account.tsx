@@ -11,7 +11,7 @@ import style from './assets/css/index.less';
 import {
   User,
   DispatchParam,
-} from '../../utils/type'
+} from '../../utils/type';
 
 const initialState = JSON.stringify({
   uid: '',
@@ -20,8 +20,8 @@ const initialState = JSON.stringify({
 });
 
 export interface PersonCenterProps {
-  user: User
-  dispatch: (val: DispatchParam) => any
+  user: User;
+  dispatch: (val: DispatchParam) => any;
 }
 
 class PersonCenter extends Component<PersonCenterProps, {}> {
@@ -34,10 +34,6 @@ class PersonCenter extends Component<PersonCenterProps, {}> {
     user: {},
     dispatch: () => { },
   };
-
-  static contextTypes = {
-    router: PropTypes.object,
-  }
 
   state = JSON.parse(initialState);
 
@@ -79,8 +75,20 @@ class PersonCenter extends Component<PersonCenterProps, {}> {
       <div className={style.personCenter}>
         <div id="updatePassword" className={style.updatePassword}>
           <div className={style.title}>修改密码</div>
-          <Input className={style.password} type="password" placeholder="请输入旧密码" onChange={this.oldPasswordChange} value={oldPassword} />
-          <Input className={style.password} type="password" placeholder="请输入新密码" onChange={this.passwordChange} value={password} />
+          <Input
+            className={style.password}
+            type="password"
+            placeholder="请输入旧密码"
+            onChange={this.oldPasswordChange}
+            value={oldPassword}
+          />
+          <Input
+            className={style.password}
+            type="password"
+            placeholder="请输入新密码"
+            onChange={this.passwordChange}
+            value={password}
+          />
           <Button type="primary" onClick={this.submitChangePassword}>确认修改</Button>
         </div>
       </div>

@@ -1,4 +1,3 @@
-/* eslint-disable no-confusing-arrow,no-unused-expressions */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'dva';
@@ -12,32 +11,26 @@ import style from './assets/css/index.less';
 import {
   Dispatch,
   Message,
-} from '../../utils/type'
+} from '../../utils/type';
 
 const { TabPane } = Tabs;
 let timer;
 
 export interface MessageCenterProps {
-  dispatch: Dispatch
-  discussMsgList: Message[]
-  systemMsgList: Message[]
-  discussMsgTotal: number
-  systemMsgTotal: number
-  unReadSysMsgTotal: number
-  unReadDisMsgTotal: number
+  dispatch: Dispatch;
+  discussMsgList: Message[];
+  systemMsgList: Message[];
+  discussMsgTotal: number;
+  systemMsgTotal: number;
+  unReadSysMsgTotal: number;
+  unReadDisMsgTotal: number;
 }
 
 export interface MessageCenterState {
-  alreadyReadList: number[]
+  alreadyReadList: number[];
 }
 
 class MessageCenter extends PureComponent<MessageCenterProps, MessageCenterState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      alreadyReadList: [],
-    };
-  }
 
   static propTypes = {
     dispatch: PropTypes.func,
@@ -58,6 +51,12 @@ class MessageCenter extends PureComponent<MessageCenterProps, MessageCenterState
     unReadSysMsgTotal: 0,
     unReadDisMsgTotal: 0,
   };
+  constructor(props) {
+    super(props);
+    this.state = {
+      alreadyReadList: [],
+    };
+  }
 
   componentDidMount() {
     this.getDiscussMsgs().then(() => setTimeout(() => this.lazyHandler(), 1000));
@@ -131,7 +130,7 @@ class MessageCenter extends PureComponent<MessageCenterProps, MessageCenterState
       <img src="https://rulifun.oss-cn-hangzhou.aliyuncs.com/blog/no-thing.png" alt="" />
       <div className={style.noMsgTip}>空空如也～</div>
     </div>
-  );
+  )
 
   render() {
     const {
@@ -178,7 +177,9 @@ class MessageCenter extends PureComponent<MessageCenterProps, MessageCenterState
                     </div>
                     <div className={style.infoContainer}>
                       <div className={style.primaryInfos}>
-                        {`${title}${articleId ? <Link to={`/article/detail/${articleId}`}>{`《${articleTitle}》`}</Link> : ''}`}
+                        {`${title}${articleId
+                          ? <Link to={`/article/detail/${articleId}`}>{`《${articleTitle}》`}</Link>
+                          : ''}`}
                       </div>
                       <div className={style.otherInfo}>
                         {moment(createTime).format('YYYY-MM-DD HH:mm')}
@@ -190,7 +191,11 @@ class MessageCenter extends PureComponent<MessageCenterProps, MessageCenterState
                   </div>
                 </div>);
               })}
-              <Pagination total={systemMsgTotal} showTotal={t => `共${t}条`} onChange={(pageNo) => this.getSystemMsgs(pageNo)} />
+              <Pagination
+                total={systemMsgTotal}
+                showTotal={t => `共${t}条`}
+                onChange={(pageNo) => this.getSystemMsgs(pageNo)}
+              />
             </div> : this.noMsgNow()}
           </TabPane>
           <TabPane
@@ -225,7 +230,9 @@ class MessageCenter extends PureComponent<MessageCenterProps, MessageCenterState
                         </div>
                         <div className={style.infoContainer}>
                           <div className={style.primaryInfos}>
-                            <span>{senderName}</span>在<Link to={`/article/detail/${articleId}`}>{`《${articleTitle}》`}</Link>中{title}
+                            <span>{senderName}</span>在
+                            <Link to={`/article/detail/${articleId}`}>{`《${articleTitle}》`}</Link>
+                            中{title}
                           </div>
                           <div className={style.otherInfo}>
                             {moment(createTime).format('YYYY-MM-DD HH:mm')}
@@ -237,7 +244,11 @@ class MessageCenter extends PureComponent<MessageCenterProps, MessageCenterState
                       </div>
                     </div>);
                   })}
-                  <Pagination total={discussMsgTotal} showTotal={t => `共${t}条`} onChange={(pageNo) => this.getDiscussMsgs(pageNo)} />
+                  <Pagination
+                    total={discussMsgTotal}
+                    showTotal={t => `共${t}条`}
+                    onChange={(pageNo) => this.getDiscussMsgs(pageNo)}
+                  />
                 </div> :
                 this.noMsgNow()
             }

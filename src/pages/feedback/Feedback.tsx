@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions,no-return-assign */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'dva';
@@ -12,7 +11,7 @@ import styles from './assets/style/index.less';
 import {
   User,
   Issue,
-} from '../../utils/type'
+} from '../../utils/type';
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -29,20 +28,20 @@ const typeMap = {
 };
 
 export interface FeedbackProps {
-  dispatch: (val: any) => any
-  users: User[]
-  issueList: Issue[]
-  total: number
+  dispatch: (val: any) => any;
+  users: User[];
+  issueList: Issue[];
+  total: number;
 }
 
 export interface FeedbackState {
-  keyword: string
-  uid: number | string
-  from: number | string
-  to: number | string
-  status: string | string
-  type: number | string
-  pageNo: number
+  keyword: string;
+  uid: number | string;
+  from: number | string;
+  to: number | string;
+  status: string | string;
+  type: number | string;
+  pageNo: number;
 }
 
 @connect(({ user, feedback }: any) => {
@@ -53,6 +52,21 @@ export interface FeedbackState {
   };
 })
 class Feedback extends React.PureComponent<FeedbackProps, FeedbackState> {
+
+  static propTypes = {
+    dispatch: PropTypes.func,
+    users: PropTypes.array,
+    issueList: PropTypes.array,
+    total: PropTypes.number,
+  };
+
+  static defaultProps = {
+    dispatch: () => { },
+    users: [],
+    issueList: [],
+    total: 0,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -65,20 +79,6 @@ class Feedback extends React.PureComponent<FeedbackProps, FeedbackState> {
       pageNo: 1,
     };
   }
-
-  static propTypes = {
-    dispatch: PropTypes.func,
-    users: PropTypes.array,
-    issueList: PropTypes.array,
-    total: PropTypes.number,
-  }
-
-  static defaultProps = {
-    dispatch: () => { },
-    users: [],
-    issueList: [],
-    total: 0,
-  };
 
   componentWillMount() {
     this.getIssueList();
@@ -161,7 +161,9 @@ class Feedback extends React.PureComponent<FeedbackProps, FeedbackState> {
       <div className={styles.feedbackPage}>
         <div className={styles.filterContainer}>
           <Row gutter={16}>
-            <Col span={5}>关键词：<Input style={{ width: 160 }} value={keyword} onChange={this.keywordChange} placeholder="输入关键词模糊查询" /></Col>
+            <Col span={5}>关键词：
+              <Input style={{ width: 160 }} value={keyword} onChange={this.keywordChange} placeholder="输入关键词模糊查询" />
+            </Col>
             <Col span={4}>反馈人：
             <Select value={uid} onChange={this.uidChange} style={{ width: 120 }} >
                 <Option value="">全部</Option>
@@ -182,12 +184,25 @@ class Feedback extends React.PureComponent<FeedbackProps, FeedbackState> {
                 <Option value="1">Bug</Option>
               </Select>
             </Col>
-            <Col span={7}>时间：<RangePicker style={{ width: 270 }} value={from ? [moment(from), moment(to)] : null} onChange={this.timeRangeChange} format={dateFormater} /></Col>
+            <Col span={7}>时间：
+              <RangePicker
+                style={{ width: 270 }}
+                value={from ? [moment(from), moment(to)] : null}
+                onChange={this.timeRangeChange}
+                format={dateFormater}
+              />
+            </Col>
           </Row>
           <div className={styles.filterRow}>
-            <Button className={styles.searchBtn} onClick={this.getIssueList}><IconFont type="search" fontSize="16px" />搜索</Button>
-            <Button className={styles.resetBtn} onClick={this.reset}><IconFont type="reload" fontSize="16px" />重置</Button>
-            <Button className={styles.addBtn} onClick={this.addFeedback}><IconFont type="feedback" fontSize="26px" />我有话说</Button>
+            <Button className={styles.searchBtn} onClick={this.getIssueList}>
+              <IconFont type="search" fontSize="16px" />搜索
+            </Button>
+            <Button className={styles.resetBtn} onClick={this.reset}>
+              <IconFont type="reload" fontSize="16px" />重置
+            </Button>
+            <Button className={styles.addBtn} onClick={this.addFeedback}>
+              <IconFont type="feedback" fontSize="26px" />我有话说
+            </Button>
           </div>
         </div>
         {issueList.length ?

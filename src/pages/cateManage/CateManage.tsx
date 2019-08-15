@@ -12,17 +12,47 @@ import {
   message,
 } from 'antd';
 import { BlockPicker } from 'react-color';
+import { Cate } from '../../utils/type';
 import style from './assets/css/index.less';
 
 const { confirm } = Modal;
-const presetColors = ['#F47373', '#FFD3B6', '#A8E6CF', '#2CCCE4', '#928A97', '#dce775', '#F38181', '#66C6BA', '#f44336', '#F08A5D', '#00ADB5'];
+const presetColors = [
+  '#F47373',
+  '#FFD3B6',
+  '#A8E6CF',
+  '#2CCCE4',
+  '#928A97',
+  '#dce775',
+  '#F38181',
+  '#66C6BA',
+  '#f44336',
+  '#F08A5D',
+  '#00ADB5',
+];
 
 export interface CateManageProps {
-
+  cate: Cate;
+  cateList: Cate[];
+  cateModalVisible: boolean;
+  dispatch: (val: any) => any;
 }
 
-class CateManage extends Component {
-  dispatch: any
+class CateManage extends Component<CateManageProps, {}> {
+  static propTypes = {
+    cateModalVisible: PropTypes.bool,
+    cateList: PropTypes.array,
+    dispatch: PropTypes.func,
+    cate: PropTypes.object,
+  };
+
+  static defaultProps = {
+    cateModalVisible: false,
+    cateList: [],
+    dispatch: () => { },
+    cate: {},
+  };
+
+  dispatch: any;
 
   constructor(props) {
     super(props);
@@ -57,7 +87,7 @@ class CateManage extends Component {
         this.dispatch({ type: 'category/delCate', payload: { id } });
       },
       onCancel() {
-        console.log('Cancel');
+        // console.log('Cancel');
       },
     });
   }
@@ -100,7 +130,14 @@ class CateManage extends Component {
           const isDefault = record.name === '其它';
           return (
             <div>
-              <Button disabled={isDefault} className="custom-btn-edit" onClick={this.editCate.bind(this, record)} style={{ marginRight: 16 }}>编辑</Button>
+              <Button
+                disabled={isDefault}
+                className="custom-btn-edit"
+                onClick={this.editCate.bind(this, record)}
+                style={{ marginRight: 16 }}
+              >
+                编辑
+              </Button>
               <Button disabled={isDefault} className="custom-btn-del" onClick={this.delCate.bind(this, id)}>删除</Button>
             </div>
           );
@@ -122,10 +159,15 @@ class CateManage extends Component {
             title={`${cate.id ? '编辑' : '新增'}分类`}
             visible={cateModalVisible}
             onOk={this.submitUpdate}
-            onCancel={() => this.dispatch({ type: 'category/stateChange', payload: { cateModalVisible: false } })}
+            onCancel={() => this.dispatch({
+              type: 'category/stateChange',
+              payload: { cateModalVisible: false },
+            })}
           >
             <Row>分类名称： <Input value={cate.name} onChange={this.cateNameChange} style={{ width: 300 }} /></Row>
-            <Row style={{ margin: '24px 0' }}>分类颜色： <Tag style={{ width: 100 }} color={cate.color}>{cate.color}</Tag></Row>
+            <Row style={{ margin: '24px 0' }}>分类颜色：
+              <Tag style={{ width: 100 }} color={cate.color}>{cate.color}</Tag>
+            </Row>
             <Row>
               <BlockPicker
                 color={cate.color || presetColors[0]}
@@ -139,20 +181,6 @@ class CateManage extends Component {
     );
   }
 }
-
-CateManage.propTypes = {
-  cateModalVisible: PropTypes.bool,
-  cateList: PropTypes.array,
-  dispatch: PropTypes.func,
-  cate: PropTypes.object,
-};
-
-CateManage.defaultProps = {
-  cateModalVisible: false,
-  cateList: [],
-  dispatch: () => { },
-  cate: {},
-};
 
 function mapStateToProps({ category }) {
   return {

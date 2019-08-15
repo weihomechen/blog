@@ -1,11 +1,10 @@
-/* eslint-disable no-extend-native */
 import { message } from 'antd';
 import moment from 'moment';
 export { request } from './request';
 
 export const getQuery = (key: string): string => {
   const query = {};
-  location.search.slice(1).split('&').forEach((item) => { // eslint-disable-line
+  location.search.slice(1).split('&').forEach((item) => {
     const queryPair = item.split('=');
     query[queryPair[0]] = queryPair[1];
   });

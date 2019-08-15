@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions,no-return-assign */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon, Input, Button } from 'antd';
@@ -9,35 +8,24 @@ import style from './index.less';
 
 const { TextArea } = Input;
 export interface CommentItemProps {
-  comment: Comment,
-  user: User,
-  users: User[],
-  submitReply: (replyDTO: any) => any,
-  delComment: (comment: any) => any,
-  delReply: () => any,
+  comment: Comment;
+  user: User;
+  users: User[];
+  submitReply: (replyDTO: any) => any;
+  delComment: (comment: any) => any;
+  delReply: () => any;
 }
 
 export interface CommentItemState {
-  replysVisible: boolean,
-  replyBoxVisible: boolean,
-  replyContent: string,
-  isShowDelBtn: boolean,
-  showDelReplyBtnId: string | number,
-  to: string,
+  replysVisible: boolean;
+  replyBoxVisible: boolean;
+  replyContent: string;
+  isShowDelBtn: boolean;
+  showDelReplyBtnId: string | number;
+  to: string;
 }
 
 class CommentItem extends React.Component<CommentItemProps, CommentItemState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      replysVisible: false,
-      replyBoxVisible: false,
-      isShowDelBtn: false,
-      showDelReplyBtnId: '',
-      replyContent: '',
-      to: '',
-    };
-  }
 
   static propTypes = {
     comment: PropTypes.object,
@@ -57,7 +45,18 @@ class CommentItem extends React.Component<CommentItemProps, CommentItemState> {
     delReply: () => { },
   };
 
-  replyInput: any
+  replyInput: any;
+  constructor(props) {
+    super(props);
+    this.state = {
+      replysVisible: false,
+      replyBoxVisible: false,
+      isShowDelBtn: false,
+      showDelReplyBtnId: '',
+      replyContent: '',
+      to: '',
+    };
+  }
 
   replyChangeDebounce = (replyContent) => {
     customDebounce(this.setState({ replyContent }), 100);
@@ -77,7 +76,7 @@ class CommentItem extends React.Component<CommentItemProps, CommentItemState> {
       return `${replysLen}条回复`;
     }
     return '回复';
-  };
+  }
 
   submitReply = () => {
     const {
@@ -139,7 +138,9 @@ class CommentItem extends React.Component<CommentItemProps, CommentItemState> {
     return (
       <div className={style.commentItem}>
         <div className={style.commentHeader}>
-          {commentAuthor.avatar ? <img alt="" src={commentAuthor.avatar} className={style.avatar} /> : <IconFont type="avatar" color="#00ADB5" fontSize="28px" />}
+          {commentAuthor.avatar
+            ? <img alt="" src={commentAuthor.avatar} className={style.avatar} />
+            : <IconFont type="avatar" color="#00ADB5" fontSize="28px" />}
           <span className={style.author}>{author}</span>
         </div>
         <div
@@ -164,7 +165,9 @@ class CommentItem extends React.Component<CommentItemProps, CommentItemState> {
         <div className={style.replys} style={{ display: replysVisible ? '' : 'none' }}>
           {replyList.map(item => (<div key={item.id} className={style.replyItem}>
             <div className={style.replyHeader}>
-              {getReplyAuthor(item.author) ? <img alt="" src={replyAuthorAvatar} className={style.avatar} /> : <IconFont type="avatar" fontSize="22px" />}
+              {getReplyAuthor(item.author)
+                ? <img alt="" src={replyAuthorAvatar} className={style.avatar} />
+                : <IconFont type="avatar" fontSize="22px" />}
               <span className={style.replyAuthor}>{item.author}</span>
             </div>
             <div

@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import './index.less';
 
 export interface IconfontProps {
-  type: string
-  color: string
-  fontSize: string
-  className: string
+  type: string;
+  color: string;
+  fontSize: string;
+  className: string;
 }
 
 const Iconfont = (props: IconfontProps) => {
   const {
     type, color, fontSize, className,
-  } = props
+  } = props;
 
   return (
     <svg className={`icon ${className}`} style={{ fontSize }} aria-hidden="true">
@@ -36,4 +36,3 @@ Iconfont.propTypes = {
 };
 
 export default Iconfont;
-

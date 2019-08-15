@@ -1,5 +1,3 @@
-/* eslint-disable react/self-closing-comp */
-/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'dva';
@@ -8,25 +6,22 @@ import { Layout } from '../components';
 import '../components/skin.less';
 import {
   DispatchParam,
-} from '../utils/type'
+} from '../utils/type';
 
 const {
   Header, Footer, Sider, styles,
 } = Layout;
 
 export interface SiderLayoutProps {
-  app: any
-  loading: boolean
-  location: any
-  state: any
-  dispatch: (val: DispatchParam) => any
-  unHandledCount: number
+  app: any;
+  loading: boolean;
+  location: any;
+  state: any;
+  dispatch: (val: DispatchParam) => any;
+  unHandledCount: number;
 }
 
 class SiderLayout extends React.PureComponent<SiderLayoutProps, {}> {
-  state = {
-    isSiderFold: false,
-  };
 
   static propTypes = {
     app: PropTypes.object,
@@ -44,6 +39,9 @@ class SiderLayout extends React.PureComponent<SiderLayoutProps, {}> {
     state: {},
     dispatch: () => { },
     unHandledCount: 0,
+  };
+  state = {
+    isSiderFold: false,
   };
 
   render() {
@@ -106,4 +104,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SiderLayout));
-

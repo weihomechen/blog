@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions, no-return-assign */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal } from 'antd';

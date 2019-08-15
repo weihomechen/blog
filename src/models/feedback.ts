@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { message } from 'antd';
 import {
   query,

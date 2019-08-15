@@ -19,28 +19,28 @@ import {
   User,
   Cate,
   Dispatch,
-} from '../../utils/type'
+} from '../../utils/type';
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 const dateFormater = 'YYYY-MM-DD';
 
 export interface SearchProps {
-  list: Article[]
-  users: User[]
-  cateList: Cate[]
-  total: number
-  dispatch: Dispatch
+  list: Article[];
+  users: User[];
+  cateList: Cate[];
+  total: number;
+  dispatch: Dispatch;
 }
 
 export interface SearchState {
-  title: string
-  uid: number | string
-  from: string
-  to: string
-  cate: number | string
-  tag: string
-  pageNo: number
+  title: string;
+  uid: number | string;
+  from: string;
+  to: string;
+  cate: number | string;
+  tag: string;
+  pageNo: number;
 }
 
 @connect((({ article, user, category }) => {
@@ -52,6 +52,23 @@ export interface SearchState {
   };
 }))
 class Search extends React.PureComponent<SearchProps, SearchState> {
+
+  static propTypes = {
+    dispatch: PropTypes.func,
+    list: PropTypes.array,
+    users: PropTypes.array,
+    cateList: PropTypes.array,
+    total: PropTypes.number,
+  };
+
+  static defaultProps = {
+    dispatch: () => { },
+    list: [],
+    users: [],
+    cateList: [],
+    total: 0,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -63,22 +80,6 @@ class Search extends React.PureComponent<SearchProps, SearchState> {
       tag: '',
       pageNo: 1,
     };
-  }
-
-  static propTypes = {
-    dispatch: PropTypes.func,
-    list: PropTypes.array,
-    users: PropTypes.array,
-    cateList: PropTypes.array,
-    total: PropTypes.number,
-  }
-
-  static defaultProps = {
-    dispatch: () => { },
-    list: [],
-    users: [],
-    cateList: [],
-    total: 0,
   }
 
   componentWillMount() {
@@ -166,38 +167,62 @@ class Search extends React.PureComponent<SearchProps, SearchState> {
 
     return (
       <div className={style.search}>
-      <div className={style.filterContainer}>
-        <Row gutter={16}>
-          <Col span={6}>标题：<Input style={{ width: 200 }} value={title} onChange={this.titleChange} placeholder="输入关键词模糊查询" /></Col>
-          <Col span={6}>作者：
+        <div className={style.filterContainer}>
+          <Row gutter={16}>
+            <Col span={6}>标题：
+              <Input style={{ width: 200 }} value={title} onChange={this.titleChange} placeholder="输入关键词模糊查询" />
+            </Col>
+            <Col span={6}>作者：
             <Select value={uid} onChange={this.uidChange} style={{ width: 200 }} placeholder="可选择作者查询" >
-              <Option value="">全部</Option>
-              {users.map(user => <Option key={user.uid} value={user.uid}>{user.name}</Option>)}
-            </Select>
-          </Col>
-          <Col span={8}>时间：<RangePicker style={{ width: 300 }} value={from ? [moment(from), moment(to)] : null} onChange={this.timeRangeChange} format={dateFormater} /></Col>
-        </Row>
-        <Row gutter={16}>
-          <Col span={6}>分类：
+                <Option value="">全部</Option>
+                {users.map(user => <Option key={user.uid} value={user.uid}>{user.name}</Option>)}
+              </Select>
+            </Col>
+            <Col span={8}>时间：
+              <RangePicker
+                style={{ width: 300 }}
+                value={from ? [moment(from), moment(to)] : null}
+                onChange={this.timeRangeChange}
+                format={dateFormater}
+              />
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={6}>分类：
             <Select value={cate} onChange={this.cateChange} style={{ width: 200 }} placeholder="可选择分类查询" >
-              <Option value="">全部</Option>
-              {cateList.map(item => <Option key={item.id} value={item.id}>{item.name}</Option>)}
-            </Select>
-          </Col>
-          <Col span={6}>标签：<Input value={tag} onChange={this.tagChange} style={{ width: 200 }} placeholder="输入文章标签查询" /></Col>
-          <Col span={8}>
-            <Button className={style.searchBtn} onClick={this.getArticleList}><IconFont type="search" />搜索</Button>
-            <Button className={style.resetBtn} onClick={this.reset}><IconFont type="reload" />重置</Button>
-          </Col>
-        </Row>
-      </div>
-      <div className={style.resultContainer}>
-        <div className={style.resultList}>
-          {list.map(item => <ArticleItem article={item} key={item.id} cate={this.getCateInfo(item.cate)} onClick={this.goToArticle} />)}
-          <Pagination total={total} showTotal={t => `共${t}篇`} onChange={pageNo => this.pageChange(pageNo)} />
+                <Option value="">全部</Option>
+                {cateList.map(item => <Option key={item.id} value={item.id}>{item.name}</Option>)}
+              </Select>
+            </Col>
+            <Col span={6}>标签：
+              <Input value={tag} onChange={this.tagChange} style={{ width: 200 }} placeholder="输入文章标签查询" />
+            </Col>
+            <Col span={8}>
+              <Button className={style.searchBtn} onClick={this.getArticleList}><IconFont type="search" />搜索</Button>
+              <Button className={style.resetBtn} onClick={this.reset}><IconFont type="reload" />重置</Button>
+            </Col>
+          </Row>
+        </div>
+        <div className={style.resultContainer}>
+          <div className={style.resultList}>
+            {
+              list.map(item =>
+                <ArticleItem
+                  article={item}
+                  key={item.id}
+                  cate={this.getCateInfo(item.cate)}
+                  onClick={this.goToArticle}
+                />,
+              )
+            }
+            <Pagination
+              total={total}
+              showTotal={t => `共${t}篇`}
+              onChange={pageNo => this.pageChange(pageNo)}
+            />
+          </div>
         </div>
       </div>
-    </div>
     );
   }
 }

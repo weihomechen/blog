@@ -4,8 +4,8 @@ import { IconFont } from 'components';
 import styles from './assets/css/index.less';
 
 const goBack = () => {
-  history.go(-2)
-}
+  history.go(-2);
+};
 
 const Error = () => (
   <div className={styles.errorPage}>

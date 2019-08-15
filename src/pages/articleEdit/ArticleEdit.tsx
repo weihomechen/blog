@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions,no-return-assign */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -22,7 +21,7 @@ import {
   User,
   Article,
   Cate,
-} from '../../utils/type'
+} from '../../utils/type';
 
 const labelSpan = 2;
 const contentSpan = 16;
@@ -31,19 +30,19 @@ const { Option } = Select;
 const { confirm } = Modal;
 
 export interface ArticleEditProps {
-  match: any
-  location: any
-  user: User
-  loading: boolean
-  isEditing: boolean
-  article: Article
-  cateList: Cate[]
-  dispatch: (val: any) => any
+  match: any;
+  location: any;
+  user: User;
+  loading: boolean;
+  isEditing: boolean;
+  article: Article;
+  cateList: Cate[];
+  dispatch: (val: any) => any;
 }
 
 export interface ArticleEditState {
-  inputVisible: boolean
-  inputValue: string
+  inputVisible: boolean;
+  inputValue: string;
 }
 
 class ArticleEdit extends Component<ArticleEditProps> {
@@ -69,26 +68,27 @@ class ArticleEdit extends Component<ArticleEditProps> {
     dispatch: () => { },
   };
 
+  static contextTypes = {
+    router: PropTypes.object,
+  };
+
   state = {
     inputVisible: false,
     inputValue: '',
   };
 
-  tagInput: any
-
-  static contextTypes = {
-    router: PropTypes.object,
-  }
+  tagInput: any;
 
   componentDidMount() {
     const { dispatch, match } = this.props;
     const { id } = match.params;
 
     id && this.getArticle(id);
+
     dispatch({ type: 'category/getCateList' }).then(({ success, cateList }) => {
       if (success && !id) {
-        const { id } = cateList.find(v => v.name === '其它') || {} as Cate;
-        this.props.dispatch({ type: 'article/articleChange', payload: { cate: id } });
+        const { id: cate } = cateList.find(v => v.name === '其它') || {} as Cate;
+        this.props.dispatch({ type: 'article/articleChange', payload: { cate } });
       }
     });
   }
@@ -243,7 +243,9 @@ class ArticleEdit extends Component<ArticleEditProps> {
           </Row>
           <Row type="flex" align="middle" style={{ margin: '8px 0' }}>
             <Col span={labelSpan}>文章摘要</Col>
-            <Col span={contentSpan}><TextArea autosize={{ minRows: 2, maxRows: 3 }} value={abstract} onChange={this.abstractChange} /></Col>
+            <Col span={contentSpan}>
+              <TextArea autosize={{ minRows: 2, maxRows: 3 }} value={abstract} onChange={this.abstractChange} />
+            </Col>
           </Row>
           <Row type="flex" align="middle" style={{ margin: '8px 0' }}>
             <Col span={labelSpan}>选择分类</Col>
@@ -258,7 +260,12 @@ class ArticleEdit extends Component<ArticleEditProps> {
                 {tagsArr.map(tag => {
                   const isLongTag = tag.length > 6;
                   const tagElem = (
-                    <Tag key={tag} closable color="#00adb5" afterClose={() => this.handleClose(tag)}>
+                    <Tag
+                      key={tag}
+                      closable
+                      color="#00adb5"
+                      afterClose={() => this.handleClose(tag)}
+                    >
                       {isLongTag ? `${tag.slice(0, 6)}...` : tag}
                     </Tag>
                   );
@@ -277,7 +284,9 @@ class ArticleEdit extends Component<ArticleEditProps> {
                   />
                 )}
                 {!inputVisible && (
-                  <Tag onClick={this.showInput} style={{ background: '#fff', borderStyle: 'dashed' }}><Icon type="plus" /> 新标签</Tag>
+                  <Tag onClick={this.showInput} style={{ background: '#fff', borderStyle: 'dashed' }}>
+                    <Icon type="plus" /> 新标签
+                  </Tag>
                 )}
               </div>
             </Col>

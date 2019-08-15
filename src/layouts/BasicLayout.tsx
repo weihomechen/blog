@@ -1,5 +1,3 @@
-/* eslint-disable react/self-closing-comp */
-/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'dva';
@@ -8,16 +6,16 @@ import { Layout } from '../components';
 import '../components/skin.less';
 import {
   DispatchParam,
-} from '../utils/type'
+} from '../utils/type';
 
 const { Header, Footer, styles } = Layout;
 
 export interface BasicLayoutProps {
-  app: any,
-  loading: boolean,
-  location: any,
-  state: any,
-  dispatch: (val: DispatchParam) => any,
+  app: any;
+  loading: boolean;
+  location: any;
+  state: any;
+  dispatch: (val: DispatchParam) => any;
 }
 
 class BasicLayout extends React.PureComponent<BasicLayoutProps> {
@@ -64,4 +62,3 @@ function mapStateToProps({ app, loading }) {
 }
 
 export default withRouter(connect(mapStateToProps)(BasicLayout));
-

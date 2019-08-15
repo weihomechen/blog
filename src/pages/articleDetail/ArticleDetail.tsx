@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions,no-return-assign */
 import { connect } from 'dva';
 import { IconFont } from 'components';
 import { Spin, Input, Button } from 'antd';
@@ -13,23 +12,23 @@ import {
   Article,
   Comment,
   User,
-} from '../../utils/type'
+} from '../../utils/type';
 
 const { TextArea } = Input;
 
 export interface ArticleDetailProps {
-  loading: boolean
-  comments: Comment[]
-  article: Article
-  dispatch: (val: any) => any
-  user: User
-  users: User[]
-  match: any
+  loading: boolean;
+  comments: Comment[];
+  article: Article;
+  dispatch: (val: any) => any;
+  user: User;
+  users: User[];
+  match: any;
 }
 
 export interface ArticleDetailState {
-  comment: string
-  moneyCodeVisiable: boolean
+  comment: string;
+  moneyCodeVisiable: boolean;
 }
 
 class ArticleDetail extends Component<ArticleDetailProps, ArticleDetailState> {
@@ -81,7 +80,10 @@ class ArticleDetail extends Component<ArticleDetailProps, ArticleDetailState> {
 
   submitComment = () => {
     const { comment: content } = this.state;
-    this.props.dispatch({ type: 'article/submitComment', payload: { content } }).then(() => this.setState({ comment: '' }));
+    this.props.dispatch({
+      type: 'article/submitComment',
+      payload: { content },
+    }).then(() => this.setState({ comment: '' }));
   }
 
   submitReply = (payload) => this.props.dispatch({ type: 'article/submitReply', payload });
@@ -154,14 +156,16 @@ class ArticleDetail extends Component<ArticleDetailProps, ArticleDetailState> {
                 className={styles.moneyCode}
                 alt=""
                 src={moneyCode}
-                style={{ display: moneyCodeVisiable || 'none' }}
+                style={{ display: moneyCodeVisiable ? '' : 'none' }}
               />
             </div> : null
         }
         <div className={styles.comments}>
           <div className={styles.commentsHeader}>{`评论( ${comments.length || 0} )`}</div>
           <div className={styles.commentBox}>
-            {user.avatar ? <img className={styles.avatar} src={user.avatar} alt="" /> : <IconFont type="avatar" fontSize="32px" />}
+            {user.avatar
+              ? <img className={styles.avatar} src={user.avatar} alt="" />
+              : <IconFont type="avatar" fontSize="32px" />}
             <TextArea
               placeholder="说说你的看法"
               value={comment}

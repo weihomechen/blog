@@ -6,20 +6,20 @@ import * as styles from './assets/style/index.less';
 import {
   User,
   Dispatch,
-} from '../../utils/type'
+} from '../../utils/type';
 
 const { TextArea } = Input;
 
 export interface MessageSenderProps {
-  user: User
-  users: User[]
-  dispatch: Dispatch
+  user: User;
+  users: User[];
+  dispatch: Dispatch;
 }
 
 export interface MessageSenderState {
-  title: string
-  content: string
-  receiver: number[]
+  title: string;
+  content: string;
+  receiver: number[];
 }
 
 @connect(({ user, team, messageSender }) => {
@@ -30,14 +30,6 @@ export interface MessageSenderState {
   };
 })
 class MessageSender extends Component<MessageSenderProps, MessageSenderState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: '',
-      content: '',
-      receiver: [], // 发送站内信是只有系统管理员可以发么，团队管理员或者普通用户是否也能发消息给某一个或者某一些用户？
-    };
-  }
 
   static propTypes = {
     user: PropTypes.object,
@@ -50,6 +42,15 @@ class MessageSender extends Component<MessageSenderProps, MessageSenderState> {
     users: [],
     dispatch: () => { },
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: '',
+      content: '',
+      receiver: [], // 发送站内信是只有系统管理员可以发么，团队管理员或者普通用户是否也能发消息给某一个或者某一些用户？
+    };
+  }
 
   contentChange = (e) => {
     this.setState({ content: e.target.value });

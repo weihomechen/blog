@@ -13,7 +13,7 @@ import style from './assets/css/index.less';
 import {
   User,
   Dispatch,
-} from '../../utils/type'
+} from '../../utils/type';
 
 const { TextArea } = Input;
 
@@ -27,19 +27,11 @@ function beforeUpload(file) {
 }
 
 export interface PersonCenterProps {
-  user: User
-  dispatch: Dispatch
+  user: User;
+  dispatch: Dispatch;
 }
 
-export interface PersonCenterState {
-
-}
-
-class PersonCenter extends Component<PersonCenterProps, PersonCenterState> {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+class PersonCenter extends Component<PersonCenterProps, {}> {
 
   static propTypes = {
     user: PropTypes.object,
@@ -53,9 +45,14 @@ class PersonCenter extends Component<PersonCenterProps, PersonCenterState> {
 
   static contextTypes = {
     router: PropTypes.object,
-  }
+  };
 
-  mottoInput: any
+  mottoInput: any;
+
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
   /**
    * @param type number: 0 - avatar, 1-cover, 2-moneyCode

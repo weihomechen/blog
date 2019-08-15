@@ -15,7 +15,7 @@ import { checkFileSize } from '../../utils';
 import * as styles from './index.less';
 import {
   Team,
-} from '../../utils/type'
+} from '../../utils/type';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -25,12 +25,12 @@ const formItemLayout = {
 };
 
 export interface TeamFormProps {
-  dispatch: (val: any) => any
-  form: any
-  teamList: Team[]
-  modalVisible: boolean
-  hide: any
-  teamDTO: Team
+  dispatch: (val: any) => any;
+  form: any;
+  teamList: Team[];
+  modalVisible: boolean;
+  hide: any;
+  teamDTO: Team;
 }
 
 @connect(({ team }) => {
@@ -39,9 +39,6 @@ export interface TeamFormProps {
   };
 })
 class TeamForm extends React.Component<TeamFormProps, {}> {
-  state = {
-    avatar: '',
-  };
 
   static propTypes = {
     dispatch: PropTypes.func,
@@ -50,7 +47,7 @@ class TeamForm extends React.Component<TeamFormProps, {}> {
     modalVisible: PropTypes.bool,
     hide: PropTypes.func,
     teamDTO: PropTypes.object,
-  }
+  };
 
   static defaultProps = {
     dispatch: () => { },
@@ -59,6 +56,9 @@ class TeamForm extends React.Component<TeamFormProps, {}> {
     modalVisible: false,
     hide: () => { },
     teamDTO: {},
+  };
+  state = {
+    avatar: '',
   };
 
   componentDidMount() {
@@ -74,6 +74,7 @@ class TeamForm extends React.Component<TeamFormProps, {}> {
     e.preventDefault();
     let { avatar } = this.state;
     avatar = avatar || this.props.teamDTO.avatar;
+
     this.setState({ avatar }, () => {
       this.props.form.validateFields((err, values) => {
         if (!err) {
@@ -86,10 +87,12 @@ class TeamForm extends React.Component<TeamFormProps, {}> {
           const { tid } = teamDTO;
           const { avatar } = this.state;
           const { name, abstract } = values;
+
           if (teamList.find(v => v.name === name && v.tid !== tid)) {
             message.error('团队名称不能和其他团队重复～');
             return;
           }
+
           if (avatar) {
             dispatch({
               type: 'team/save',
@@ -112,7 +115,7 @@ class TeamForm extends React.Component<TeamFormProps, {}> {
           }
         }
       });
-    })
+    });
   }
 
   handleCancel = () => {

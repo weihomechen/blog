@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'dva';
@@ -9,31 +8,26 @@ import style from './assets/css/index.less';
 import {
   User,
   ApprovalItem,
-} from '../../utils/type'
+} from '../../utils/type';
 
 const statusMap = ['待审批', '已同意', '已驳回'];
 const DATE_FORMATER = 'YYYY-MM-DD HH:mm';
 const { TextArea } = Input;
 
 export interface ApprovalProps {
-  dispatch: (val?: any) => any
-  list: ApprovalItem[]
-  total: number
-  loading: boolean
-  users: User[]
+  dispatch: (val?: any) => any;
+  list: ApprovalItem[];
+  total: number;
+  loading: boolean;
+  users: User[];
 }
 
 export interface ApprovalState {
-  pageNo: number
-  reason: string
+  pageNo: number;
+  reason: string;
 }
 
 class Approval extends PureComponent<ApprovalProps, ApprovalState> {
-  state = {
-    pageNo: 1,
-    reason: '',
-  };
-
   static propTypes = {
     dispatch: PropTypes.func,
     list: PropTypes.arrayOf(PropTypes.object),
@@ -48,6 +42,11 @@ class Approval extends PureComponent<ApprovalProps, ApprovalState> {
     total: 0,
     loading: false,
     users: [],
+  };
+
+  state = {
+    pageNo: 1,
+    reason: '',
   };
 
   componentDidMount() {
@@ -100,9 +99,14 @@ class Approval extends PureComponent<ApprovalProps, ApprovalState> {
   rejectRender = () => (
     <div>
       <div>确认驳回该申请？</div>
-      <TextArea placeholder="请填写驳回理由" onChange={this.reasonChange} style={{ width: 180, marginTop: 12 }} autosize={{ minRows: 2, maxRows: 3 }} />
+      <TextArea
+        placeholder="请填写驳回理由"
+        onChange={this.reasonChange}
+        style={{ width: 180, marginTop: 12 }}
+        autosize={{ minRows: 2, maxRows: 3 }}
+      />
     </div>
-  );
+  )
 
   render() {
     const {
@@ -178,5 +182,5 @@ export default connect(({ approval, user, loading }: any) => {
     loading: loading.models.approval,
     ...user,
     ...approval,
-  })
+  });
 })(Approval);

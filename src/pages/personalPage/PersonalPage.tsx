@@ -18,23 +18,23 @@ import {
   User,
   Team,
   Article,
-} from '../../utils/type'
+} from '../../utils/type';
 
 const { TabPane } = Tabs;
 const DEFAULT_MOTTO = '神秘人物，谁知道呢';
 
 export interface PersonalPageProps {
-  dispatch: Dispatch
-  match: any
-  user: User
-  users: User[]
-  teamList: Team[]
-  articleList: Article[]
-  articleTotal: number
+  dispatch: Dispatch;
+  match: any;
+  user: User;
+  users: User[];
+  teamList: Team[];
+  articleList: Article[];
+  articleTotal: number;
 }
 
 export interface PersonalPageState {
-  uid: number | string
+  uid: number | string;
 }
 
 @connect(({ user, article, team }) => {
@@ -47,12 +47,6 @@ export interface PersonalPageState {
   };
 })
 class PersonalPage extends React.PureComponent<PersonalPageProps, PersonalPageState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      uid: '',
-    };
-  }
 
   static propTypes = {
     dispatch: PropTypes.func,
@@ -73,6 +67,13 @@ class PersonalPage extends React.PureComponent<PersonalPageProps, PersonalPageSt
     articleList: [],
     articleTotal: 0,
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      uid: '',
+    };
+  }
 
   componentWillMount() {
     const { dispatch, match } = this.props;
@@ -97,9 +98,9 @@ class PersonalPage extends React.PureComponent<PersonalPageProps, PersonalPageSt
       <img src="https://rulifun.oss-cn-hangzhou.aliyuncs.com/blog/no-thing.png" alt="" />
       <div className={style.nothingTip}>空空如也～快去发表文章吧</div>
     </div>
-  );
+  )
 
-  DEFAULT_MOTTO = () => <span>{DEFAULT_MOTTO}<IconFont type="question" fontSize="26px" /></span>
+  DEFAULT_MOTTO = () => <span>{DEFAULT_MOTTO}<IconFont type="question" fontSize="26px" /></span>;
 
   render() {
     const {
@@ -146,7 +147,11 @@ class PersonalPage extends React.PureComponent<PersonalPageProps, PersonalPageSt
         <div className={style.personalNews}>
           <Tabs defaultActiveKey="1">
             <TabPane
-              tab={<div><Button className={style.tabBtn} fullWidth><IconFont type="list" fontSize="18px" />文章</Button></div>}
+              tab={<div>
+                <Button className={style.tabBtn} fullWidth>
+                  <IconFont type="list" fontSize="18px" />文章
+                </Button>
+              </div>}
               key="1"
             >
               {articleList.length ?
@@ -155,15 +160,27 @@ class PersonalPage extends React.PureComponent<PersonalPageProps, PersonalPageSt
                     <div className={style.time}>{showOffsetTime(item.createTime)} • 发表了</div>
                     <Link to={`/article/detail/${item.id}`} className={style.title}>{item.title}</Link>
                     <div className={style.infos}>
-                      {+item.comments ? <span className={style.infoItem}><IconFont type="comment" color="#F38181" />{item.comments}</span> : null}
+                      {
+                        +item.comments
+                          ? <span className={style.infoItem}>
+                            <IconFont type="comment" color="#F38181" />{item.comments}
+                          </span>
+                          : null
+                      }
                     </div>
                     {item.tags ?
                       <div className={style.tags}>
                         <IconFont type="tag" color="#F38181" fontSize="20px" />
-                        {item.tags.split(',').map(tag => <span key={`${item.id}-${tag}`} className={style.tag}>{tag}</span>)}
+                        {item.tags.split(',').map(tag =>
+                          <span key={`${item.id}-${tag}`} className={style.tag}>{tag}</span>,
+                        )}
                       </div> : null}
                   </div>))}
-                  <Pagination total={articleTotal} showTotal={t => `共${t}篇`} onChange={pageNo => this.pageChange(pageNo)} />
+                  <Pagination
+                    total={articleTotal}
+                    showTotal={t => `共${t}篇`}
+                    onChange={pageNo => this.pageChange(pageNo)}
+                  />
                 </div> : this.nothingNow()}
             </TabPane>
           </Tabs>

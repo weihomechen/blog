@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions,no-return-assign,no-nested-ternary,no-restricted-globals */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'dva';
@@ -13,7 +12,7 @@ import style from './assets/style/index.less';
 import {
   User,
   Issue,
-} from '../../utils/type'
+} from '../../utils/type';
 
 const { TextArea } = Input;
 const typeMap = {
@@ -38,15 +37,15 @@ const statusMap = {
 };
 
 export interface FeedbackDetailProps {
-  dispatch: (val: any) => any
-  match: any
-  user: User
-  users: User[]
-  issue: Issue
+  dispatch: (val: any) => any;
+  match: any;
+  user: User;
+  users: User[];
+  issue: Issue;
 }
 
 export interface FeedbackDetailState {
-  replyContent: string
+  replyContent: string;
 }
 
 @connect(({ user, feedback }) => {
@@ -57,12 +56,6 @@ export interface FeedbackDetailState {
   };
 })
 class FeedbackDetail extends React.PureComponent<FeedbackDetailProps, FeedbackDetailState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      replyContent: '',
-    };
-  }
 
   static propTypes = {
     dispatch: PropTypes.func,
@@ -70,7 +63,7 @@ class FeedbackDetail extends React.PureComponent<FeedbackDetailProps, FeedbackDe
     user: PropTypes.object,
     users: PropTypes.array,
     issue: PropTypes.object,
-  }
+  };
 
   static defaultProps = {
     dispatch: () => { },
@@ -80,7 +73,13 @@ class FeedbackDetail extends React.PureComponent<FeedbackDetailProps, FeedbackDe
     issue: {},
   };
 
-  editorInstance: any
+  editorInstance: any;
+  constructor(props) {
+    super(props);
+    this.state = {
+      replyContent: '',
+    };
+  }
 
   componentWillMount() {
     const {
@@ -210,7 +209,8 @@ class FeedbackDetail extends React.PureComponent<FeedbackDetailProps, FeedbackDe
         <div className={style.actionsContainer}>
           {user.uid === author || user.role === 1 ?
             issue.status === 1 ? <Popconfirm title="是否确定该反馈已经没有讨论的必要并将其关闭?" onConfirm={this.closeIssue} >
-              <Button className={style.closeIssue}><IconFont type="forbid" fontSize="16px" />关闭</Button></Popconfirm> : null
+              <Button className={style.closeIssue}>
+                <IconFont type="forbid" fontSize="16px" />关闭</Button></Popconfirm> : null
             : null
           }
         </div>

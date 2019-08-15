@@ -1,4 +1,3 @@
-/* eslint-disable react/forbid-prop-types,jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Row, Form, Input } from 'antd';
@@ -8,9 +7,9 @@ import styles from './index.less';
 const FormItem = Form.Item;
 
 export interface LoginProps {
-  loading: boolean
-  dispatch: (val: any) => any
-  form: any
+  loading: boolean;
+  dispatch: (val: any) => any;
+  form: any;
 }
 
 const Login = ({
