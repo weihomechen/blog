@@ -26,7 +26,6 @@ export interface CommentItemState {
 }
 
 class CommentItem extends React.Component<CommentItemProps, CommentItemState> {
-
   static propTypes = {
     comment: PropTypes.object,
     users: PropTypes.array,
@@ -46,8 +45,10 @@ class CommentItem extends React.Component<CommentItemProps, CommentItemState> {
   };
 
   replyInput: any;
+
   constructor(props) {
     super(props);
+
     this.state = {
       replysVisible: false,
       replyBoxVisible: false,
@@ -67,14 +68,22 @@ class CommentItem extends React.Component<CommentItemProps, CommentItemState> {
   }
 
   toggleReplys = () => {
-    const { replysVisible } = this.state;
-    this.setState({ replysVisible: !replysVisible });
+    const {
+      replysVisible,
+      replyBoxVisible,
+    } = this.state;
+
+    this.setState({
+      replysVisible: !replysVisible,
+      replyBoxVisible: !replyBoxVisible,
+    });
   }
 
   showTip = (replysLen) => {
     if (replysLen) {
       return `${replysLen}条回复`;
     }
+
     return '回复';
   }
 
@@ -84,9 +93,11 @@ class CommentItem extends React.Component<CommentItemProps, CommentItemState> {
       author,
     } = this.props.comment;
     const { to, replyContent } = this.state;
+
     let content = replyContent;
     const reg = new RegExp(`回复 ${to}：`);
     content = replyContent.replace(reg, '');
+
     this.props.submitReply({ comment_id, to: to || author, content })
       .then(({ success }) => success && this.setState({ replyContent: '', to: '' }));
   }
@@ -108,7 +119,13 @@ class CommentItem extends React.Component<CommentItemProps, CommentItemState> {
   presetReply = (item) => {
     const { author } = item;
     const { author: commentAuthor } = this.props.comment;
-    author !== commentAuthor && this.setState({ to: author, replyContent: `回复 ${author}：` });
+
+    author !== commentAuthor && this.setState({
+      to: author,
+      replyContent: `回复 ${author}：`,
+      replyBoxVisible: true,
+    });
+
     this.replyInput.focus();
   }
 
@@ -118,6 +135,7 @@ class CommentItem extends React.Component<CommentItemProps, CommentItemState> {
       users,
       user,
     } = this.props;
+
     const {
       replysVisible,
       replyBoxVisible,
@@ -125,16 +143,19 @@ class CommentItem extends React.Component<CommentItemProps, CommentItemState> {
       isShowDelBtn,
       showDelReplyBtnId,
     } = this.state;
+
     const { author, createTime, content, replyList = [] } = comment;
     const commentAuthor = users.find(item => item.name === author) || {} as User;
     const replysLen = replyList.length;
     const isAuthor = author === user.name;
     let replyAuthorAvatar;
+
     const getReplyAuthor = (replyAuthorName) => {
       const replyAuthor = users.find(item => item.name === replyAuthorName) || {} as User;
       replyAuthorAvatar = replyAuthor.avatar || '';
       return replyAuthorAvatar;
     };
+
     return (
       <div className={style.commentItem}>
         <div className={style.commentHeader}>
