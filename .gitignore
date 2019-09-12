@@ -4,4 +4,3 @@ build/
 .history/
 *.tar.gz
 dist/
-deploy.config.js
