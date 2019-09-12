@@ -94,7 +94,7 @@ npm start
 - 4、nginx过滤、转发等
 - 5、后台监听收到请求（router）
 - 6、根据路由映射调用处理函数（controller）
-- 、与数据库交互（service）、业务处理
+- 7、与数据库交互（service）、业务处理
 - 8、返回结果（controller）
 - 9、前端接收后处理(models)
 - 10、前端UI更新
@@ -109,10 +109,23 @@ npm i @ifun/deploy -g
 
 [deploy-tool说明](https://github.com/weihomechen/deploy-tool/blob/master/README.md)
 
+在项目根目录创建部署配置文件`deploy.config.js`，**为了方便可能会将密码等敏感信息放入此文件，建议将此文件移出git管理**
+
+```js
+/**
+ * 部署配置，配合@ifun/deploy@2.x
+ */
+module.exports = {
+  dev: {
+    web: '88.88.88.88' // 部署到的服务器地址
+  },
+}
+```
+
 ```sh
-# 部署前端项目
-deploy app <name>
+# cd到项目根目录，部署前端项目
+deploy app <scheme>
 
 # 示例
-deploy app blog
+deploy app dev
 ```
