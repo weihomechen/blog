@@ -127,7 +127,7 @@ class ArticleDetail extends Component<ArticleDetailProps, ArticleDetailState> {
       <div className={styles.articleDetail}>
         <Helmet>
           <link href="https://rulifun.oss-cn-hangzhou.aliyuncs.com/blog/prism.css" rel="stylesheet" />
-          <script src="https://rulifun.oss-cn-hangzhou.aliyuncs.com/blog/prism.js" />
+          <script src="https://rulifun.oss-cn-hangzhou.aliyuncs.com/blog/prism.js" defer />
         </Helmet>
         <Spin size="large" spinning={loading} />
         <div className={styles.titleContainer}>

@@ -52,6 +52,7 @@
     "ordered-imports": false,
     "space-before-function-paren": false,
     "no-object-literal-type-assertion": false,
-    "jsx-no-lambda": false
+    "jsx-no-lambda": false,
+    "jsx-wrap-multiline": false
   }
 }
