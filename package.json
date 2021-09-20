@@ -15,7 +15,7 @@
     "braft-extensions": "0.0.18",
     "draft-js-prism": "^1.0.6",
     "dva": "^2.6.0-beta.7",
-    "prismjs": "^1.17.1",
+    "prismjs": "^1.25.0",
     "react": "^16.8.6",
     "react-color": "^2.17.0",
     "react-dom": "^16.8.6",
